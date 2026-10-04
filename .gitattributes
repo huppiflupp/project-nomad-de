@@ -3,3 +3,6 @@
 # the container exits immediately. Checkouts on Windows would otherwise convert
 # them, which only shows up when building an image locally rather than in CI.
 *.sh text eol=lf
+
+README.md merge=ours
+FAQ.md merge=ours

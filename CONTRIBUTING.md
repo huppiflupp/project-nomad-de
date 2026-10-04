@@ -1,3 +1,13 @@
+# Mitwirken an der deutschen Fassung (deutsche Fassung)
+
+Beiträge zu dieser deutschen Fassung (Übersetzungen, Korrekturen, Install-Skripte) sind willkommen: Eröffnen Sie ein Issue oder einen Pull Request in diesem Repository. Beiträge, die das Original betreffen (Funktionen, Fehler in der englischen Fassung), gehören dagegen in das [Original-Projekt](https://github.com/Crosstalk-Solutions/project-nomad). Übersetzungen halten Sie bitte in der Sie-Form und nach dem Glossar der Übersetzungsrichtlinien; Hinweise zur Pflege des Forks finden Sie in [de/README.md](de/README.md).
+
+Die folgenden Richtlinien des Originals (Englisch) gelten sinngemäß weiter.
+
+*Original (Englisch, unverändert):*
+
+---
+
 # Contributing to Project NOMAD
 
 Thank you for your interest in contributing to Project NOMAD! Community contributions are what keep this project growing and improving. Please read this guide fully before getting started — it will save you (and the maintainers) a lot of time.

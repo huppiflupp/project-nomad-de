@@ -1,3 +1,11 @@
+# Sicherheitshinweise (deutsche Fassung)
+
+Sicherheitslücken, die nur die deutsche Fassung betreffen (z. B. Install-Skripte oder der Sprachumschalter dieses Forks), melden Sie bitte vertraulich an die Betreuer dieses Repositorys über die Sicherheitsfunktion von GitHub (Security Advisories), nicht als öffentliches Issue. Lücken im Original melden Sie bitte gemäß der folgenden Richtlinie (Englisch) beim [Original-Projekt](https://github.com/Crosstalk-Solutions/project-nomad). Nur die jeweils neueste Version erhält Sicherheitskorrekturen.
+
+*Original (Englisch, unverändert):*
+
+---
+
 # Security Policy
 
 ## Supported Versions
