@@ -207,7 +207,7 @@ Andere Inhalte in den Katalogen sind Teilprojekt B.
   Rückfragen direkt auf Deutsch umgeschrieben (rund 130 `echo` allein im Installer).
   Eine Sprachweiche in Bash wäre Aufwand ohne Nutzen. Wer Englisch will, nimmt das Original.
 - Befehle, Pfade, Variablen und Logik bleiben unverändert, damit Merges nur Textzeilen betreffen.
-- Installation: `curl -fsSL https://raw.githubusercontent.com/huppiflupp/project-nomad-de/refs/heads/main/install/install_nomad.sh | sudo bash`
+- Installation: zweistufig: `curl -fsSL https://raw.githubusercontent.com/huppiflupp/project-nomad-de/refs/heads/main/install/install_nomad.sh -o install_nomad.sh && sudo bash install_nomad.sh`
 
 ## 8. Bauen, Veröffentlichen, Testen
 
@@ -294,3 +294,6 @@ Diese Punkte ersetzen die entsprechenden Stellen oben:
    Wissensdatenbank lesen `docs/` rekursiv und würden einen Unterordner mit einlesen.
 6. **KI-Chat:** Statt einer Sprachweiche bekommt `SYSTEM_PROMPTS.default` den Satz „Antworte in der Sprache
    des Nutzers, im Zweifel auf Deutsch“ (englisch formuliert, wie der Rest des Prompts).
+7. **Installationsbefehl zweistufig (ersetzt 7, „Installation“).** `install_nomad.sh` fragt interaktiv per `read`
+   (Bestätigung, Lizenz); per `| sudo bash` läge das Skript auf stdin und der Installer bräche ab. Deshalb erst
+   `curl … -o install_nomad.sh`, dann `sudo bash install_nomad.sh`.

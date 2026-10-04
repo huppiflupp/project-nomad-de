@@ -40,10 +40,14 @@ Project NOMAD lässt sich auf jedem Debian-basierten Betriebssystem installieren
 ### Schnellinstallation (nur Debian-basierte Systeme)
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/huppiflupp/project-nomad-de/refs/heads/main/install/install_nomad.sh | sudo bash
+sudo apt-get update && \
+sudo apt-get install -y curl && \
+curl -fsSL https://raw.githubusercontent.com/huppiflupp/project-nomad-de/refs/heads/main/install/install_nomad.sh \
+  -o install_nomad.sh && \
+sudo bash install_nomad.sh
 ```
 
-(`curl` muss installiert sein: `sudo apt-get update && sudo apt-get install -y curl`.)
+(Das Skript wird bewusst erst heruntergeladen und dann ausgeführt, weil es Rückfragen stellt; per Pipe nach `bash` könnte es Ihre Eingaben nicht lesen.)
 
 Project NOMAD ist nun auf Ihrem Gerät installiert. Öffnen Sie einen Browser und rufen Sie `http://localhost:8080` (oder `http://GERÄTE-IP:8080`) auf, um loszulegen.
 

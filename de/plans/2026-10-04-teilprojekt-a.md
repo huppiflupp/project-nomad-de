@@ -1589,7 +1589,7 @@ Translate-Image separat (eigene Versionierung `0.1.0`): `gh workflow run build-t
 
 - [ ] **Step 2: Wegwerf-VM statt Host.** Auf x9 laufen die Kinder-VMs (libvirt); Docker auf dem Host würde die FORWARD-Regeln ändern und deren Netz stören. Deshalb eine frische Ubuntu-24.04-VM: `ssh x9 'virt-install --name nomad-de-test --memory 8192 --vcpus 4 --disk size=60,path=/data/vms/nomad-de-test.qcow2 --os-variant ubuntu24.04 --cloud-init user-data=<datei mit seeas-Benutzer + SSH-Schlüssel von ai395> --location <ubuntu-24.04-cloud-image oder ISO> --network network=default --graphics none --noautoconsole'`. Cloud-Image bevorzugen (`--import` mit `noble-server-cloudimg-amd64.img` als Basis); die exakten Pfade/ISOs auf x9 vorher mit `ssh x9 ls /data/vms/iso` prüfen. Ist Speicher knapp (`/data` hat 593 GB frei laut Inventar): 60 GB reichen für A (keine großen Inhalte laden).
 
-- [ ] **Step 3: Installieren** in der VM: `curl -fsSL https://raw.githubusercontent.com/huppiflupp/project-nomad-de/refs/heads/main/install/install_nomad.sh | sudo bash` – Ausgabe mitschneiden (`| tee install.log`). Expected: alle Meldungen deutsch, Ende ohne Fehler.
+- [ ] **Step 3: Installieren** in der VM: `curl -fsSL https://raw.githubusercontent.com/huppiflupp/project-nomad-de/refs/heads/main/install/install_nomad.sh -o install_nomad.sh && sudo bash install_nomad.sh 2>&1 | tee install.log` (zweistufig, das Skript fragt interaktiv) – Ausgabe mitschneiden. Expected: alle Meldungen deutsch, Ende ohne Fehler.
 
 - [ ] **Step 4: Abnahme prüfen** (Spec Abschnitt 9) und ins Protokoll schreiben:
   1. `sudo docker ps --format '{{.Image}}'` → nur `ghcr.io/huppiflupp/…` und Fremd-Images.
