@@ -33,3 +33,10 @@ Echter Rückläufer: `listRemoteZimFiles` (api.ts) -> `title`/`summary`/`author`
 remote-explorer.tsx:350-355 per `downloadRemoteZimFile` als gespeicherte Metadaten zurückgeschickt (zim_controller.ts:39).
 Maßnahme: dieser Aufruf trägt `{ skipLocalize: true }`, der Interceptor überspringt ihn (`response.config.skipLocalize`).
 Fremde Kiwix-Titel sind ohnehin kein Katalogtext; die Anzeige braucht dort kein `tc(…)`.
+
+## Texte (Task 6)
+
+`node i18n/cli.mjs check` (aus `admin/`), Wörterbücher noch leer:
+- Oberfläche: 1285 Texte, Server: 394, Kataloge: 401.
+- fehlend 2080 (Summe abzüglich Überschneidungen), Platzhalter-Fehler 0, verwaist 0; Exit 1 wie erwartet.
+- Parser-Plugins je Endung (`.ts`: typescript, `.tsx`: jsx+typescript); keine Datei nicht lesbar.
