@@ -8,12 +8,13 @@ import CreatorPackCard from '~/components/CreatorPackCard'
 import StyledModal from '~/components/StyledModal'
 import { formatBytes } from '~/lib/util'
 import type { CreatorPackWithStatus } from '../../types/collections'
+import { DISTRIBUTION } from '../../constants/distribution'
 
 // Canonical Creator Pack License (one license across the seed packs). Opened in a
 // new tab from the install modal; install is an online action so an external link
 // is fine. A per-pack catalog `license_url` can supersede this later if needed.
 const LICENSE_URL =
-  'https://github.com/Crosstalk-Solutions/project-nomad/blob/main/collections/creator-pack-license.md'
+  `https://github.com/${DISTRIBUTION.repo}/blob/main/collections/creator-pack-license.md`
 
 export interface CreatorPacksSectionProps {
   /** Show uninstall controls on installed packs (the settings "manage" surface). */

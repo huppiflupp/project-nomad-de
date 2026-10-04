@@ -1,3 +1,4 @@
+import { DISTRIBUTION } from '../../constants/distribution.js'
 import { inject } from '@adonisjs/core'
 import logger from '@adonisjs/core/services/logger'
 import axios from 'axios'
@@ -18,8 +19,8 @@ import {
 } from '../utils/image_disk_preflight.js'
 
 /** Docker image repository for the NOMAD admin/core image (tag applied per-release). */
-const NOMAD_IMAGE_REPO = 'ghcr.io/crosstalk-solutions/project-nomad'
-const RELEASES_URL = 'https://api.github.com/repos/Crosstalk-Solutions/project-nomad/releases'
+const NOMAD_IMAGE_REPO = DISTRIBUTION.imageRepo
+const RELEASES_URL = DISTRIBUTION.releasesApi
 
 /** Defaults for user-configurable settings (server-local time window + cool-off). */
 const DEFAULT_WINDOW_START = '02:00'

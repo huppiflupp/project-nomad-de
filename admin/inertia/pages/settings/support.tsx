@@ -1,6 +1,7 @@
 import { Head } from '@inertiajs/react'
 import { IconExternalLink } from '@tabler/icons-react'
 import SettingsLayout from '~/layouts/SettingsLayout'
+import { DISTRIBUTION } from '../../../constants/distribution'
 
 export default function SupportPage() {
   return (
@@ -68,7 +69,7 @@ export default function SupportPage() {
             <ul className="space-y-2 text-text-muted">
               <li>
                 <a
-                  href="https://github.com/Crosstalk-Solutions/project-nomad"
+                  href={`https://github.com/${DISTRIBUTION.repo}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-blue-600 hover:underline"
@@ -79,7 +80,7 @@ export default function SupportPage() {
               </li>
               <li>
                 <a
-                  href="https://github.com/Crosstalk-Solutions/project-nomad/issues"
+                  href={`https://github.com/${DISTRIBUTION.repo}/issues`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-blue-600 hover:underline"

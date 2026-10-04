@@ -1,3 +1,4 @@
+import { DISTRIBUTION } from '../../constants/distribution.js'
 import axios from 'axios'
 import vine from '@vinejs/vine'
 import logger from '@adonisjs/core/services/logger'
@@ -29,10 +30,10 @@ import type {
 } from '../../types/collections.js'
 
 const SPEC_URLS: Record<ManifestType, string> = {
-  zim_categories: 'https://raw.githubusercontent.com/Crosstalk-Solutions/project-nomad/refs/heads/main/collections/kiwix-categories.json',
-  maps: 'https://github.com/Crosstalk-Solutions/project-nomad/raw/refs/heads/main/collections/maps.json',
-  wikipedia: 'https://raw.githubusercontent.com/Crosstalk-Solutions/project-nomad/refs/heads/main/collections/wikipedia.json',
-  creator_packs: 'https://raw.githubusercontent.com/Crosstalk-Solutions/project-nomad/refs/heads/main/collections/creator-packs.json',
+  zim_categories: `${DISTRIBUTION.rawBase}/collections/kiwix-categories.json`,
+  maps: `${DISTRIBUTION.rawBase}/collections/maps.json`,
+  wikipedia: `${DISTRIBUTION.rawBase}/collections/wikipedia.json`,
+  creator_packs: `${DISTRIBUTION.rawBase}/collections/creator-packs.json`,
 }
 
 const VALIDATORS: Record<ManifestType, any> = {

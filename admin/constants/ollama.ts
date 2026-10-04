@@ -321,6 +321,7 @@ export const SYSTEM_PROMPTS = {
  - Use headers (##, ###) to organize longer responses.
  - Use bullet points or numbered lists for clarity.
  - Use tables when presenting structured data.
+ - Answer in the language the user writes in. If that is unclear, answer in German.
 `,
   rag_context: (context: string) => `
 Information has been retrieved from the NOMAD knowledge base for the user's question. It

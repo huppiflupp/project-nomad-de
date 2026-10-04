@@ -34,6 +34,7 @@ import { invalidateAssistantNameCache } from '../../config/inertia.js'
 import { invalidateMinRelevanceCache } from '../utils/rag_relevance.js'
 import { invalidateResponseStyleCache } from '../utils/response_style.js'
 import { KiwixLibraryService } from '#services/kiwix_library_service'
+import { DISTRIBUTION } from '../../constants/distribution.js'
 
 @inject()
 export class SystemService {
@@ -688,14 +689,14 @@ export class SystemService {
       let latestVersion: string
       if (earlyAccess) {
         const response = await axios.get(
-          'https://api.github.com/repos/Crosstalk-Solutions/project-nomad/releases',
+          DISTRIBUTION.releasesApi,
           { headers: { Accept: 'application/vnd.github+json' }, timeout: 5000 }
         )
         if (!response?.data?.length) throw new Error('No releases found')
         latestVersion = response.data[0].tag_name.replace(/^v/, '').trim()
       } else {
         const response = await axios.get(
-          'https://api.github.com/repos/Crosstalk-Solutions/project-nomad/releases/latest',
+          `${DISTRIBUTION.releasesApi}/latest`,
           { headers: { Accept: 'application/vnd.github+json' }, timeout: 5000 }
         )
         if (!response?.data?.tag_name) throw new Error('Invalid response from GitHub API')
