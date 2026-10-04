@@ -5,6 +5,7 @@ import '../css/app.css'
 import { createRoot } from 'react-dom/client'
 import { createInertiaApp } from '@inertiajs/react'
 import { resolvePageComponent } from '@adonisjs/inertia/helpers'
+import { localize } from '~/i18n/runtime'
 import ModalsProvider from '~/providers/ModalProvider'
 import { TransmitProvider } from 'react-adonis-transmit'
 import { generateUUID } from '~/lib/util'
@@ -35,6 +36,7 @@ createInertiaApp({
   },
 
   setup({ el, App, props }) {
+    props.initialPage.props = localize(props.initialPage.props)
     const environment = (props.initialPage.props as unknown as UsePageProps).environment
     const showDevtools = ['development', 'staging'].includes(environment)
     createRoot(el).render(

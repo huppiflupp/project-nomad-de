@@ -18,6 +18,7 @@ import { BenchmarkType, RunBenchmarkResponse, SubmitBenchmarkResponse, UpdateBui
 import type { CreateMapMarkerPayload, MapMarkerResponse, UpdateMapMarkerPayload } from '../../types/maps'
 import type { ChatSource } from '../../types/chat'
 import { chatStreamErrorMessage } from './chat_stream.js'
+import { localize } from '~/i18n/runtime'
 
 type OllamaChatRequestWithImages = OllamaChatRequest & { images?: File[] }
 
@@ -49,6 +50,19 @@ class API {
         'Content-Type': 'application/json',
       },
     })
+
+    // German distribution: translate server messages and catalog texts (admin/i18n).
+    this.client.interceptors.response.use(
+      (response) => {
+        if ((response.config as any)?.skipLocalize) return response
+        response.data = localize(response.data)
+        return response
+      },
+      (error) => {
+        if (error?.response?.data) error.response.data = localize(error.response.data)
+        return Promise.reject(error)
+      },
+    )
   }
 
   async affectService(service_name: string, action: 'start' | 'stop' | 'restart') {
@@ -858,7 +872,9 @@ class API {
           query,
           language,
         },
-      })
+        // title/summary/author go back to the server as stored metadata (downloadRemoteZimFile)
+        skipLocalize: true,
+      } as any)
     })()
   }
 
