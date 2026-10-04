@@ -20,6 +20,19 @@ import CoordinateOverlay from './CoordinateOverlay'
 import ViewMapMarkerPopup from './ViewMapMarkerPopup'
 import MapMarkerFormPopup from './MapMarkerFormPopup'
 import ScaleUnitToggle from './ScaleUnitSelector'
+import { t } from '~/i18n/runtime'
+
+// German distribution: MapLibre's built-in control labels (aria-label/title) follow the UI language.
+const MAP_LOCALE = {
+  'Map.Title': t('Map'),
+  'NavigationControl.ZoomIn': t('Zoom in'),
+  'NavigationControl.ZoomOut': t('Zoom out'),
+  'NavigationControl.ResetBearing': t('Reset bearing to north'),
+  'FullscreenControl.Enter': t('Enter fullscreen'),
+  'FullscreenControl.Exit': t('Exit fullscreen'),
+  'AttributionControl.ToggleAttribution': t('Toggle attribution'),
+  'AttributionControl.MapFeedback': t('Map feedback'),
+}
 
 type ScaleUnit = 'imperial' | 'metric' | 'nautical'
 
@@ -368,6 +381,7 @@ export default function MapComponent({
           cursor={isDraggingMap ? 'grabbing' : 'crosshair'}
           mapStyle={`${window.location.protocol}//${window.location.hostname}:${window.location.port}/api/maps/styles`}
           mapLib={maplibregl}
+          locale={MAP_LOCALE}
           initialViewState={initialViewState}
           onMoveEnd={(e) => {
             // Persist the view so a refresh restores where the user was, not the default.

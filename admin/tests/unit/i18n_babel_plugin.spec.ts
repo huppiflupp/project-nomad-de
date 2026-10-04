@@ -65,3 +65,14 @@ test('explicit t() calls are collected', () => {
   const { collect } = run('import { t } from "~/i18n/runtime"; confirm(t("Really delete?"))')
   assert.ok(collect.has('Really delete?'))
 })
+
+test('display-text calls and extra text props are wrapped', () => {
+  const { out, collect } = run(
+    'const A = ({e}) => { showError(`Failed to save: ${e}`); window.confirm("Discard all changes?"); console.log("Not for users here"); return <Tip text="Shown on hover" helpText="Some help text" /> }'
+  )
+  assert.match(out, /showError\(__t\("Failed to save: \{0\}", e\)\)/)
+  assert.match(out, /window\.confirm\(__t\("Discard all changes\?"\)\)/)
+  assert.match(out, /console\.log\("Not for users here"\)/)
+  assert.match(out, /text=\{__t\("Shown on hover"\)\}/)
+  assert.ok(collect.has('Some help text'))
+})

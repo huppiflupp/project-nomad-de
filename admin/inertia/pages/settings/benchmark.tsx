@@ -26,6 +26,7 @@ import { useBenchmarkRun } from '~/hooks/useBenchmarkRun'
 import BenchmarkRunView from '~/components/benchmark/BenchmarkRunView'
 import ScoreReveal from '~/components/benchmark/ScoreReveal'
 import { getScoreDisplay } from '~/lib/benchmarkScore'
+import { t } from '~/i18n/runtime'
 
 export default function BenchmarkPage(props: {
   benchmark: {
@@ -123,7 +124,7 @@ export default function BenchmarkPage(props: {
     }) => {
       const res = await api.updateBuilderTag(benchmarkId, builderTag)
       if (!res || !res.success) {
-        throw new Error(res?.error || 'Failed to update builder tag')
+        throw new Error(res?.error || t('Failed to update builder tag'))
       }
       return res
     },
@@ -152,7 +153,7 @@ export default function BenchmarkPage(props: {
 
       const res = await api.submitBenchmark(benchmarkId, anonymous)
       if (!res || !res.success) {
-        throw new Error(res?.error || 'Failed to submit benchmark')
+        throw new Error(res?.error || t('Failed to submit benchmark'))
       }
       return res
     },
@@ -628,7 +629,7 @@ export default function BenchmarkPage(props: {
                     data={[
                       { label: 'RAM', value: formatBytes(latestResult.ram_bytes) },
                       { label: 'Disk Type', value: latestResult.disk_type.toUpperCase() },
-                      { label: 'GPU', value: latestResult.gpu_model || 'Not detected' },
+                      { label: 'GPU', value: latestResult.gpu_model || t('Not detected') },
                     ]}
                   />
                 </div>

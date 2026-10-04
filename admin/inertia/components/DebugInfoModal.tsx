@@ -3,6 +3,7 @@ import { IconBug, IconCopy, IconCheck } from '@tabler/icons-react'
 import StyledModal from './StyledModal'
 import api from '~/lib/api'
 import { DISTRIBUTION } from '../../constants/distribution'
+import { t } from '~/i18n/runtime'
 
 interface DebugInfoModalProps {
   open: boolean
@@ -66,7 +67,7 @@ export default function DebugInfoModal({ open, onClose }: DebugInfoModalProps) {
       <textarea
         id="debug-info-text"
         readOnly
-        value={loading ? 'Loading...' : debugText}
+        value={loading ? t('Loading...') : debugText}
         rows={18}
         className="w-full font-mono text-xs text-black bg-gray-50 border border-gray-200 rounded-md p-3 resize-none focus:outline-none text-left"
       />

@@ -38,9 +38,8 @@ vorsichtiges Minimum.
 
 **Die KI ist die Variable, und es ist das Modell, nicht NOMAD.** Ollama braucht im Leerlauf
 etwa 1,2 GB, und ein Modell benötigt beim Antworten ungefähr seine Download-Größe im Speicher,
-ein 8B-Modell mit ~4,6 GB braucht also etwa so viel zusätzlich. **8 GB sind für ein kleines
-Modell machbar, 16 GB sind komfortabel, und 32 GB sind die Empfehlung, wenn Sie größere
-Modelle betreiben möchten.**
+ein 8B-Modell mit ~4,6 GB braucht also etwa so viel zusätzlich.
+**8 GB sind für ein kleines Modell machbar, 16 GB sind komfortabel, und 32 GB sind die Empfehlung, wenn Sie größere Modelle betreiben möchten.**
 
 Woher dieser Speicher kommt, hängt von Ihrer Hardware ab. Mit einer dedizierten GPU
 wird das Modell in den VRAM geladen und berührt den Arbeitsspeicher nie, daher bestimmt der VRAM,

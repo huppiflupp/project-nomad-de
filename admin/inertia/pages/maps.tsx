@@ -7,6 +7,7 @@ import StyledButton from '~/components/StyledButton'
 import { IconArrowLeft, IconCrosshair, IconMapPin, IconPlaneTilt } from '@tabler/icons-react'
 import { FileEntry } from '../../types/files'
 import Alert from '~/components/Alert'
+import { t } from '~/i18n/runtime'
 
 type MapCommand = {
   id: number
@@ -55,11 +56,11 @@ export default function Maps(props: {
   }
 
   const alertMessage = !props.maps.baseAssetsExist
-    ? 'The base map assets have not been installed. Please download them first to enable map functionality.'
+    ? t('The base map assets have not been installed. Please download them first to enable map functionality.')
     : !props.maps.worldBasemapExists
-    ? 'The world base map has not been downloaded yet, so the map may appear blank outside downloaded regions. Connect this NOMAD to the internet and download it (~15 MB) from Map Settings.'
+    ? t('The world base map has not been downloaded yet, so the map may appear blank outside downloaded regions. Connect this NOMAD to the internet and download it (~15 MB) from Map Settings.')
     : props.maps.regionFiles.length === 0
-    ? 'No map regions have been downloaded yet. Please download some regions to enable map functionality.'
+    ? t('No map regions have been downloaded yet. Please download some regions to enable map functionality.')
     : null
 
   return (

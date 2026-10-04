@@ -5,6 +5,7 @@ import StyledButton from '~/components/StyledButton'
 import MarkdownEditor from '~/components/MarkdownEditor'
 import { useNotifications } from '~/context/NotificationContext'
 import api from '~/lib/api'
+import { t } from '~/i18n/runtime'
 
 interface NomadMdModalProps {
   aiAssistantName?: string
@@ -67,7 +68,7 @@ export default function NomadMdModal({ aiAssistantName, onClose }: NomadMdModalP
     },
   })
 
-  const assistantName = aiAssistantName?.trim() || 'your AI assistant'
+  const assistantName = aiAssistantName?.trim() || t('your AI assistant')
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/30 backdrop-blur-sm transition-opacity">

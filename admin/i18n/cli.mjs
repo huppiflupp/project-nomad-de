@@ -34,6 +34,9 @@ function tplKey(node) {
 }
 const strValue = (n) =>
   n?.type === 'StringLiteral' ? normalize(n.value) : n?.type === 'TemplateLiteral' ? tplKey(n) : null
+// Server messages may pick singular/plural wording with a conditional: collect every branch.
+const strValues = (n) =>
+  n?.type === 'ConditionalExpression' ? [...strValues(n.consequent), ...strValues(n.alternate)] : [strValue(n)]
 const keep = (k) => k && /[A-Za-z]/.test(k) && looksHuman(normalize(k.replace(/\{\d+\}/g, ' ')))
 
 export function collectUi(root) {
@@ -68,8 +71,7 @@ export function collectServer(root) {
           const k = p.node.key
           const name = k.type === 'Identifier' ? k.name : k.type === 'StringLiteral' ? k.value : null
           if (!SERVER_PROPS.has(name)) return
-          const v = strValue(p.node.value)
-          if (keep(v) && !keys.has(v)) keys.set(v, relative(root, file))
+          for (const v of strValues(p.node.value)) if (keep(v) && !keys.has(v)) keys.set(v, relative(root, file))
         },
         NewExpression(p) {
           const c = p.node.callee

@@ -1,6 +1,7 @@
 import type { DrugInteractionEntry } from '../../../types/drug_reference'
 import { PRODUCT_TYPES } from '../../../types/drug_reference'
 import LabelBlocks from './LabelBlocks'
+import { t } from '~/i18n/runtime'
 
 interface Props {
   entry: DrugInteractionEntry
@@ -17,7 +18,7 @@ interface Props {
 export default function InteractionColumn({ entry, onRemove }: Props) {
   const isRx = entry.product_type === PRODUCT_TYPES.RX
   const isOtc = entry.product_type === PRODUCT_TYPES.OTC
-  const displayName = entry.brand_name ?? entry.generic_name ?? 'Unknown Drug'
+  const displayName = entry.brand_name ?? entry.generic_name ?? t('Unknown Drug')
 
   return (
     <div className="flex h-full flex-col min-w-0 border border-desert-tan-lighter rounded-lg overflow-hidden">

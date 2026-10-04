@@ -6,6 +6,13 @@ import { looksHuman, normalize } from './text.mjs'
 export const TEXT_PROPS = new Set([
   'placeholder', 'title', 'aria-label', 'alt', 'label', 'description', 'helperText', 'tooltip',
   'subtitle', 'message', 'confirmText', 'cancelText', 'emptyMessage', 'heading', 'buttonText',
+  'text', 'helpText', 'footnote', 'note', 'subtext', 'caption', 'children', 'ariaLabel', 'cta',
+])
+// Calls whose first argument is display text (notifications, error state setters, browser dialogs).
+export const TEXT_CALLS = new Set([
+  'showError', 'setError', 'setErrorMsg', 'setErrorMessage', 'setDebugText', 'setLogs', 'setLinkError',
+  'setSubmitError', 'setRemoteOllamaError', 'setPickerError', 'confirm', 'alert',
+  'window.confirm', 'window.alert', 'uppy.info', 'renderSortHeader',
 ])
 const SKIP_TAGS = new Set(['code', 'pre', 'kbd', 'samp', 'script', 'style', 'svg'])
 const T = '__t'
@@ -169,9 +176,19 @@ export default function nomadI18n({ types: t }, opts = {}) {
         if (r) path.node.value = r
       },
       CallExpression(path, state) {
-        if (!collect || !active(state)) return
+        if (!active(state)) return
         const c = path.node.callee
         const a = path.node.arguments[0]
+        const callee = t.isIdentifier(c)
+          ? c.name
+          : t.isMemberExpression(c) && t.isIdentifier(c.object) && t.isIdentifier(c.property) && !c.computed
+            ? `${c.object.name}.${c.property.name}`
+            : null
+        if (callee && TEXT_CALLS.has(callee) && a) {
+          const r = wrapExpr(a, state)
+          if (r) path.node.arguments[0] = r
+        }
+        if (!collect) return
         if (t.isIdentifier(c) && (c.name === 't' || c.name === T) && t.isStringLiteral(a)) {
           collect.add(normalize(a.value))
         }

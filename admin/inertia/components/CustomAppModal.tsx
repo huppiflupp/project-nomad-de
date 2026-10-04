@@ -7,6 +7,7 @@ import Input from './inputs/Input'
 import Select from './inputs/Select'
 import DynamicIcon, { DynamicIconName } from './DynamicIcon'
 import { IconTrash } from '@tabler/icons-react'
+import { t } from '~/i18n/runtime'
 
 interface PortMapping {
   container: string
@@ -52,7 +53,7 @@ const CATEGORY_OPTIONS = [
   { value: 'security', label: 'Security' },
   { value: 'networking', label: 'Networking' },
   { value: 'utility', label: 'Utility' },
-  { value: 'ai', label: 'AI' },
+  { value: 'ai', label: t('AI') },
   { value: 'education', label: 'Education' },
 ]
 

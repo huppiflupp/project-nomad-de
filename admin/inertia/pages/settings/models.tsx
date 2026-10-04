@@ -24,6 +24,7 @@ import useDebounce from '~/hooks/useDebounce'
 import ActiveModelDownloads from '~/components/ActiveModelDownloads'
 import { useSystemInfo } from '~/hooks/useSystemInfo'
 import GpuPassthroughAlert from '~/components/GpuPassthroughAlert'
+import { t } from '~/i18n/runtime'
 
 export default function ModelsPage(props: {
   models: {
@@ -72,7 +73,7 @@ export default function ModelsPage(props: {
         router.reload()
       }
     } catch (error: any) {
-      const msg = error?.response?.data?.message || error?.message || 'Failed to configure remote Ollama.'
+      const msg = error?.response?.data?.message || error?.message || t('Failed to configure remote Ollama.')
       setRemoteOllamaError(msg)
     } finally {
       setRemoteOllamaSaving(false)
@@ -220,7 +221,7 @@ export default function ModelsPage(props: {
   const minRelevanceOptions = [
     ...RAG_MIN_RELEVANCE_PRESETS.map((preset) => ({
       value: String(preset.value),
-      label: preset.label,
+      label: t(preset.label),
     })),
     // The setting is API-writable to any value in [0,1], so a value off the
     // preset ladder is reachable. Surface it as a disabled option rather than
@@ -233,7 +234,7 @@ export default function ModelsPage(props: {
 
   const responseStyleOptions = RESPONSE_STYLE_PRESETS.map((preset) => ({
     value: preset.value,
-    label: preset.label,
+    label: t(preset.label),
   }))
 
   const resolvedWindows = props.models.resolvedContextWindows ?? {}
@@ -486,7 +487,7 @@ export default function ModelsPage(props: {
                 <Input
                   name="remoteOllamaUrl"
                   label="Remote Ollama/OpenAI API URL"
-                  placeholder="http://192.168.1.100:11434  (or :1234 for OpenAI API Compatible Apps)"
+                  placeholder={t("http://192.168.1.100:11434  (or :1234 for OpenAI API Compatible Apps)")}
                   value={remoteOllamaUrl}
                   onChange={(e) => {
                     setRemoteOllamaUrl(e.target.value)

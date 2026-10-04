@@ -7,6 +7,7 @@ import LiveReadout from './LiveReadout'
 import ResultsSoFar from './ResultsSoFar'
 import type { BenchmarkRunHook } from '~/hooks/useBenchmarkRun'
 import type { BenchmarkStatus } from '../../../types/benchmark'
+import { t } from '~/i18n/runtime'
 
 function formatElapsed(ms: number): string {
   const s = Math.floor(ms / 1000)
@@ -28,7 +29,7 @@ function StageHero({ run }: { run: BenchmarkRunHook }) {
             unit="tok/s"
             label="Tokens per Second"
             size="lg"
-            sub={run.aiTtftMs !== null ? `First token in ${Math.round(run.aiTtftMs)} ms` : 'Waiting for first token...'}
+            sub={run.aiTtftMs !== null ? t('First token in {0} ms', Math.round(run.aiTtftMs)) : t('Waiting for first token...')}
           />
           <div className="text-desert-green">
             <Sparkline data={run.aiTokHistory} height={64} />

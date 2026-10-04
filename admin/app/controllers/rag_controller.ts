@@ -210,16 +210,29 @@ export default class RagController {
 
   public async cleanupFailedJobs({ response }: HttpContext) {
     const result = await EmbedFileJob.cleanupFailedJobs()
+    const { cleaned: n, filesDeleted: f } = result
+    // Whole sentences per case (no plural suffix as a placeholder) so the German dictionary can match them.
     return response.status(200).json({
-      message: `Cleaned up ${result.cleaned} failed job${result.cleaned !== 1 ? 's' : ''}${result.filesDeleted > 0 ? `, deleted ${result.filesDeleted} file${result.filesDeleted !== 1 ? 's' : ''}` : ''}.`,
+      message:
+        f === 0
+          ? n === 1 ? 'Cleaned up 1 failed job.' : `Cleaned up ${n} failed jobs.`
+          : f === 1
+            ? n === 1 ? 'Cleaned up 1 failed job, deleted 1 file.' : `Cleaned up ${n} failed jobs, deleted 1 file.`
+            : n === 1 ? `Cleaned up 1 failed job, deleted ${f} files.` : `Cleaned up ${n} failed jobs, deleted ${f} files.`,
       ...result,
     })
   }
 
   public async cancelAllJobs({ response }: HttpContext) {
     const result = await EmbedFileJob.cancelAllJobs()
+    const { cancelled: n, filesDeleted: f } = result
     return response.status(200).json({
-      message: `Cancelled ${result.cancelled} job${result.cancelled !== 1 ? 's' : ''}${result.filesDeleted > 0 ? `, deleted ${result.filesDeleted} file${result.filesDeleted !== 1 ? 's' : ''}` : ''}.`,
+      message:
+        f === 0
+          ? n === 1 ? 'Cancelled 1 job.' : `Cancelled ${n} jobs.`
+          : f === 1
+            ? n === 1 ? 'Cancelled 1 job, deleted 1 file.' : `Cancelled ${n} jobs, deleted 1 file.`
+            : n === 1 ? `Cancelled 1 job, deleted ${f} files.` : `Cancelled ${n} jobs, deleted ${f} files.`,
       ...result,
     })
   }

@@ -23,6 +23,7 @@ import classNames from 'classnames'
 import type { CategoryWithStatus, SpecTier, SpecResource } from '../../../types/collections'
 import { resolveTierResources } from '~/lib/collections'
 import { SERVICE_NAMES } from '../../../constants/service_names'
+import { t } from '~/i18n/runtime'
 
 // Capability definitions - maps user-friendly categories to services
 interface Capability {
@@ -39,29 +40,29 @@ function buildCoreCapabilities(aiAssistantName: string): Capability[] {
   return [
     {
       id: 'information',
-      name: 'Information Library',
+      name: t('Information Library'),
       technicalName: 'Kiwix',
       description:
         'Offline access to Wikipedia, medical references, how-to guides, and encyclopedias',
       features: [
-        'Complete Wikipedia offline',
-        'Medical references and first aid guides',
-        'DIY repair guides and how-to content',
-        'Project Gutenberg books and literature',
+        t('Complete Wikipedia offline'),
+        t('Medical references and first aid guides'),
+        t('DIY repair guides and how-to content'),
+        t('Project Gutenberg books and literature'),
       ],
       services: [SERVICE_NAMES.KIWIX],
       icon: 'IconBooks',
     },
     {
       id: 'education',
-      name: 'Education Platform',
+      name: t('Education Platform'),
       technicalName: 'Kolibri',
       description: 'Interactive learning platform with video courses and exercises',
       features: [
-        'Khan Academy math and science courses',
-        'K-12 curriculum content',
-        'Interactive exercises and quizzes',
-        'Progress tracking for learners',
+        t('Khan Academy math and science courses'),
+        t('K-12 curriculum content'),
+        t('Interactive exercises and quizzes'),
+        t('Progress tracking for learners'),
       ],
       services: [SERVICE_NAMES.KOLIBRI_GEN2],
       icon: 'IconSchool',
@@ -72,10 +73,10 @@ function buildCoreCapabilities(aiAssistantName: string): Capability[] {
       technicalName: 'Ollama',
       description: 'Local AI chat that runs entirely on your hardware - no internet required',
       features: [
-        'Private conversations that never leave your device',
-        'No internet connection needed after setup',
-        'Ask questions, get help with writing, brainstorm ideas',
-        'Runs on your own hardware with local AI models',
+        t('Private conversations that never leave your device'),
+        t('No internet connection needed after setup'),
+        t('Ask questions, get help with writing, brainstorm ideas'),
+        t('Runs on your own hardware with local AI models'),
       ],
       services: [SERVICE_NAMES.OLLAMA],
       icon: 'IconRobot',
@@ -94,12 +95,12 @@ function buildCoreCapabilities(aiAssistantName: string): Capability[] {
 type WizardStep = 1 | 2 | 3 | 4 | 5 | 6
 
 const STEP_LABELS: Record<WizardStep, string> = {
-  1: 'Apps',
-  2: 'Maps',
-  3: 'Content',
-  4: 'Creator Packs',
-  5: 'AI',
-  6: 'Review',
+  1: t('Apps'),
+  2: t('Maps'),
+  3: t('Content'),
+  4: t('Creator Packs'),
+  5: t('AI'),
+  6: t('Review'),
 }
 
 const CURATED_MAP_COLLECTIONS_KEY = 'curated-map-collections'
@@ -406,7 +407,7 @@ export default function EasySetupWizard(props: {
       if (remoteOllamaEnabled && remoteOllamaUrl) {
         const remoteResult = await api.configureRemoteOllama(remoteOllamaUrl)
         if (!remoteResult?.success) {
-          const msg = (remoteResult as any)?.message || 'Failed to configure remote Ollama.'
+          const msg = (remoteResult as any)?.message || t('Failed to configure remote Ollama.')
           setRemoteOllamaUrlError(msg)
           setIsProcessing(false)
           setCurrentStep(1)

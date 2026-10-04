@@ -18,7 +18,7 @@ import { BenchmarkType, RunBenchmarkResponse, SubmitBenchmarkResponse, UpdateBui
 import type { CreateMapMarkerPayload, MapMarkerResponse, UpdateMapMarkerPayload } from '../../types/maps'
 import type { ChatSource } from '../../types/chat'
 import { chatStreamErrorMessage } from './chat_stream.js'
-import { localize } from '~/i18n/runtime'
+import { localize, tm, t } from '~/i18n/runtime'
 
 type OllamaChatRequestWithImages = OllamaChatRequest & { images?: File[] }
 
@@ -362,7 +362,7 @@ class API {
         })
         const responseBody = await response.json().catch(() => null)
         if (!response.ok) {
-          throw new Error(responseBody?.message ?? `HTTP error: ${response.status}`)
+          throw new Error(tm(responseBody?.message ?? `HTTP error: ${response.status}`))
         }
         return responseBody as NomadChatResponse
       }
@@ -390,7 +390,7 @@ class API {
 
     if (!response.ok || !response.body) {
       const errorBody = await response.json().catch(() => null)
-      throw new Error(errorBody?.message ?? `HTTP error: ${response.status}`)
+      throw new Error(tm(errorBody?.message ?? `HTTP error: ${response.status}`))
     }
 
     const reader = response.body.getReader()
@@ -414,7 +414,7 @@ class API {
           } catch { continue /* skip malformed chunks */ }
 
           const streamError = chatStreamErrorMessage(data)
-          if (streamError) throw new Error(streamError)
+          if (streamError) throw new Error(tm(streamError))
 
           // Citation metadata (#1179) arrives as a distinct trailing event with no
           // `message` key -- route it separately rather than through onChunk.
@@ -1005,12 +1005,12 @@ class API {
     } catch (error: any) {
       // For 409 Conflict errors, throw a specific error that the UI can handle
       if (error.response?.status === 409) {
-        const err = new Error(error.response?.data?.error || 'This benchmark has already been submitted to the repository')
+        const err = new Error(error.response?.data?.error || t('This benchmark has already been submitted to the repository'))
           ; (err as any).status = 409
         throw err
       }
       // For other errors, extract the message and throw
-      const errorMessage = error.response?.data?.error || error.message || 'Failed to submit benchmark'
+      const errorMessage = error.response?.data?.error || error.message || t('Failed to submit benchmark')
       throw new Error(errorMessage)
     }
   }

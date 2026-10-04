@@ -1,6 +1,7 @@
 import { useState, useCallback, useRef, useEffect } from 'react'
 import { Head, Link } from '@inertiajs/react'
 import AppLayout from '~/layouts/AppLayout'
+import { t, tm } from '~/i18n/runtime'
 import StyledButton from '~/components/StyledButton'
 import InteractionColumn from '~/components/drug-reference/InteractionColumn'
 import IngestStatus from '~/components/drug-reference/IngestStatus'
@@ -93,7 +94,7 @@ export default function DrugReferenceInteractions({ ingestStatus, rowCount }: Pa
       setPickerResults(json.results ?? [])
       setPickerSearched(true)
     } catch (err) {
-      setPickerError(err instanceof Error ? err.message : 'Search failed')
+      setPickerError(err instanceof Error ? tm(err.message) : t('Search failed'))
     } finally {
       setPickerLoading(false)
     }
@@ -146,8 +147,8 @@ export default function DrugReferenceInteractions({ ingestStatus, rowCount }: Pa
           <IconAlertTriangle size={20} className="text-amber-600 flex-shrink-0 mt-0.5" />
           <p className="text-sm text-amber-900 leading-relaxed">
             <strong>This shows each drug's own FDA-labeled interaction warnings, individually.</strong>{' '}
-            It is <strong>not</strong> a cross-drug interaction checker and is{' '}
-            <strong>not</strong> a substitute for professional medical review. Absence of text
+            It is <strong>{t('not')}</strong> a cross-drug interaction checker and is{' '}
+            <strong>{t('not')}</strong> a substitute for professional medical review. Absence of text
             here does not mean a drug is safe to combine.
           </p>
         </div>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import StyledModal from './StyledModal'
 import api from '~/lib/api'
+import { t } from '~/i18n/runtime'
 
 interface ServiceLogsModalProps {
   serviceName: string
@@ -45,7 +46,7 @@ export default function ServiceLogsModal({
       large
     >
       <pre className="text-xs font-mono whitespace-pre-wrap break-all max-h-[60vh] overflow-auto bg-surface-secondary rounded-md p-3 text-text-primary text-left">
-        {logs || (loading ? 'Loading…' : 'No log output.')}
+        {logs || (loading ? t('Loading…') : t('No log output.'))}
       </pre>
     </StyledModal>
   )

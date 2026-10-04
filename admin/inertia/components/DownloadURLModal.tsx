@@ -2,6 +2,7 @@ import { useState } from 'react'
 import StyledModal, { StyledModalProps } from './StyledModal'
 import Input from './inputs/Input'
 import api from '~/lib/api'
+import { t } from '~/i18n/runtime'
 
 export type DownloadURLModalProps = Omit<
   StyledModalProps,
@@ -23,10 +24,10 @@ const DownloadURLModal: React.FC<DownloadURLModalProps> = ({
   async function runPreflightCheck(downloadUrl: string) {
     try {
       setLoading(true)
-      setMessages([`Running preflight check for URL: ${downloadUrl}`])
+      setMessages([t('Running preflight check for URL: {0}', downloadUrl)])
       const res = await api.downloadRemoteMapRegionPreflight(downloadUrl)
       if (!res) {
-        throw new Error('An unknown error occurred during the preflight check.')
+        throw new Error(t('An unknown error occurred during the preflight check.'))
       }
 
       if ('message' in res) {
@@ -35,7 +36,7 @@ const DownloadURLModal: React.FC<DownloadURLModalProps> = ({
 
       setMessages((prev) => [
         ...prev,
-        `Preflight check passed. Filename: ${res.filename}, Size: ${(res.size / (1024 * 1024)).toFixed(2)} MB`,
+        t('Preflight check passed. Filename: {0}, Size: {1} MB', res.filename, (res.size / (1024 * 1024)).toFixed(2)),
       ])
 
       if (onPreflightSuccess) {
@@ -43,7 +44,7 @@ const DownloadURLModal: React.FC<DownloadURLModalProps> = ({
       }
     } catch (error) {
       console.error('Preflight check failed:', error)
-      setMessages((prev) => [...prev, `Preflight check failed: ${error.message}`])
+      setMessages((prev) => [...prev, t('Preflight check failed: {0}', error.message)])
     } finally {
       setLoading(false)
     }

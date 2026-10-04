@@ -11,6 +11,7 @@ import {
 
 import { PIN_COLORS } from '~/hooks/useMapMarkers'
 import type { MapMarker } from '~/hooks/useMapMarkers'
+import { t } from '~/i18n/runtime'
 
 interface MarkerPanelProps {
   markers: MapMarker[]
@@ -97,15 +98,15 @@ export default function MarkerPanel({
         : 'Z → A'
       : sortField === 'color'
         ? sortDirection === 'asc'
-          ? 'Hue ↑'
-          : 'Hue ↓'
+          ? t('Hue ↑')
+          : t('Hue ↓')
         : sortField === 'icon'
           ? sortDirection === 'asc'
             ? 'A → Z'
             : 'Z → A'
           : sortDirection === 'asc'
-            ? 'Hidden first'
-            : 'Visible first'
+            ? t('Hidden first')
+            : t('Visible first')
 
   const filteredAndSortedMarkers = useMemo(() => {
     const query = searchQuery.trim().toLowerCase()

@@ -8,7 +8,9 @@ export function normalize(s) {
 export function looksHuman(s) {
   if (s.length < 2 || !/[A-Za-z]{2}/.test(s)) return false
   if (/^(https?:|\/|\.\/|#|@|[a-z0-9_.-]+\/[a-z0-9_./-]*$)/i.test(s)) return false
-  if (/^[a-z0-9_:.\-[\]/!%]+( [a-z0-9_:.\-[\]/!%()]+)*$/.test(s) && /[-:]/.test(s)) return false
+  // Lower-case, hyphenated word lists are class names – unless they read like a sentence fragment.
+  const prose = (s.match(/(?:^| )(the|and|is|a|an|of|to|for|not|with|your|this|that|or|in|on|be)(?= |$)/g) || []).length >= 2
+  if (!prose && /^[a-z0-9_:.\-[\]/!%]+( [a-z0-9_:.\-[\]/!%()]+)*$/.test(s) && /[-:]/.test(s)) return false
   if (/^[a-z][a-zA-Z0-9_.]*$/.test(s)) return false
   if (/^[A-Z0-9_]+$/.test(s)) return false
   if (/^Icon[A-Z]\w+$/.test(s)) return false

@@ -7,6 +7,7 @@ import DrugResultRow from '~/components/drug-reference/DrugResultRow'
 import type { ConditionSummary, NaturalRemedy } from '../../../types/conditions'
 import { remedySourceName } from '../../../util/conditions'
 import type { DrugSearchResult } from '../../../types/drug_reference'
+import { t } from '~/i18n/runtime'
 
 interface PageProps {
   condition: ConditionSummary | null
@@ -25,7 +26,7 @@ interface PageProps {
  * "data present, but nothing matched this situation".
  */
 export default function ConditionsShow({ condition, drugs, remedies, drugRowCount }: PageProps) {
-  const label = condition?.label ?? 'Condition'
+  const label = condition?.label ?? t('Condition')
   const noData = drugRowCount === 0
 
   return (

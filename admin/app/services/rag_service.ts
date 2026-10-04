@@ -1616,10 +1616,16 @@ export class RagService {
       }
 
       const label = collection ?? 'Uncategorized'
-      const verb = active ? 'Turned on' : 'Turned off'
+      // Whole sentences per case (no plural suffix as a placeholder) so the German dictionary can match them.
       return {
         success: true,
-        message: `${verb} ${affectedCount} file${affectedCount === 1 ? '' : 's'} in "${label}".`,
+        message: active
+          ? affectedCount === 1
+            ? `Turned on 1 file in "${label}".`
+            : `Turned on ${affectedCount} files in "${label}".`
+          : affectedCount === 1
+            ? `Turned off 1 file in "${label}".`
+            : `Turned off ${affectedCount} files in "${label}".`,
         affectedCount,
       }
     } catch (error) {
@@ -2678,7 +2684,9 @@ export class RagService {
       return {
         success: failedPaths.length === 0,
         message:
-          `Re-embedding ${queuedCount} file${queuedCount === 1 ? '' : 's'}. Existing points were replaced.` +
+          (queuedCount === 1
+            ? 'Re-embedding 1 file. Existing points were replaced.'
+            : `Re-embedding ${queuedCount} files. Existing points were replaced.`) +
           failureSuffix,
         filesScanned: filesInStorage.length,
         filesQueued: queuedCount,
@@ -2761,7 +2769,9 @@ export class RagService {
       return {
         success: failedPaths.length === 0,
         message:
-          `Collection wiped. Queued ${queuedCount} file${queuedCount === 1 ? '' : 's'} for a full rebuild.` +
+          (queuedCount === 1
+            ? 'Collection wiped. Queued 1 file for a full rebuild.'
+            : `Collection wiped. Queued ${queuedCount} files for a full rebuild.`) +
           failureSuffix,
         filesScanned: filesInStorage.length,
         filesQueued: queuedCount,

@@ -16,6 +16,7 @@ import CoreAutoUpdateSection from '~/components/updates/CoreAutoUpdateSection'
 import AppAutoUpdateSection from '~/components/updates/AppAutoUpdateSection'
 import ContentAutoUpdateSection from '~/components/updates/ContentAutoUpdateSection'
 import ContentUpdatesSection from '~/components/updates/ContentUpdatesSection'
+import { t } from '~/i18n/runtime'
 
 type Props = {
   updateAvailable: boolean
@@ -25,13 +26,13 @@ type Props = {
 }
 
 const STAGE_LABELS: Record<SystemUpdateStatus['stage'], string> = {
-  idle: 'Preparing Update',
-  starting: 'Starting Update',
-  pulling: 'Pulling Images',
-  pulled: 'Images Pulled',
-  recreating: 'Recreating Containers',
-  complete: 'Update Complete',
-  error: 'Update Failed',
+  idle: t('Preparing Update'),
+  starting: t('Starting Update'),
+  pulling: t('Pulling Images'),
+  pulled: t('Images Pulled'),
+  recreating: t('Recreating Containers'),
+  complete: t('Update Complete'),
+  error: t('Update Failed'),
 }
 
 const ADVANCED_STAGES: ReadonlySet<SystemUpdateStatus['stage']> = new Set([
@@ -169,7 +170,7 @@ export default function SystemUpdatePage(props: { system: Props }) {
       }
     },
     onError: (error: any) => {
-      const errorMessage = error?.message || 'Failed to check for updates'
+      const errorMessage = error?.message || t('Failed to check for updates')
       setError(errorMessage)
       addNotification({ type: 'error', message: errorMessage })
     },
@@ -515,7 +516,7 @@ export default function SystemUpdatePage(props: { system: Props }) {
                 </div>
                 <div className="p-6 overflow-auto flex-1">
                   <pre className="bg-black text-green-400 p-4 rounded text-xs font-mono whitespace-pre-wrap">
-                    {logs || 'No logs available yet...'}
+                    {logs || t('No logs available yet...')}
                   </pre>
                 </div>
                 <div className="p-6 border-t border-desert-stone-light">

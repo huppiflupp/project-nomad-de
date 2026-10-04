@@ -17,6 +17,7 @@ import { useTransmit } from 'react-adonis-transmit'
 import { BROADCAST_CHANNELS } from '../../../constants/broadcast'
 import { IconArrowUp, IconCheck, IconDownload } from '@tabler/icons-react'
 import UpdateServiceModal from '~/components/UpdateServiceModal'
+import { t } from '~/i18n/runtime'
 
 function extractTag(containerImage: string): string {
   if (!containerImage) return ''
@@ -192,7 +193,7 @@ export default function SettingsPage(props: { system: { services: ServiceSlim[] 
           try {
             const response = await api.updateService(record.service_name, targetVersion)
             if (!response?.success) {
-              throw new Error(response?.message || 'Update failed')
+              throw new Error(response?.message || t('Update failed'))
             }
             // On success the backend broadcasts `update-complete`, which triggers the reload effect
             // above and refreshes the version + status. Leave the button disabled until then.
