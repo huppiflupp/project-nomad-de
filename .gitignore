@@ -77,3 +77,9 @@ admin/storage
 __pycache__/
 *.pyc
 .superpowers/
+
+# Testinstanz und Seiten-Crawl (de/dev, de/tools/crawl)
+de/dev/data/
+!de/dev/compose.yml
+de/tools/crawl/node_modules/
+de/tools/crawl/report*.json
