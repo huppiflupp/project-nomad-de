@@ -7,7 +7,7 @@ import { UsePageProps } from '../../types/system'
 import { IconMenu2, IconX } from '@tabler/icons-react'
 import ThemeToggle from '~/components/ThemeToggle'
 import DebugInfoModal from './DebugInfoModal'
-import { tc } from '~/i18n/runtime'
+import { t } from '~/i18n/runtime'
 
 type SidebarItem = {
   name: string
@@ -42,7 +42,7 @@ const StyledSidebar: React.FC<StyledSidebarProps> = ({ title, items }) => {
     const content = (
       <>
         {item.icon && <item.icon aria-hidden="true" className="size-6 shrink-0" />}
-        {tc(item.name)}
+        {t(item.name)}
       </>
     )
     return (

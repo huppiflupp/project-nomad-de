@@ -1,7 +1,7 @@
 import * as assert from 'node:assert/strict'
 import { test } from 'node:test'
 import {
-  compile, localizeData, normalize, parseLang, translate, translateDynamic,
+  compile, localizeData, normalize, parseLang, translate, translateDynamic, translateExact,
 } from '../../i18n/core.js'
 
 const dict = compile({
@@ -71,4 +71,31 @@ test('translate renders false/null/undefined args as nothing, keeps 0 and string
   assert.equal(translate(null, 'Items: {0} | Size: {1}', [undefined, '2 GB']), 'Items:  | Size: 2 GB')
   assert.equal(translate(null, 'a{0}b{1}c{2}', [false, null, 0]), 'abc0')
   assert.equal(translate(dict, 'Deleted {0} files', [0]), '0 Dateien gelöscht')
+})
+
+test('localizeData leaves Markdoc render trees alone', () => {
+  const tree = { $$mdtype: 'Tag', name: 'Image', attributes: { title: 'Medicine' }, children: [] }
+  const data = { content: tree, title: 'Medicine' }
+  localizeData(data, { message: (s) => s, catalog: (s) => translateDynamic(dict, s) })
+  assert.equal(data.title, 'Medizin')
+  assert.equal(tree.name, 'Image')
+  assert.equal(tree.attributes.title, 'Medicine')
+})
+
+test('translateExact: catalog hits only, user data with pattern-like text stays untouched', () => {
+  assert.equal(translateExact(dict, '  Medicine '), 'Medizin')
+  assert.equal(translateExact(dict, 'Deleted 3 files'), 'Deleted 3 files')
+  assert.equal(translateExact(dict, 'Downloading Home'), 'Downloading Home')
+  assert.equal(translateExact(dict, 'Empty'), 'Empty')
+  assert.equal(translateExact(null, 'Medicine'), 'Medicine')
+})
+
+test('localizeData leaves user-defined services (custom apps, link tiles) alone', () => {
+  const data = [
+    { service_name: 'nomad_kiwix', friendly_name: 'Medicine', is_custom: false, is_link_tile: false },
+    { service_name: 'link_1', friendly_name: 'Medicine', is_custom: false, is_link_tile: 1 },
+    { service_name: 'custom_x', friendly_name: 'Medicine', is_custom: true },
+  ]
+  localizeData(data, { message: (s) => s, catalog: (s) => translateDynamic(dict, s) })
+  assert.deepEqual(data.map((d) => d.friendly_name), ['Medizin', 'Medicine', 'Medicine'])
 })

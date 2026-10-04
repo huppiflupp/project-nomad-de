@@ -46,7 +46,7 @@ import { getSupplyDepotDocLink } from '../../constants/supply_depot_docs'
 import api from '~/lib/api'
 import { toTitleCase } from '../../app/utils/misc'
 import { SERVICE_NAMES } from '../../constants/service_names'
-import { tc, t } from '~/i18n/runtime'
+import { t } from '~/i18n/runtime'
 
 function extractTag(containerImage: string): string {
   if (!containerImage) return ''
@@ -969,7 +969,7 @@ function AppCard({
       <div className="flex items-center gap-2 mb-4 flex-wrap">
         {service.category && (
           <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${catColor}`}>
-            {tc(toTitleCase(service.category))}
+            {t(toTitleCase(service.category))}
           </span>
         )}
         {service.is_custom ? (

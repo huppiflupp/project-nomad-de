@@ -3,7 +3,7 @@
 import de from '../../i18n/de.json'
 import catalogDe from '../../i18n/catalog.de.json'
 import {
-  compile, localizeData, parseLang, translate, translateDynamic, LANG_COOKIE, type Lang,
+  compile, localizeData, parseLang, translate, translateDynamic, translateExact, LANG_COOKIE, type Lang,
 } from '../../i18n/core'
 
 const lang: Lang = typeof document === 'undefined' ? 'de' : parseLang(document.cookie)
@@ -26,10 +26,12 @@ export function tm(text: string): string {
   return translateDynamic(ui, text)
 }
 
-/** Catalog/service text: exact match in the catalog dictionary, then UI dictionary. */
+/**
+ * Catalog/service text: exact match in the catalog dictionary only. These fields also carry
+ * user data (marker names, link tiles, custom apps, chat titles) – no UI fallback, no patterns.
+ */
 export function tc(text: string): string {
-  const c = translateDynamic(catalog, text)
-  return c !== text ? c : translateDynamic(ui, text)
+  return translateExact(catalog, text)
 }
 
 export function localize<T>(data: T): T {

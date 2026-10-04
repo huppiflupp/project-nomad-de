@@ -15,3 +15,13 @@ test('checkDicts reports missing keys, placeholder mismatches and orphans', () =
   assert.deepEqual(r.badPlaceholders, ['Deleted {0} files -> Dateien gelöscht'])
   assert.deepEqual(r.orphans, ['Old text'])
 })
+
+test('checkDicts wants catalog texts in the catalog dictionary, a UI entry is not enough', () => {
+  const r = checkDicts({
+    ui: new Map(), server: new Map(),
+    catalog: new Map([['Notes', 'seeder.ts'], ['Medicine', 'x.json']]),
+    de: { 'Notes': 'Notizen' },
+    cat: { 'Medicine': 'Medizin' },
+  })
+  assert.deepEqual(r.missing, ['seeder.ts: Notes'])
+})

@@ -54,6 +54,7 @@ class API {
     // German distribution: translate server messages and catalog texts (admin/i18n).
     this.client.interceptors.response.use(
       (response) => {
+        // skipLocalize: user data (chat sessions, map markers, custom libraries/apps) stays as typed
         if ((response.config as any)?.skipLocalize) return response
         response.data = localize(response.data)
         return response
@@ -470,7 +471,7 @@ class API {
         model: string | null
         timestamp: string
         lastMessage: string | null
-      }>>('/chat/sessions')
+      }>>('/chat/sessions', { skipLocalize: true } as any)
       return response.data
     })()
   }
@@ -488,7 +489,7 @@ class API {
           content: string
           timestamp: string
         }>
-      }>(`/chat/sessions/${sessionId}`)
+      }>(`/chat/sessions/${sessionId}`, { skipLocalize: true } as any)
       return response.data
     })()
   }
@@ -500,7 +501,7 @@ class API {
         title: string
         model: string | null
         timestamp: string
-      }>('/chat/sessions', { title, model })
+      }>('/chat/sessions', { title, model }, { skipLocalize: true } as any)
       return response.data
     })()
   }
@@ -512,7 +513,7 @@ class API {
         title: string
         model: string | null
         timestamp: string
-      }>(`/chat/sessions/${sessionId}`, data)
+      }>(`/chat/sessions/${sessionId}`, data, { skipLocalize: true } as any)
       return response.data
     })()
   }
@@ -539,7 +540,7 @@ class API {
         role: 'system' | 'user' | 'assistant'
         content: string
         timestamp: string
-      }>(`/chat/sessions/${sessionId}/messages`, { role, content })
+      }>(`/chat/sessions/${sessionId}/messages`, { role, content }, { skipLocalize: true } as any)
       return response.data
     })()
   }
@@ -828,21 +829,21 @@ class API {
 
   async listMapMarkers() {
     return catchInternal(async () => {
-      const response = await this.client.get<MapMarkerResponse[]>('/maps/markers')
+      const response = await this.client.get<MapMarkerResponse[]>('/maps/markers', { skipLocalize: true } as any)
       return response.data
     })()
   }
 
   async createMapMarker(data: CreateMapMarkerPayload) {
     return catchInternal(async () => {
-      const response = await this.client.post<MapMarkerResponse>('/maps/markers', data)
+      const response = await this.client.post<MapMarkerResponse>('/maps/markers', data, { skipLocalize: true } as any)
       return response.data
     })()
   }
 
   async updateMapMarker(id: number, data: UpdateMapMarkerPayload) {
     return catchInternal(async () => {
-      const response = await this.client.patch<MapMarkerResponse>(`/maps/markers/${id}`, data)
+      const response = await this.client.patch<MapMarkerResponse>(`/maps/markers/${id}`, data, { skipLocalize: true } as any)
       return response.data
     })()
   }
@@ -889,7 +890,8 @@ class API {
   async listCustomLibraries() {
     return catchInternal(async () => {
       const response = await this.client.get<{ id: number; name: string; base_url: string; is_default: boolean }[]>(
-        '/zim/custom-libraries'
+        '/zim/custom-libraries',
+        { skipLocalize: true } as any
       )
       return response.data
     })()
@@ -1404,7 +1406,7 @@ class API {
           memory_mb?: number
           cpus?: number
         }
-      }>(`/system/services/custom/${service_name}`)
+      }>(`/system/services/custom/${service_name}`, { skipLocalize: true } as any)
       return response.data
     })()
   }

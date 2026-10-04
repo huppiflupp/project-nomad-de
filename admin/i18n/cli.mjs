@@ -121,7 +121,8 @@ export function checkDicts({ ui, server, catalog, de, cat }) {
   const catN = new Map(Object.entries(cat).map(([k, v]) => [normalize(k), v]))
   const missing = []
   for (const [k, f] of [...ui, ...server]) if (!deN.get(k) && !missing.includes(`${f}: ${k}`)) missing.push(`${f}: ${k}`)
-  for (const [k, f] of catalog) if (!catN.get(k) && !deN.get(k)) missing.push(`${f}: ${k}`)
+  // tc() looks only into the catalog dictionary (user data must never hit UI patterns)
+  for (const [k, f] of catalog) if (!catN.get(k)) missing.push(`${f}: ${k}`)
   const badPlaceholders = []
   for (const [k, v] of [...deN, ...catN]) if (v && ph(k) !== ph(v)) badPlaceholders.push(`${k} -> ${v}`)
   const used = new Set([...ui.keys(), ...server.keys(), ...catalog.keys()])

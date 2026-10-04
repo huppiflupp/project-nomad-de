@@ -73,6 +73,13 @@ export function translate(c: Compiled | null, key: string, args: unknown[] = [])
   return format(hit ?? key, args)
 }
 
+/** Exact dictionary hit only (no {n} patterns); anything else comes back unchanged. */
+export function translateExact(c: Compiled | null, text: string): string {
+  if (!c || typeof text !== 'string') return text
+  const hit = c.exact.get(normalize(text))
+  return hit === undefined ? text : hit
+}
+
 export function translateDynamic(c: Compiled | null, text: string): string {
   if (!c || typeof text !== 'string') return text
   const core = normalize(text)
@@ -103,6 +110,10 @@ export function localizeData(
       return value
     }
     const obj = value as Record<string, unknown>
+    // Markdoc render trees (docs pages) use `name`/`title` for tags and attributes, not texts.
+    if ('$$mdtype' in obj) return obj
+    // User-defined services (custom apps, link tiles) carry names the user typed.
+    if (obj.is_custom || obj.is_link_tile) return obj
     for (const [k, v] of Object.entries(obj)) {
       if (typeof v === 'string') {
         if (MESSAGE_KEYS.has(k)) obj[k] = fns.message(v)
