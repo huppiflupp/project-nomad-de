@@ -265,3 +265,32 @@ A ist fertig, wenn:
 - **Namensrechte:** „Project NOMAD“ gehört Crosstalk Solutions. Der Fork tritt klar als
   inoffiziell auf; verlangt Upstream eine Umbenennung, ist sie auf README, Fußzeile und
   `distribution.ts` begrenzt.
+
+## Nachtrag 2026-10-04 (beim Schreiben des Plans, nach Lesen des Codes)
+
+Diese Punkte ersetzen die entsprechenden Stellen oben:
+
+1. **Versionsschema (ersetzt 1., „Versionen“).** `v1.35.0-de.1` funktioniert nicht: `isNewerVersion`
+   (`admin/app/utils/version.ts`) behandelt alles mit `-` als Vorabversion und bietet es ohne
+   „Early Access“ nie als Update an, und das Auto-Update lässt nur `^\d+\.\d+\.\d+$` zu, weil der Tag in
+   ein `sed` im Updater gelangt. Deshalb reines SemVer mit kodierter Patch-Nummer:
+   **Patch = 100 × Upstream-Patch + n**. Upstream `1.35.0` → Fork `1.35.1`, `1.35.2` …; Upstream `1.35.1`
+   → Fork `1.35.101`; Upstream `1.36.0` → Fork `1.36.1`. Upstream-Code bleibt unverändert; README und
+   Release-Notizen nennen die Basis („beruht auf Project NOMAD 1.35.0“).
+2. **Ort der Übersetzungsdateien (ersetzt 4.1).** Das Docker-Image baut nur aus `admin/`. Wörterbücher und
+   Laufzeit liegen deshalb in **`admin/i18n/`** (`de.json`, `catalog.de.json`, `core.ts`,
+   `babel-plugin.mjs`, `cli.mjs`); `de/` behält Spezifikationen, Pläne und Werkzeuge außerhalb des Images.
+3. **Servermeldungen und Kataloge werden im Browser übersetzt (ersetzt 4.4 und 6).** Alle API-Antworten
+   laufen durch einen Axios-Client (`admin/inertia/lib/api.ts`). Ein Response-Interceptor übersetzt dort
+   `message`/`error`-Felder (mit Platzhalter-Mustern wie `Deleted {0} files`) und Katalogfelder
+   (`name`, `title`, `description` …, nur bei exaktem Treffer im Katalog-Wörterbuch). Das erspart ~110
+   Eingriffe auf dem Server, eine Sprach-Middleware und AsyncLocalStorage. Der Server liest die Sprache
+   nur noch dort, wo er selbst Text auswählt: Anleitungen (Cookie `nomad_lang` im `DocsController`).
+4. **Babel-Plugin übersetzt auch Objekt-Eigenschaften** (`label`, `title`, `message`, `description` …,
+   als String oder Template-Literal) in Oberflächendateien. Damit sind `addNotification({ message })`
+   und Menü-/Spaltendefinitionen ohne Handarbeit abgedeckt; `t()` von Hand bleibt nur für Strings in
+   Variablen und Funktionsargumenten.
+5. **Deutsche Anleitungen in `admin/docs-de/`** statt `admin/docs/de/`: `DocsService.getDocs()` und die
+   Wissensdatenbank lesen `docs/` rekursiv und würden einen Unterordner mit einlesen.
+6. **KI-Chat:** Statt einer Sprachweiche bekommt `SYSTEM_PROMPTS.default` den Satz „Antworte in der Sprache
+   des Nutzers, im Zweifel auf Deutsch“ (englisch formuliert, wie der Rest des Prompts).
