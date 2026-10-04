@@ -102,6 +102,7 @@ RUN echo "{\"version\":\"${VERSION}\"}" > /app/version.json
 
 # Copy docs and README for access within the container
 COPY admin/docs /app/docs
+COPY admin/docs-de /app/docs-de
 COPY README.md /app/README.md
 
 # Empty Calibre library, seeded into storage/books on Calibre-Web install

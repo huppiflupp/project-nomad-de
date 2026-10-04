@@ -4,6 +4,7 @@ import { inject } from '@adonisjs/core'
 import logger from '@adonisjs/core/services/logger'
 import { TokenChunker } from '@chonkiejs/core'
 import sharp from 'sharp'
+import { existsSync } from 'node:fs'
 import {
   deleteFileIfExists,
   determineFileType,
@@ -2064,7 +2065,10 @@ export class RagService {
   private _nomadDocsRoots(): { readmePath: string; docsDir: string } {
     return {
       readmePath: join(process.cwd(), 'README.md'),
-      docsDir: join(process.cwd(), 'docs'),
+      // German distribution: embed the German docs.
+      docsDir: existsSync(join(process.cwd(), 'docs-de'))
+        ? join(process.cwd(), 'docs-de')
+        : join(process.cwd(), 'docs'),
     }
   }
 
