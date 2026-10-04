@@ -4,8 +4,9 @@
 import '../css/app.css'
 import { createRoot } from 'react-dom/client'
 import { createInertiaApp } from '@inertiajs/react'
+import axios from 'axios'
 import { resolvePageComponent } from '@adonisjs/inertia/helpers'
-import { localize } from '~/i18n/runtime'
+import { getLang, localize } from '~/i18n/runtime'
 import ModalsProvider from '~/providers/ModalProvider'
 import { TransmitProvider } from 'react-adonis-transmit'
 import { generateUUID } from '~/lib/util'
@@ -17,6 +18,26 @@ import { UsePageProps } from '../../types/system'
 
 const appName = import.meta.env.VITE_APP_NAME || 'Project NOMAD'
 const queryClient = new QueryClient()
+
+// de: Inertia 2 loads every later page (Link, router.visit/reload) through the default axios
+// instance with responseType "text" – translate those props like the initial page's.
+// Inertia's getDataFromResponse() accepts the parsed object as well.
+axios.interceptors.response.use((response) => {
+  if (getLang() === 'en' || !response.headers['x-inertia']) return response
+  let data = response.data
+  if (typeof data === 'string') {
+    try {
+      data = JSON.parse(data)
+    } catch {
+      return response
+    }
+  }
+  if (data?.props) {
+    data.props = localize(data.props)
+    response.data = data
+  }
+  return response
+})
 
 // Patch the global crypto object for non-HTTPS/localhost contexts
 if (!window.crypto?.randomUUID) {
