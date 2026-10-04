@@ -4,6 +4,7 @@ import { UsePageProps } from '../../types/system'
 import ThemeToggle from '~/components/ThemeToggle'
 import { IconBug } from '@tabler/icons-react'
 import DebugInfoModal from './DebugInfoModal'
+import LanguageSwitch from '~/i18n/LanguageSwitch'
 
 export default function Footer() {
   const { appVersion } = usePage().props as unknown as UsePageProps
@@ -24,7 +25,14 @@ export default function Footer() {
           Debug Info
         </button>
         <ThemeToggle />
+        <span className="text-gray-300">|</span>
+        <LanguageSwitch />
       </div>
+      <p className="pb-3 text-center text-xs text-text-secondary">
+        Unofficial German edition of{' '}
+        <a className="underline" href="https://github.com/Crosstalk-Solutions/project-nomad">Project NOMAD</a>{' '}
+        by Crosstalk Solutions · <a className="underline" href="https://github.com/huppiflupp/project-nomad-de">huppiflupp/project-nomad-de</a>
+      </p>
       <DebugInfoModal open={debugModalOpen} onClose={() => setDebugModalOpen(false)} />
     </footer>
   )
