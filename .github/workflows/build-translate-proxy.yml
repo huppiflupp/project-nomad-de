@@ -47,6 +47,6 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: |
-            ghcr.io/crosstalk-solutions/project-nomad-translate:${{ inputs.version }}
-            ghcr.io/crosstalk-solutions/project-nomad-translate:v${{ inputs.version }}
-            ${{ inputs.tag_latest && 'ghcr.io/crosstalk-solutions/project-nomad-translate:latest' || '' }}
+            ghcr.io/huppiflupp/project-nomad-de-translate:${{ inputs.version }}
+            ghcr.io/huppiflupp/project-nomad-de-translate:v${{ inputs.version }}
+            ${{ inputs.tag_latest && 'ghcr.io/huppiflupp/project-nomad-de-translate:latest' || '' }}

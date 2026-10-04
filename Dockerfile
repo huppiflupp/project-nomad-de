@@ -70,14 +70,14 @@ RUN set -eux; \
     /usr/local/bin/pmtiles version
 
 # Labels
-LABEL org.opencontainers.image.title="Project NOMAD" \
-      org.opencontainers.image.description="The Project NOMAD Official Docker image" \
+LABEL org.opencontainers.image.title="Project NOMAD – Deutsche Fassung (inoffiziell)" \
+      org.opencontainers.image.description="Inoffizielle deutsche Fassung von Project NOMAD (Crosstalk Solutions)" \
       org.opencontainers.image.version="${VERSION}" \
       org.opencontainers.image.created="${BUILD_DATE}" \
       org.opencontainers.image.revision="${VCS_REF}" \
-      org.opencontainers.image.vendor="Crosstalk Solutions, LLC" \
-      org.opencontainers.image.documentation="https://github.com/CrosstalkSolutions/project-nomad/blob/main/README.md" \
-      org.opencontainers.image.source="https://github.com/CrosstalkSolutions/project-nomad" \
+      org.opencontainers.image.vendor="huppiflupp (Fork von Crosstalk Solutions, LLC)" \
+      org.opencontainers.image.documentation="https://github.com/huppiflupp/project-nomad-de/blob/main/README.md" \
+      org.opencontainers.image.source="https://github.com/huppiflupp/project-nomad-de" \
       org.opencontainers.image.licenses="Apache-2.0"
 
 ENV NODE_ENV=production
