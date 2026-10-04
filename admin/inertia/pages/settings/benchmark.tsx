@@ -896,8 +896,9 @@ export default function BenchmarkPage(props: {
                       <div className="flex items-center gap-2">
                         <IconClock className="w-5 h-5 text-desert-stone-dark" />
                         <span className="font-medium text-desert-green">
-                          {benchmarkHistory.length} benchmark
-                          {benchmarkHistory.length !== 1 ? 's' : ''} recorded
+                          {benchmarkHistory.length === 1
+                            ? t('{0} benchmark recorded', benchmarkHistory.length)
+                            : t('{0} benchmarks recorded', benchmarkHistory.length)}
                         </span>
                       </div>
                       <IconChevronDown

@@ -1451,21 +1451,24 @@ export default function EasySetupWizard(props: {
 
                 <p className="text-sm text-text-secondary">
                   {(() => {
+                    // de: whole phrases per count so they can be translated; English output unchanged
                     const count = CORE_CAPABILITIES.filter((cap) =>
                       cap.services.some((s) => selectedServices.includes(s))
                     ).length
-                    return `${count} ${count === 1 ? 'capability' : 'capabilities'}`
+                    const maps = selectedMapCollections.length
+                    const tiers = selectedTiers.size
+                    const packs = selectedCreatorPacks.length
+                    const models = selectedAiModels.length
+                    return [
+                      count === 1 ? t('{0} capability', count) : t('{0} capabilities', count),
+                      maps === 1 ? t('{0} map region', maps) : t('{0} map regions', maps),
+                      tiers === 1 ? t('{0} content category', tiers) : t('{0} content categories', tiers),
+                      ...(creatorPacksConfigured
+                        ? [packs === 1 ? t('{0} creator pack', packs) : t('{0} creator packs', packs)]
+                        : []),
+                      models === 1 ? t('{0} AI model selected', models) : t('{0} AI models selected', models),
+                    ].join(', ')
                   })()}
-                  , {selectedMapCollections.length} map region
-                  {selectedMapCollections.length !== 1 && 's'}, {selectedTiers.size}{' '}
-                  content categor{selectedTiers.size !== 1 ? 'ies' : 'y'},{' '}
-                  {creatorPacksConfigured && (
-                    <>
-                      {selectedCreatorPacks.length} creator pack
-                      {selectedCreatorPacks.length !== 1 && 's'},{' '}
-                    </>
-                  )}
-                  {selectedAiModels.length} AI model{selectedAiModels.length !== 1 && 's'} selected
                 </p>
               </div>
 

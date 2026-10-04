@@ -639,10 +639,10 @@ export default function DrugReferenceIndex({
                       <IconPill size={18} />
                     </span>
                     <h2 className="text-sm font-bold text-desert-green-darker">
-                      {ingredientGroups.length} ingredient{ingredientGroups.length !== 1 ? 's' : ''}
+                      {ingredientGroups.length === 1 ? t('{0} ingredient', ingredientGroups.length) : t('{0} ingredients', ingredientGroups.length)}
                     </h2>
                     <span className="ml-auto text-xs text-desert-stone">
-                      {drugResults.length} product{drugResults.length !== 1 ? 's' : ''}
+                      {drugResults.length === 1 ? t('{0} product', drugResults.length) : t('{0} products', drugResults.length)}
                     </span>
                   </div>
                   <div className="divide-y divide-desert-stone-lighter/40">

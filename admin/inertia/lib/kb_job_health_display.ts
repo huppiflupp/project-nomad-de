@@ -45,7 +45,7 @@ export const JOB_HEALTH_DISPLAY: Record<
  */
 export function formatTimeAgo(timestampMs: number, now: number): string {
   const seconds = Math.max(0, Math.floor((now - timestampMs) / 1000))
-  if (seconds < 5) return 'just now'
+  if (seconds < 5) return t('just now')
   if (seconds < 60) return t('{0}s ago', seconds)
   const minutes = Math.floor(seconds / 60)
   if (minutes < 60) return t('{0}m ago', minutes)

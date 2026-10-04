@@ -59,8 +59,13 @@ export function compile(dict: Dict): Compiled {
   return { exact, patterns }
 }
 
+// false/null/undefined render as nothing, like React children do.
 function format(template: string, args: unknown[]): string {
-  return template.replace(/\{(\d+)\}/g, (all, i) => (Number(i) < args.length ? String(args[Number(i)]) : all))
+  return template.replace(/\{(\d+)\}/g, (all, i) => {
+    if (Number(i) >= args.length) return all
+    const v = args[Number(i)]
+    return v === false || v === null || v === undefined ? '' : String(v)
+  })
 }
 
 export function translate(c: Compiled | null, key: string, args: unknown[] = []): string {

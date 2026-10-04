@@ -66,3 +66,9 @@ test('localizeData survives cycles, null and deep nesting', () => {
   assert.equal(out.a.message, '1 Dateien gelöscht')
   assert.equal(out.n, null)
 })
+
+test('translate renders false/null/undefined args as nothing, keeps 0 and strings', () => {
+  assert.equal(translate(null, 'Items: {0} | Size: {1}', [undefined, '2 GB']), 'Items:  | Size: 2 GB')
+  assert.equal(translate(null, 'a{0}b{1}c{2}', [false, null, 0]), 'abc0')
+  assert.equal(translate(dict, 'Deleted {0} files', [0]), '0 Dateien gelöscht')
+})

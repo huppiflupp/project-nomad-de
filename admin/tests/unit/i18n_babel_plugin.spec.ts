@@ -76,3 +76,42 @@ test('display-text calls and extra text props are wrapped', () => {
   assert.match(out, /text=\{__t\("Shown on hover"\)\}/)
   assert.ok(collect.has('Some help text'))
 })
+
+test('children with JSX/logical/mixed conditionals are not merged into one key', () => {
+  const a = run('const A = ({c, n}) => <p>{n} tiers available{!c && <span> - Click to choose</span>}</p>')
+  assert.doesNotMatch(a.out, /\{\d\}/)
+  assert.match(a.out, /__t\("tiers available"\)/)
+  assert.match(a.out, /__t\("- Click to choose"\)/)
+  const b = run('const A = ({n}) => <p>{n} map region{n !== 1 && "s"} selected</p>')
+  assert.doesNotMatch(b.out, /\{\d\}/)
+  assert.match(b.out, /n !== 1 && "s"/)
+  const c = run('const A = ({a}) => <p>Status: {a ? "Ready now" : <b>Busy</b>}</p>')
+  assert.doesNotMatch(c.out, /\{\d\}/)
+  assert.match(c.out, /__t\("Ready now"\)/)
+  assert.match(c.out, /__t\("Busy"\)/)
+  const d = run('const A = ({xs}) => <ul>Items {xs.map((x) => <li key={x}>{x}</li>)}</ul>')
+  assert.doesNotMatch(d.out, /\{\d\}/)
+})
+
+test('plain values and string-only conditionals still merge, optional chains included', () => {
+  const { out } = run('const A = ({c, s}) => <p>Items: {c.resources?.length} | Size: {s} {c.on ? "on" : "off"}</p>')
+  assert.match(out, /__t\("Items: \{0\} \| Size: \{1\} \{2\}", c\.resources\?\.length, s, c\.on \? "on" : "off"\)/)
+})
+
+test('object children/cta props and member display calls are wrapped; non-literal args are not', () => {
+  const { out } = run(
+    'const f = (msg) => { open({ children: "Close this window", cta: "Get started now" }); uppy.info("Upload finished well"); showError(msg); setError(err.message) }'
+  )
+  assert.match(out, /children: __t\("Close this window"\)/)
+  assert.match(out, /cta: __t\("Get started now"\)/)
+  assert.match(out, /uppy\.info\(__t\("Upload finished well"\)\)/)
+  assert.match(out, /showError\(msg\)/)
+  assert.match(out, /setError\(err\.message\)/)
+})
+
+test('|| and ?? with value-like sides keep the merged sentence', () => {
+  const { out } = run('const A = ({s, g}) => <p>Install {s.friendly_name || s.service_name} on {g ?? "none"} now?</p>')
+  assert.match(out, /__t\("Install \{0\} on \{1\} now\?", s\.friendly_name \|\| s\.service_name, g \?\? "none"\)/)
+  const b = run('const A = ({s}) => <p>Install {s.ok || <b>nothing</b>} now</p>')
+  assert.doesNotMatch(b.out, /\{\d\}/)
+})

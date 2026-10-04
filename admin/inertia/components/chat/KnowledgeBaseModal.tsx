@@ -1138,7 +1138,7 @@ export default function KnowledgeBaseModal({
               This will re-process every document currently in your knowledge base — about
               <strong>
                 {' '}
-                {storedFiles.length} file{storedFiles.length === 1 ? '' : 's'}
+                {storedFiles.length === 1 ? t('{0} file', storedFiles.length) : t('{0} files', storedFiles.length)}
               </strong>
               . For each file, NOMAD will delete the existing embeddings from Qdrant and queue a
               fresh embedding job using the current chunking and embedding model.
@@ -1205,7 +1205,7 @@ export default function KnowledgeBaseModal({
               <code> nomad_knowledge_base </code>Qdrant collection and rebuild from the
               <strong>
                 {' '}
-                {storedFiles.length} file{storedFiles.length === 1 ? '' : 's'}
+                {storedFiles.length === 1 ? t('{0} file', storedFiles.length) : t('{0} files', storedFiles.length)}
               </strong>{' '}
               currently on disk. The collection is dropped, recreated, and every file is re-queued
               for embedding.

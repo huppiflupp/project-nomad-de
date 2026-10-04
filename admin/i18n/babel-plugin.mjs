@@ -77,9 +77,28 @@ export default function nomadI18n({ types: t }, opts = {}) {
     return m && !m.includes('\n') ? ' ' : ''
   }
 
+  // A merged sentence key only works when every expression renders as a plain value.
+  // `cond && <x/>`, `n !== 1 && 's'`, `a ? 'x' : <b/>` or anything holding JSX would be
+  // stringified by format() ("false", "[object Object]") – those fall back to per-node wrapping.
+  // `a || b` / `a ?? 'x'` and conditionals stay mergeable when every branch is value-like.
+  function mergeable(expr) {
+    let jsx = false
+    t.traverseFast(expr, (n) => {
+      if (t.isJSXElement(n) || t.isJSXFragment(n)) jsx = true
+    })
+    return !jsx && valueLike(expr)
+  }
+  function valueLike(expr) {
+    if (t.isBooleanLiteral(expr) || t.isNullLiteral(expr)) return false
+    if (t.isLogicalExpression(expr)) return expr.operator !== '&&' && valueLike(expr.left) && valueLike(expr.right)
+    if (t.isConditionalExpression(expr)) return valueLike(expr.consequent) && valueLike(expr.alternate)
+    return true
+  }
+
   function handleChildren(path, state) {
     const kids = path.node.children
-    const inline = kids.every((c) => t.isJSXText(c) || t.isJSXExpressionContainer(c))
+    const inline = kids.every((c) => t.isJSXText(c) || t.isJSXExpressionContainer(c)) &&
+      kids.every((c) => !t.isJSXExpressionContainer(c) || t.isJSXEmptyExpression(c.expression) || mergeable(c.expression))
     if (inline && kids.some((c) => t.isJSXExpressionContainer(c) && !t.isJSXEmptyExpression(c.expression))) {
       let key = ''
       let hasText = false
