@@ -26,7 +26,10 @@ LANG=en node crawl.mjs http://localhost:18080 > report-en.json # Gegenprobe Engl
 
 `suspicious`: Text mit mindestens zwei englischen Funktionswörtern und keinem deutschen Merkmal.
 `untranslated`: sichtbarer Text, der wörtlich ein englischer Wörterbuchschlüssel ist (findet auch kurze
-Texte wie Menüpunkte). Im englischen Lauf meldet `suspicious` verdächtig deutschen Text.
+Texte wie Menüpunkte).
+`bogus` (beide Sprachen): als Text gerenderte Werte (`false`, `undefined`, `null`, `NaN`, `[object Object]`).
+Einträge `click /…` stammen aus dem Klick-Durchgang durch die Einstellungs-Seitenleiste (`clientSide: true` =
+Inertia-Navigation ohne Neuladen), `easy-setup step N` aus dem Schnellstart (`summary` = Zusammenfassung unten). Im englischen Lauf meldet `suspicious` verdächtig deutschen Text.
 
 Nicht prüfbar in dieser Instanz: `/chat` (antwortet ohne installierten KI-Assistenten mit 404; ohne
 Docker-Socket markiert der Abgleich `nomad_ollama` beim nächsten Seitenaufruf wieder als nicht installiert)

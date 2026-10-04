@@ -26,14 +26,11 @@ for (const f of ['de.json', 'catalog.de.json']) {
   const d = JSON.parse(readFileSync(new URL(`../../../admin/i18n/${f}`, import.meta.url), 'utf8'))
   for (const [k, v] of Object.entries(d)) if (v && norm(k) !== norm(v) && !/\{\d+\}/.test(k)) dictKeys.add(norm(k))
 }
-const browser = await chromium.launch()
-const ctx = await browser.newContext()
-await ctx.addCookies([{ name: 'nomad_lang', value: lang, url: base }])
-const report = []
-for (const p of PAGES) {
-  const page = await ctx.newPage()
-  const res = await page.goto(base + p, { waitUntil: 'networkidle' }).catch((e) => ({ status: () => String(e) }))
-  const texts = await page.evaluate(() => {
+// Dritte Prüfung (beide Sprachen): Werte, die als Text gerendert wurden ("false", "[object Object]" …).
+const BOGUS = /\b(false|undefined|null|NaN)\b|\[object Object\]/
+// Sichtbare Texte und Text-Attribute einer Seite (ohne Code-Blöcke).
+const collect = (page) =>
+  page.evaluate(() => {
     const out = []
     const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT)
     for (let n; (n = w.nextNode()); ) {
@@ -46,12 +43,65 @@ for (const p of PAGES) {
       for (const a of ['placeholder', 'title', 'aria-label', 'alt']) if (el.getAttribute(a)) out.push(el.getAttribute(a))
     return [...new Set(out)]
   })
+// Versionshinweise sind Commit-Prosa ("add null check …") – dort keine Prüfung auf gerenderte Werte.
+const BOGUS_EXEMPT = new Set(['/docs/release-notes'])
+const judge = (texts, p = '') => {
   const suspicious =
     lang === 'de'
       ? texts.filter((s) => (s.match(EN) || []).length >= 2 && !DE.test(s))
       : texts.filter((s) => (s.match(DE_COUNT) || []).length >= 2 && s !== 'Deutsch')
   const untranslated = lang === 'de' ? texts.filter((s) => dictKeys.has(norm(s)) && !suspicious.includes(s)) : []
-  report.push({ page: p, url: page.url(), status: res.status(), lang, suspicious, untranslated })
+  const bogus = BOGUS_EXEMPT.has(p) ? [] : texts.filter((s) => BOGUS.test(s))
+  return { suspicious, untranslated, bogus }
+}
+const browser = await chromium.launch()
+const ctx = await browser.newContext()
+await ctx.addCookies([{ name: 'nomad_lang', value: lang, url: base }])
+const report = []
+for (const p of PAGES) {
+  const page = await ctx.newPage()
+  const res = await page.goto(base + p, { waitUntil: 'networkidle' }).catch((e) => ({ status: () => String(e) }))
+  const texts = await collect(page)
+  report.push({ page: p, url: page.url(), status: res.status(), lang, ...judge(texts, p) })
+  await page.close()
+}
+
+// Interaktion 1: Seitenleiste der Einstellungen per Klick (Inertia-Navigation ohne Neuladen).
+// Ein Merker am window-Objekt beweist, dass kein voller Seitenaufruf stattfand.
+{
+  const page = await ctx.newPage()
+  await page.goto(base + '/settings/system', { waitUntil: 'networkidle' })
+  await page.evaluate(() => { window.__crawlMarker = 1 })
+  for (const target of ['/settings/maps', '/settings/zim', '/settings/benchmark', '/settings/update', '/settings/legal', '/supply-depot']) {
+    const link = page.locator(`a[href="${target}"]`).first()
+    if (!(await link.count())) {
+      report.push({ page: `click ${target}`, lang, error: 'Link nicht gefunden' })
+      continue
+    }
+    await link.click()
+    await page.waitForURL(`**${target}`)
+    await page.waitForLoadState('networkidle')
+    const clientSide = await page.evaluate(() => window.__crawlMarker === 1)
+    const texts = await collect(page)
+    report.push({ page: `click ${target}`, url: page.url(), lang, clientSide, ...judge(texts) })
+  }
+  await page.close()
+}
+
+// Interaktion 2: Schnellstart Schritt für Schritt bis zur Prüfseite; die Zusammenfassung unten steht
+// auf jedem Schritt. Ohne Internet bleibt "Weiter" gesperrt – dann wird nur Schritt 1 geprüft.
+{
+  const page = await ctx.newPage()
+  await page.goto(base + '/easy-setup', { waitUntil: 'networkidle' })
+  const next = page.getByRole('button', { name: lang === 'de' ? 'Weiter' : 'Next', exact: true })
+  for (let step = 1; step <= 7; step++) {
+    const texts = await collect(page)
+    const summary = await page.locator('p', { hasText: /(selected|ausgewählt)$/ }).last().textContent({ timeout: 2000 }).catch(() => null)
+    report.push({ page: `easy-setup step ${step}`, lang, summary, ...judge(texts) })
+    if (!(await next.count()) || (await next.isDisabled())) break
+    await next.click()
+    await page.waitForLoadState('networkidle')
+  }
   await page.close()
 }
 await browser.close()

@@ -78,3 +78,25 @@ Sammler nicht gesehen: Statusmeldungen des Update-Sidecars (`install/sidecar-upd
 `HTTP error: {0}`, die Bild-Fehlermeldung aus `ollama_controller.ts`, Voreinstellungen aus `constants/ollama.ts`
 (Relevanz, Antwortstil), die Ergebnismeldungen von Neu-Einbetten/Neuaufbau in `rag_service.ts` (Textverkettung), Spaltenköpfe aus Tabellenschlüsseln (`Author`, `Source`, `Updated`) und
 Seitenleisten-Einträge (`Service Logs & Metrics`, `API Reference`).
+
+## Abschlussprüfung (Final-Review)
+
+- **Absichtlich deutsch an das Modell:** Die Chat-Hilfsprompts in `ChatInterface.tsx` (`CONTINUE_PROMPT`
+  „Continue exactly where you left off …“ und „Describe the attached image.“ bei Bild ohne Text) laufen durch `t()`
+  und gehen in der Sprache der Oberfläche an das Modell. Ebenso wird der Standardtitel neuer Chats („New Chat“ →
+  „Neuer Chat“) beim Anlegen gespeichert; danach ist er Nutzerdaten und wird nicht mehr übersetzt.
+- **Nutzerdaten bleiben unübersetzt:** `tc()` (Katalogfelder `name`, `title`, `description` …) übersetzt nur noch bei
+  exaktem Treffer in `catalog.de.json` – keine Oberflächen-Wörter, keine Platzhalter-Muster. Eigene Apps und
+  Link-Kacheln (`is_custom`/`is_link_tile`) und Markdoc-Bäume der Anleitungen (`$$mdtype`) überspringt
+  `localizeData` ganz; Chat-Sitzungen, Kartenmarker, eigene Bibliotheken und `getCustomApp` laden mit `skipLocalize`.
+- **Seitenwechsel ohne Neuladen:** Inertia 2 holt Folgeseiten über die Standard-Axios-Instanz (`responseType: "text"`);
+  `inertia/app/app.tsx` übersetzt deren `props` per Interceptor wie die der ersten Seite.
+- **Sätze mit Bedingungen:** Das Babel-Plugin fasst Kinder nur zu einem Satzschlüssel zusammen, wenn jeder Ausdruck
+  ein schlichter Wert ist (kein `&&`, kein JSX, keine Boolean-Zweige). Plural-Bruchstücke (`file{s}`) sind als ganze
+  Sätze je Anzahl gebaut; die englische Ausgabe ist unverändert.
+- **CI** (`.github/workflows/de-checks.yml`) führt nur die Tests `tests/unit/i18n_*.spec.ts` aus; die übrigen
+  Upstream-Tests laufen lokal mit `npm run test:unit` (10 bekannte Upstream-Fehlschläge, siehe oben).
+- **Crawl erweitert:** meldet zusätzlich gerenderte Werte (`false`, `undefined`, `null`, `NaN`, `[object Object]`;
+  ausgenommen die Versionshinweise), klickt sich durch die Einstellungs-Seitenleiste (Inertia-Navigation, mit
+  Prüfung, dass nicht neu geladen wurde) und den Schnellstart bis zur Prüfseite. Ergebnis 2026-10-04: 0 gerenderte
+  Werte in Deutsch und Englisch, alle Klick-Seiten deutsch.
