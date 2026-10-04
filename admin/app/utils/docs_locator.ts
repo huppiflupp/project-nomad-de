@@ -58,6 +58,17 @@ export class DocsLocator {
     return files.sort((a, b) => (DOC_ORDER[a.slug] ?? 999) - (DOC_ORDER[b.slug] ?? 999))
   }
 
+  /** Files to embed in the knowledge base: every German doc plus English docs lacking a German counterpart. */
+  async embedList(): Promise<Array<{ path: string; name: string }>> {
+    const byName = new Map<string, string>()
+    for (const root of [this.docsPath, this.docsDePath]) {
+      for (const item of await listDirectoryContentsRecursive(root)) {
+        if (item.type === 'file') byName.set(item.name, item.key)
+      }
+    }
+    return [...byName].map(([name, p]) => ({ name, path: p }))
+  }
+
   private async germanTitle(slug: string): Promise<string | null> {
     try {
       const md = await readFile(path.join(this.docsDePath, `${slug}.md`), 'utf8')

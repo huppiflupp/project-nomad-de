@@ -39,3 +39,20 @@ test('German list keeps English slugs and order, takes titles from the German he
   const en = await s.listDocs('en')
   assert.equal(en.find((d) => d.slug === 'faq')!.title, 'FAQ')
 })
+
+test('embedList: German wins, English fills gaps, no duplicates', async () => {
+  const s = fixture()
+  const list = await s.embedList()
+  assert.deepEqual(list.map((e) => e.name).sort(), ['faq.md', 'home.md', 'new-upstream.md'])
+  assert.match(list.find((e) => e.name === 'home.md')!.path, /docs-de\/home\.md$/)
+  assert.match(list.find((e) => e.name === 'new-upstream.md')!.path, /docs\/new-upstream\.md$/)
+})
+
+test('embedList: works when docs-de is empty or only German exists', async () => {
+  const dir = mkdtempSync(join(tmpdir(), 'docs-'))
+  mkdirSync(join(dir, 'docs')); mkdirSync(join(dir, 'docs-de'))
+  writeFileSync(join(dir, 'docs', 'a.md'), '# A\n')
+  assert.deepEqual((await new DocsLocator(dir).embedList()).map((e) => e.name), ['a.md'])
+  writeFileSync(join(dir, 'docs-de', 'only-de.md'), '# D\n')
+  assert.deepEqual((await new DocsLocator(dir).embedList()).map((e) => e.name).sort(), ['a.md', 'only-de.md'])
+})

@@ -1,10 +1,10 @@
 import { QdrantClient } from '@qdrant/js-client-rest'
 import { DockerService } from './docker_service.js'
 import { inject } from '@adonisjs/core'
+import { DocsLocator } from '../utils/docs_locator.js'
 import logger from '@adonisjs/core/services/logger'
 import { TokenChunker } from '@chonkiejs/core'
 import sharp from 'sharp'
-import { existsSync } from 'node:fs'
 import {
   deleteFileIfExists,
   determineFileType,
@@ -2065,16 +2065,13 @@ export class RagService {
   private _nomadDocsRoots(): { readmePath: string; docsDir: string } {
     return {
       readmePath: join(process.cwd(), 'README.md'),
-      // German distribution: embed the German docs.
-      docsDir: existsSync(join(process.cwd(), 'docs-de'))
-        ? join(process.cwd(), 'docs-de')
-        : join(process.cwd(), 'docs'),
+      docsDir: join(process.cwd(), 'docs'),
     }
   }
 
   public async discoverNomadDocs(force?: boolean): Promise<{ success: boolean; message: string }> {
     try {
-      const { readmePath: README_PATH, docsDir: DOCS_DIR } = this._nomadDocsRoots()
+      const { readmePath: README_PATH } = this._nomadDocsRoots()
 
       const alreadyEmbeddedRaw = await KVStore.getValue('rag.docsEmbedded')
       if (alreadyEmbeddedRaw && !force) {
@@ -2092,11 +2089,9 @@ export class RagService {
         filesToEmbed.push({ path: README_PATH, source: 'README.md' })
       }
 
-      const dirContents = await listDirectoryContentsRecursive(DOCS_DIR)
-      for (const entry of dirContents) {
-        if (entry.type === 'file') {
-          filesToEmbed.push({ path: entry.key, source: join('docs', entry.name) })
-        }
+      // German distribution: German docs win, English fills gaps (see DocsLocator.embedList).
+      for (const entry of await new DocsLocator(process.cwd()).embedList()) {
+        filesToEmbed.push({ path: entry.path, source: join('docs', entry.name) })
       }
 
       logger.info(`[RAG] Discovered ${filesToEmbed.length} Nomad doc files to embed`)

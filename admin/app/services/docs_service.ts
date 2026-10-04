@@ -1,3 +1,4 @@
+// German distribution: DOC_ORDER/TITLE_OVERRIDES/prettify moved to app/utils/docs_locator.ts (apply upstream changes there).
 import Markdoc from '@markdoc/markdoc'
 import { streamToString } from '../../util/docs.js'
 import { getFile } from '../utils/fs.js'
