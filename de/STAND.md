@@ -40,3 +40,41 @@ Fremde Kiwix-Titel sind ohnehin kein Katalogtext; die Anzeige braucht dort kein 
 - Oberfläche: 1285 Texte, Server: 394, Kataloge: 401.
 - fehlend 2080 (Summe abzüglich Überschneidungen), Platzhalter-Fehler 0, verwaist 0; Exit 1 wie erwartet.
 - Parser-Plugins je Endung (`.ts`: typescript, `.tsx`: jsx+typescript); keine Datei nicht lesbar.
+
+## Sichtprüfung (Task 15)
+
+Testinstanz `de/dev/compose.yml` (Port 18080, ohne Docker-Socket), Crawl `de/tools/crawl/crawl.mjs` über 36 Seiten
+(alle Oberflächenrouten aus `admin/start/routes.ts`, alle 11 Anleitungen, eine 404-Seite). Ergebnis Deutsch:
+außerhalb der Liste unten keine englischen Texte. Gegenprobe Englisch (`LANG=en`): keine deutschen Texte.
+Nicht prüfbar ohne Docker-Socket: `/chat` (404 ohne installierten KI-Assistenten) und Dialoge laufender Apps –
+dort per Codedurchsicht geprüft.
+
+### Bewusst englisch
+
+- **Versionshinweise** (`docs-de/release-notes.md`): deutscher Abschnitt vorangestellt, ältere Einträge englisch
+  (siehe `de/tools/docs-check.mjs`).
+- **Fremde Oberflächen und Meldungen in Anleitungen**: Menüpunkte anderer Programme in Anführungszeichen
+  („Install third-party drivers …“ im Ubuntu-Installer, „Open from computer“, **Save**, **Location of Calibre
+  Database** in Stirling/Calibre-Web), App-Namen (File Browser, IT Tools), Fehlermeldungen als Überschrift
+  (`ERROR: Failed to load the XML library file …` in der FAQ).
+- **Ollama-Modellkatalog** (Einstellungen → KI-Assistent): Beschreibungen und Altersangaben („1 year ago“)
+  kommen von ollama.com.
+- **Kiwix-Katalog** (Inhalts-Explorer): Titel, Zusammenfassungen und Kategorien der ZIM-Dateien (Inhalte,
+  Teilprojekt C).
+- **Namen der US-Kartenregionen** (Pacific Region …) im Kartenkatalog: Eigennamen, so im Katalog belassen.
+- **Builder-Tag-Wörter** (`inertia/lib/builderTagWords.ts`): Teil des öffentlichen Benchmark-Namens.
+- **Theme-Namen** „Day Ops“/„Night Ops“: Markenbegriffe der Oberfläche (so im Wörterbuch festgelegt).
+- **Tastennamen/Werte** im Code (`Enter`, `Escape`, `Manual`, `Always`): keine Anzeige.
+- **Selten angezeigte Zusätze** in Servermeldungen, die als Textverkettung gebaut werden und deshalb nicht ganz
+  passen: Hinweis „N files failed to dispatch …“ nach Neu-Einbetten/Neuaufbau und die Bereinigungsnotiz der
+  Wissensdatenbank-Prüfung („; purged N orphaned sources …“). Der Hauptsatz ohne Zusatz ist übersetzt.
+- **Browser-Netzwerkfehler** („Failed to fetch“) und Upstream-Entwicklerfehler (`useModal must be used within …`).
+
+### Schlüssel ohne Fundstelle (verwaist, gewollt)
+
+`node i18n/cli.mjs check` meldet 39 verwaiste Einträge. Sie werden zur Laufzeit dynamisch nachgeschlagen und vom
+Sammler nicht gesehen: Statusmeldungen des Update-Sidecars (`install/sidecar-updater/update-watcher.sh`,
+`write_status`), Hinweise aus `inertia/lib/vision_guidance.ts` und `kb_file_grouping.ts` (per `tm` angezeigt),
+`HTTP error: {0}`, die Bild-Fehlermeldung aus `ollama_controller.ts`, Voreinstellungen aus `constants/ollama.ts`
+(Relevanz, Antwortstil), die Ergebnismeldungen von Neu-Einbetten/Neuaufbau in `rag_service.ts` (Textverkettung), Spaltenköpfe aus Tabellenschlüsseln (`Author`, `Source`, `Updated`) und
+Seitenleisten-Einträge (`Service Logs & Metrics`, `API Reference`).
