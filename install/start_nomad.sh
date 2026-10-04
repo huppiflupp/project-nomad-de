@@ -1,27 +1,27 @@
 #!/bin/bash
 
-echo "Finding Project NOMAD containers..."
+echo "Project-NOMAD-Container werden gesucht ..."
 
 # -a to include all containers (running and stopped)
 containers=$(docker ps -a --filter "name=^nomad_" --format "{{.Names}}")
 
 if [ -z "$containers" ]; then
-    echo "No containers found for Project NOMAD Is it installed?"
+    echo "Keine Container für Project NOMAD gefunden. Ist es installiert?"
     exit 0
 fi
 
-echo "Found the following containers:"
+echo "Folgende Container wurden gefunden:"
 echo "$containers"
 echo ""
 
 for container in $containers; do
-    echo "Starting container: $container"
+    echo "Container wird gestartet: $container"
     if docker start "$container"; then
-        echo "✓ Successfully started $container"
+        echo "✓ $container erfolgreich gestartet"
     else
-        echo "✗ Failed to start $container"
+        echo "✗ $container konnte nicht gestartet werden"
     fi
     echo ""
 done
 
-echo "Finished initiating start of all Project NOMAD containers."
+echo "Der Start aller Project-NOMAD-Container wurde angestoßen."

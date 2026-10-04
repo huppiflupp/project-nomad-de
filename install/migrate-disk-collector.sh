@@ -45,58 +45,58 @@ COMPOSE_PROJECT_NAME="project-nomad"
 
 check_is_bash() {
   if [[ -z "$BASH_VERSION" ]]; then
-    echo -e "${RED}#${RESET} This script must be run with bash."
-    echo -e "${RED}#${RESET} Example: bash $(basename "$0")"
+    echo -e "${RED}#${RESET} Dieses Skript muss mit bash ausgeführt werden."
+    echo -e "${RED}#${RESET} Beispiel: bash $(basename "$0")"
     exit 1
   fi
-  echo -e "${GREEN}#${RESET} Running in bash.\n"
+  echo -e "${GREEN}#${RESET} Läuft in bash.\n"
 }
 
 check_has_sudo() {
   if sudo -n true 2>/dev/null; then
-    echo -e "${GREEN}#${RESET} Sudo permissions confirmed.\n"
+    echo -e "${GREEN}#${RESET} sudo-Rechte bestätigt.\n"
   else
-    echo -e "${RED}#${RESET} This script requires sudo permissions."
-    echo -e "${RED}#${RESET} Example: sudo bash $(basename "$0")"
+    echo -e "${RED}#${RESET} Dieses Skript benötigt sudo-Rechte."
+    echo -e "${RED}#${RESET} Beispiel: sudo bash $(basename "$0")"
     exit 1
   fi
 }
 
 check_confirmation() {
-  echo -e "${YELLOW}#${RESET} This script migrates your Project NOMAD installation from the"
-  echo -e "${YELLOW}#${RESET} host-based disk info collector to the new disk-collector sidecar."
-  echo -e "${YELLOW}#${RESET} It will modify compose.yml and restart the full compose stack"
-  echo -e "${YELLOW}#${RESET} to drop the old /tmp bind mount and start the disk-collector sidecar."
-  echo -e "${YELLOW}#${RESET} Please ensure you have a backup of your data before proceeding.\n"
+  echo -e "${YELLOW}#${RESET} Dieses Skript migriert Ihre Project-NOMAD-Installation vom"
+  echo -e "${YELLOW}#${RESET} hostbasierten Datenträger-Informationssammler auf den neuen disk-collector-Sidecar."
+  echo -e "${YELLOW}#${RESET} Es ändert compose.yml und startet den gesamten Compose-Stack neu,"
+  echo -e "${YELLOW}#${RESET} um den alten /tmp-Bind-Mount zu entfernen und den disk-collector-Sidecar zu starten."
+  echo -e "${YELLOW}#${RESET} Bitte stellen Sie sicher, dass Sie vor dem Fortfahren eine Datensicherung haben.\n"
 
-  echo -e "${RED}#${RESET} STOP: If you have customized your compose.yml or NOMAD's storage setup (not common), please make these changes manually instead of using this script!\n"
-  read -rp "Do you want to continue? (y/N) " response
-  if [[ ! "$response" =~ ^[Yy]$ ]]; then
-    echo -e "${RED}#${RESET} Aborting. No changes have been made."
+  echo -e "${RED}#${RESET} STOPP: Wenn Sie Ihre compose.yml oder die Speicherkonfiguration von NOMAD angepasst haben (ungewöhnlich), nehmen Sie diese Änderungen bitte manuell vor, statt dieses Skript zu verwenden!\n"
+  read -rp "Möchten Sie fortfahren? (j/N) " response
+  if [[ ! "$response" =~ ^[YyJj]$ ]]; then
+    echo -e "${RED}#${RESET} Abbruch. Es wurden keine Änderungen vorgenommen."
     exit 0
   fi
-  echo -e "${GREEN}#${RESET} Confirmation received. Proceeding with migration...\n"
+  echo -e "${GREEN}#${RESET} Bestätigung erhalten. Die Migration wird durchgeführt ...\n"
 }
 
 check_docker_running() {
   if ! command -v docker &>/dev/null; then
-    echo -e "${RED}#${RESET} Docker is not installed. Cannot proceed."
+    echo -e "${RED}#${RESET} Docker ist nicht installiert. Es kann nicht fortgefahren werden."
     exit 1
   fi
   if ! systemctl is-active --quiet docker; then
-    echo -e "${RED}#${RESET} Docker is not running. Please start Docker and try again."
+    echo -e "${RED}#${RESET} Docker läuft nicht. Bitte starten Sie Docker und versuchen Sie es erneut."
     exit 1
   fi
-  echo -e "${GREEN}#${RESET} Docker is running.\n"
+  echo -e "${GREEN}#${RESET} Docker läuft.\n"
 }
 
 check_compose_file() {
   if [[ ! -f "$COMPOSE_FILE" ]]; then
-    echo -e "${RED}#${RESET} compose.yml not found at ${COMPOSE_FILE}."
-    echo -e "${RED}#${RESET} Project NOMAD does not appear to be installed or compose.yml is missing."
+    echo -e "${RED}#${RESET} compose.yml wurde unter ${COMPOSE_FILE} nicht gefunden."
+    echo -e "${RED}#${RESET} Project NOMAD scheint nicht installiert zu sein oder compose.yml fehlt."
     exit 1
   fi
-  echo -e "${GREEN}#${RESET} Found compose.yml at ${COMPOSE_FILE}.\n"
+  echo -e "${GREEN}#${RESET} compose.yml unter ${COMPOSE_FILE} gefunden.\n"
 }
 
 # Step 1: Stop old host process
@@ -104,28 +104,28 @@ stop_old_host_process() {
   local pid_file="${NOMAD_DIR}/nomad-collect-disk-info.pid"
 
   if [[ -f "$pid_file" ]]; then
-    echo -e "${YELLOW}#${RESET} Stopping old collect-disk-info background process..."
+    echo -e "${YELLOW}#${RESET} Der alte Hintergrundprozess collect-disk-info wird beendet ..."
     local pid
     pid=$(cat "$pid_file")
     if kill "$pid" 2>/dev/null; then
-      echo -e "${GREEN}#${RESET} Process ${pid} stopped.\n"
+      echo -e "${GREEN}#${RESET} Prozess ${pid} beendet.\n"
     else
-      echo -e "${YELLOW}#${RESET} Process ${pid} was not running (already stopped).\n"
+      echo -e "${YELLOW}#${RESET} Prozess ${pid} lief nicht (bereits beendet).\n"
     fi
     rm -f "$pid_file"
   else
-    echo -e "${GREEN}#${RESET} No old collect-disk-info PID file found — nothing to stop.\n"
+    echo -e "${GREEN}#${RESET} Keine alte PID-Datei von collect-disk-info gefunden – nichts zu beenden.\n"
   fi
 }
 
 # Step 2: Backup compose.yml
 backup_compose_file() {
   local backup="${COMPOSE_FILE}.bak.$(date +%Y%m%d%H%M%S)"
-  echo -e "${YELLOW}#${RESET} Backing up compose.yml to ${backup}..."
+  echo -e "${YELLOW}#${RESET} compose.yml wird nach ${backup} gesichert ..."
   if cp "$COMPOSE_FILE" "$backup"; then
-    echo -e "${GREEN}#${RESET} Backup created at ${backup}.\n"
+    echo -e "${GREEN}#${RESET} Sicherung unter ${backup} angelegt.\n"
   else
-    echo -e "${RED}#${RESET} Failed to create backup. Aborting."
+    echo -e "${RED}#${RESET} Die Sicherung konnte nicht angelegt werden. Abbruch."
     exit 1
   fi
 }
@@ -133,30 +133,30 @@ backup_compose_file() {
 # Step 3: Remove old bind-mount from admin volumes
 remove_old_bind_mount() {
   if ! grep -q 'nomad-disk-info\.json' "$COMPOSE_FILE"; then
-    echo -e "${GREEN}#${RESET} Old /tmp/nomad-disk-info.json bind-mount not found — already removed.\n"
+    echo -e "${GREEN}#${RESET} Der alte Bind-Mount /tmp/nomad-disk-info.json wurde nicht gefunden – bereits entfernt.\n"
     return 0
   fi
 
-  echo -e "${YELLOW}#${RESET} Removing old /tmp/nomad-disk-info.json bind-mount from admin volumes..."
+  echo -e "${YELLOW}#${RESET} Der alte Bind-Mount /tmp/nomad-disk-info.json wird aus den Admin-Volumes entfernt ..."
   sed -i '/\/tmp\/nomad-disk-info\.json:\/app\/storage\/nomad-disk-info\.json/d' "$COMPOSE_FILE"
 
   if grep -q 'nomad-disk-info\.json' "$COMPOSE_FILE"; then
-    echo -e "${RED}#${RESET} Failed to remove old bind-mount from compose.yml. Please remove it manually:"
+    echo -e "${RED}#${RESET} Der alte Bind-Mount konnte nicht aus compose.yml entfernt werden. Bitte entfernen Sie ihn manuell:"
     echo -e "${WHITE_R}      - /tmp/nomad-disk-info.json:/app/storage/nomad-disk-info.json${RESET}"
     exit 1
   fi
 
-  echo -e "${GREEN}#${RESET} Old bind-mount removed.\n"
+  echo -e "${GREEN}#${RESET} Alter Bind-Mount entfernt.\n"
 }
 
 # Step 4: Add disk-collector service block
 add_disk_collector_service() {
   if grep -q 'disk-collector:' "$COMPOSE_FILE"; then
-    echo -e "${GREEN}#${RESET} disk-collector service already present in compose.yml — skipping.\n"
+    echo -e "${GREEN}#${RESET} Der Dienst disk-collector ist in compose.yml bereits vorhanden – wird übersprungen.\n"
     return 0
   fi
 
-  echo -e "${YELLOW}#${RESET} Adding disk-collector service to compose.yml..."
+  echo -e "${YELLOW}#${RESET} Der Dienst disk-collector wird zu compose.yml hinzugefügt ..."
 
   # Insert the disk-collector service block before the top-level `volumes:` key
   awk '/^volumes:/{
@@ -173,47 +173,47 @@ add_disk_collector_service() {
   {print}' "$COMPOSE_FILE" > "${COMPOSE_FILE}.tmp" && mv "${COMPOSE_FILE}.tmp" "$COMPOSE_FILE"
 
   if ! grep -q 'disk-collector:' "$COMPOSE_FILE"; then
-    echo -e "${RED}#${RESET} Failed to add disk-collector service. Please add it manually before the top-level volumes: key."
+    echo -e "${RED}#${RESET} Der Dienst disk-collector konnte nicht hinzugefügt werden. Bitte fügen Sie ihn manuell vor dem Schlüssel volumes: auf oberster Ebene ein."
     exit 1
   fi
 
-  echo -e "${GREEN}#${RESET} disk-collector service added.\n"
+  echo -e "${GREEN}#${RESET} Dienst disk-collector hinzugefügt.\n"
 }
 
 # Step 5 — Pull new image and restart the full stack
 # This will re-create the admin container and drop the old /tmp bind, and
 # also starts the new disk-collector sidecar we just added to compose.yml
 restart_stack() {
-  echo -e "${YELLOW}#${RESET} Pulling latest images (including disk-collector)..."
+  echo -e "${YELLOW}#${RESET} Die neuesten Images werden geladen (einschließlich disk-collector) ..."
   if ! docker compose -p "$COMPOSE_PROJECT_NAME" -f "$COMPOSE_FILE" pull; then
-    echo -e "${RED}#${RESET} Failed to pull images. Check your network connection."
+    echo -e "${RED}#${RESET} Die Images konnten nicht geladen werden. Prüfen Sie Ihre Netzwerkverbindung."
     exit 1
   fi
-  echo -e "${GREEN}#${RESET} Images pulled.\n"
+  echo -e "${GREEN}#${RESET} Images geladen.\n"
 
-  echo -e "${YELLOW}#${RESET} Restarting stack..."
+  echo -e "${YELLOW}#${RESET} Der Stack wird neu gestartet ..."
   if ! docker compose -p "$COMPOSE_PROJECT_NAME" -f "$COMPOSE_FILE" up -d; then
-    echo -e "${RED}#${RESET} Failed to bring the stack up."
+    echo -e "${RED}#${RESET} Der Stack konnte nicht gestartet werden."
     exit 1
   fi
-  echo -e "${GREEN}#${RESET} Stack restarted.\n"
+  echo -e "${GREEN}#${RESET} Stack neu gestartet.\n"
 }
 
 # Step 6: Verify
 verify_disk_collector_running() {
   sleep 3
   if docker ps --filter "name=^nomad_disk_collector$" --filter "status=running" --format '{{.Names}}' | grep -qx "nomad_disk_collector"; then
-    echo -e "${GREEN}#${RESET} disk-collector container is running.\n"
+    echo -e "${GREEN}#${RESET} Der Container disk-collector läuft.\n"
   else
-    echo -e "${RED}#${RESET} disk-collector container does not appear to be running."
-    echo -e "${RED}#${RESET} Check its logs with: docker logs nomad_disk_collector"
+    echo -e "${RED}#${RESET} Der Container disk-collector scheint nicht zu laufen."
+    echo -e "${RED}#${RESET} Seine Logs sehen Sie mit: docker logs nomad_disk_collector"
     exit 1
   fi
 }
 
 # Main
 echo -e "${GREEN}#########################################################################${RESET}"
-echo -e "${GREEN}#${RESET}      Project NOMAD — Disk Collector Migration Script             ${GREEN}#${RESET}"
+echo -e "${GREEN}#${RESET}      Project NOMAD – Migrationsskript Disk-Collector            ${GREEN}#${RESET}"
 echo -e "${GREEN}#########################################################################${RESET}\n"
 
 check_is_bash
@@ -222,29 +222,29 @@ check_confirmation
 check_docker_running
 check_compose_file
 
-echo -e "${YELLOW}#${RESET} Step 1: Stopping old host process...\n"
+echo -e "${YELLOW}#${RESET} Schritt 1: Alter Host-Prozess wird beendet ...\n"
 stop_old_host_process
 
-echo -e "${YELLOW}#${RESET} Step 2: Backing up compose.yml...\n"
+echo -e "${YELLOW}#${RESET} Schritt 2: compose.yml wird gesichert ...\n"
 backup_compose_file
 
-echo -e "${YELLOW}#${RESET} Step 3: Removing old bind-mount...\n"
+echo -e "${YELLOW}#${RESET} Schritt 3: Alter Bind-Mount wird entfernt ...\n"
 remove_old_bind_mount
 
-echo -e "${YELLOW}#${RESET} Step 4: Adding disk-collector service...\n"
+echo -e "${YELLOW}#${RESET} Schritt 4: Dienst disk-collector wird hinzugefügt ...\n"
 add_disk_collector_service
 
-echo -e "${YELLOW}#${RESET} Step 5: Pulling images and restarting stack...\n"
+echo -e "${YELLOW}#${RESET} Schritt 5: Images werden geladen und der Stack neu gestartet ...\n"
 restart_stack
 
-echo -e "${YELLOW}#${RESET} Step 6: Verifying disk-collector is running...\n"
+echo -e "${YELLOW}#${RESET} Schritt 6: Es wird geprüft, ob disk-collector läuft ...\n"
 verify_disk_collector_running
 
 echo -e "${GREEN}#########################################################################${RESET}"
-echo -e "${GREEN}#${RESET} Migration completed successfully!"
+echo -e "${GREEN}#${RESET} Die Migration wurde erfolgreich abgeschlossen!"
 echo -e "${GREEN}#${RESET}"
-echo -e "${GREEN}#${RESET} The disk-collector sidecar is now running and will update disk info"
-echo -e "${GREEN}#${RESET} every 2 minutes. The /api/system/info endpoint will return disk data"
-echo -e "${GREEN}#${RESET} after the first collector write (~5 seconds after startup)."
+echo -e "${GREEN}#${RESET} Der disk-collector-Sidecar läuft jetzt und aktualisiert die Datenträgerinformationen"
+echo -e "${GREEN}#${RESET} alle 2 Minuten. Der Endpunkt /api/system/info liefert Datenträgerdaten"
+echo -e "${GREEN}#${RESET} nach dem ersten Schreibvorgang des Collectors (ca. 5 Sekunden nach dem Start)."
 echo -e "${GREEN}#${RESET}"
 echo -e "${GREEN}#########################################################################${RESET}\n"

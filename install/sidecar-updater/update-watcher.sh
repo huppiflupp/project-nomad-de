@@ -31,39 +31,39 @@ EOF
 perform_update() {
     local target_tag="$1"
 
-    log "Update request received - starting system update (target tag: ${target_tag})"
+    log "Update-Anfrage erhalten – Systemupdate startet (Ziel-Tag: ${target_tag})"
 
     # Clear old logs
     > "$LOG_FILE"
 
     # Stage 1: Starting
     write_status "starting" 0 "System update initiated"
-    log "System update initiated"
+    log "Systemupdate gestartet"
     sleep 1
 
     # Apply target image tag to compose.yml before pulling
-    log "Applying image tag '${target_tag}' to compose.yml..."
+    log "Image-Tag „${target_tag}“ wird in compose.yml gesetzt ..."
     if sed -i "s|\(image: ghcr\.io/huppiflupp/project-nomad-de\):.*|\1:${target_tag}|" "$COMPOSE_FILE" 2>> "$LOG_FILE"; then
-        log "Successfully updated compose.yml admin image tag to '${target_tag}'"
+        log "Der Admin-Image-Tag in compose.yml wurde erfolgreich auf „${target_tag}“ gesetzt"
     else
-        log "ERROR: Failed to update compose.yml image tag"
+        log "FEHLER: Der Image-Tag in compose.yml konnte nicht aktualisiert werden"
         write_status "error" 0 "Failed to update compose.yml image tag - check logs"
         return 1
     fi
 
     # Stage 2: Pulling images
     write_status "pulling" 20 "Pulling latest Docker images..."
-    log "Pulling latest Docker images..."
+    log "Die neuesten Docker-Images werden geladen ..."
 
     # Snapshot the images backing our managed repos before the pull supersedes
     # them, so the post-update cleanup can drop only NOMAD's own dangling layers.
     PRE_UPDATE_IMAGE_IDS=$(snapshot_managed_image_ids)
 
     if docker compose -p "$COMPOSE_PROJECT_NAME" -f "$COMPOSE_FILE" pull >> "$LOG_FILE" 2>&1; then
-        log "Successfully pulled latest images"
+        log "Die neuesten Images wurden erfolgreich geladen"
         write_status "pulled" 60 "Images pulled successfully"
     else
-        log "ERROR: Failed to pull images"
+        log "FEHLER: Die Images konnten nicht geladen werden"
         write_status "error" 0 "Failed to pull Docker images - check logs"
         return 1
     fi
@@ -72,7 +72,7 @@ perform_update() {
     
     # Stage 3: Recreating containers individually (excluding updater)
     write_status "recreating" 65 "Recreating containers individually..."
-    log "Recreating containers individually (excluding updater)..."
+    log "Container werden einzeln neu erstellt (ohne Updater) ..."
     
     # List of services to update (excluding updater)
     SERVICES_TO_UPDATE="admin mysql redis dozzle"
@@ -81,23 +81,23 @@ perform_update() {
     local progress_per_service=8  # (95 - 65) / 4 services ≈ 8% per service
     
     for service in $SERVICES_TO_UPDATE; do
-        log "Updating service: $service"
+        log "Dienst wird aktualisiert: $service"
         write_status "recreating" $current_progress "Recreating $service..."
         
         # Stop the service
-        log "  Stopping $service..."
-        docker compose -p "$COMPOSE_PROJECT_NAME" -f "$COMPOSE_FILE" stop "$service" >> "$LOG_FILE" 2>&1 || log "  WARNING: Failed to stop $service"
+        log "  $service wird beendet ..."
+        docker compose -p "$COMPOSE_PROJECT_NAME" -f "$COMPOSE_FILE" stop "$service" >> "$LOG_FILE" 2>&1 || log "  WARNUNG: $service konnte nicht beendet werden"
         
         # Remove the container
-        log "  Removing old $service container..."
-        docker compose -p "$COMPOSE_PROJECT_NAME" -f "$COMPOSE_FILE" rm -f "$service" >> "$LOG_FILE" 2>&1 || log "  WARNING: Failed to remove $service"
+        log "  Alter Container von $service wird entfernt ..."
+        docker compose -p "$COMPOSE_PROJECT_NAME" -f "$COMPOSE_FILE" rm -f "$service" >> "$LOG_FILE" 2>&1 || log "  WARNUNG: $service konnte nicht entfernt werden"
         
         # Recreate and start with new image
-        log "  Starting new $service container..."
+        log "  Neuer Container von $service wird gestartet ..."
         if docker compose -p "$COMPOSE_PROJECT_NAME" -f "$COMPOSE_FILE" up -d --no-deps "$service" >> "$LOG_FILE" 2>&1; then
-            log "  ✓ Successfully recreated $service"
+            log "  ✓ $service erfolgreich neu erstellt"
         else
-            log "  ERROR: Failed to recreate $service"
+            log "  FEHLER: $service konnte nicht neu erstellt werden"
             write_status "error" $current_progress "Failed to recreate $service - check logs"
             return 1
         fi
@@ -105,13 +105,13 @@ perform_update() {
         current_progress=$((current_progress + progress_per_service))
     done
     
-    log "Successfully recreated all containers"
+    log "Alle Container wurden erfolgreich neu erstellt"
 
     # Stage 4: Reclaim disk from superseded images (best-effort; never fails the update)
     prune_old_images
 
     write_status "complete" 100 "System update completed successfully"
-    log "System update completed successfully"
+    log "Systemupdate erfolgreich abgeschlossen"
 
     return 0
 }
@@ -144,7 +144,7 @@ snapshot_managed_image_ids() {
 # keeping the refs now in use. Optional/offline images are never touched.
 prune_old_images() {
     write_status "pruning" 97 "Reclaiming disk from old images..."
-    log "Pruning superseded Docker images to reclaim disk space..."
+    log "Überholte Docker-Images werden entfernt, um Speicherplatz freizugeben ..."
 
     # 1. Drop the prior image layers this update left dangling — but ONLY ours.
     #    We snapshotted the managed repos' image IDs before pulling; any of those
@@ -157,13 +157,13 @@ prune_old_images() {
         while read -r id; do
             [ -z "$id" ] && continue
             echo "$dangling_now" | grep -qxF "$id" || continue   # keep unless now dangling
-            log "  Removing superseded dangling layer: $id"
+            log "  Überholte verwaiste Schicht wird entfernt: $id"
             # No -f: docker refuses if a container still references it, so
             # anything unexpectedly in use is safely skipped.
-            docker rmi "$id" >> "$LOG_FILE" 2>&1 || log "  Skipped $id (still in use or removal failed)"
+            docker rmi "$id" >> "$LOG_FILE" 2>&1 || log "  $id übersprungen (noch in Benutzung oder Entfernen fehlgeschlagen)"
         done <<< "$PRE_UPDATE_IMAGE_IDS"
     else
-        log "  No pre-update image snapshot available; skipping dangling cleanup"
+        log "  Kein Image-Snapshot vor dem Update vorhanden; Bereinigung verwaister Schichten wird übersprungen"
     fi
 
     # 2. Superseded tags of compose-managed repositories only.
@@ -181,8 +181,8 @@ prune_old_images() {
         esac
     done | sort -u)
     if [ -z "$in_use" ]; then
-        log "  Could not resolve in-use images from compose; skipped targeted cleanup"
-        log "Image cleanup complete"
+        log "  Die verwendeten Images konnten aus compose nicht ermittelt werden; gezielte Bereinigung übersprungen"
+        log "Image-Bereinigung abgeschlossen"
         return 0
     fi
 
@@ -196,46 +196,46 @@ prune_old_images() {
         echo "$managed_repos" | grep -qxF "$repo" || continue
         # Keep any ref that is still in use by the current stack.
         echo "$in_use" | grep -qxF "$img_ref" && continue
-        log "  Removing superseded image: $img_ref"
+        log "  Überholtes Image wird entfernt: $img_ref"
         # No -f: docker refuses to remove an image still referenced by a
         # container, which keeps us safe against removing anything in use.
-        docker rmi "$img_ref" >> "$LOG_FILE" 2>&1 || log "  Skipped $img_ref (still in use or removal failed)"
+        docker rmi "$img_ref" >> "$LOG_FILE" 2>&1 || log "  $img_ref übersprungen (noch in Benutzung oder Entfernen fehlgeschlagen)"
     done < <(docker images --format '{{.ID}} {{.Repository}}:{{.Tag}}' | grep -v '<none>')
 
-    log "Image cleanup complete"
+    log "Image-Bereinigung abgeschlossen"
 }
 
 cleanup() {
-    log "Update sidecar shutting down"
+    log "Update-Sidecar wird beendet"
     exit 0
 }
 
 trap cleanup SIGTERM SIGINT
 
 # Main watch loop
-log "Update sidecar started - watching for update requests"
+log "Update-Sidecar gestartet – wartet auf Update-Anfragen"
 write_status "idle" 0 "Ready for update requests"
 
 while true; do
     # Check if an update request file exists
     if [ -f "$REQUEST_FILE" ]; then
-        log "Found update request file"
+        log "Update-Anfragedatei gefunden"
         
         # Read request details
         REQUEST_DATA=$(cat "$REQUEST_FILE" 2>/dev/null || echo "{}")
-        log "Request data: $REQUEST_DATA"
+        log "Anfragedaten: $REQUEST_DATA"
 
         # Extract target tag from request (defaults to "latest" if not provided)
         TARGET_TAG=$(echo "$REQUEST_DATA" | jq -r '.target_tag // "latest"')
-        log "Target image tag: ${TARGET_TAG}"
+        log "Ziel-Image-Tag: ${TARGET_TAG}"
 
         # Remove the request file to prevent re-processing
         rm -f "$REQUEST_FILE"
 
         if perform_update "$TARGET_TAG"; then
-            log "Update completed successfully"
+            log "Update erfolgreich abgeschlossen"
         else
-            log "Update failed - see logs for details"
+            log "Update fehlgeschlagen – Details siehe Logs"
         fi
         
         sleep 5
