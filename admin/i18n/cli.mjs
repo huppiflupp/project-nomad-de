@@ -73,6 +73,13 @@ export function collectServer(root) {
           if (!SERVER_PROPS.has(name)) return
           for (const v of strValues(p.node.value)) if (keep(v) && !keys.has(v)) keys.set(v, relative(root, file))
         },
+        CallExpression(p) {
+          // this._broadcast(dienst, art, 'Text'): Meldungen des Installationsprotokolls (kommen als Server-Ereignis)
+          const c = p.node.callee
+          if (c.type !== 'MemberExpression' || c.property?.name !== '_broadcast') return
+          const v = strValue(p.node.arguments[2])
+          if (keep(v) && !keys.has(v)) keys.set(v, relative(root, file))
+        },
         NewExpression(p) {
           const c = p.node.callee
           if (c.type !== 'Identifier' || !/(Exception|Error)$/.test(c.name)) return

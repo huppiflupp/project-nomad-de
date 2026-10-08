@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { IconCircleCheck, IconCircleX } from '@tabler/icons-react'
 import classNames from '~/lib/classNames'
+import { tm } from '~/i18n/runtime'
 
 export type InstallActivityFeedProps = {
   activity: Array<{
@@ -79,7 +80,7 @@ const InstallActivityFeed: React.FC<InstallActivityFeedProps> = ({ activity, cla
               </div>
               <p className="flex-auto py-0.5 text-xs/5 text-text-muted">
                 <span className="font-semibold text-text-primary">{activityItem.service_name}</span> -{' '}
-                {activityItem.message || activityItem.type.charAt(0).toUpperCase() + activityItem.type.slice(1)}
+                {activityItem.message ? tm(activityItem.message) : activityItem.type.charAt(0).toUpperCase() + activityItem.type.slice(1)}
               </p>
               <time
                 dateTime={activityItem.timestamp}

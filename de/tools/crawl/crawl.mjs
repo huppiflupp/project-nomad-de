@@ -104,5 +104,26 @@ for (const p of PAGES) {
   }
   await page.close()
 }
+// Interaktion 3: Dialog der Inhaltsstufen (Schnellstart, Schritt 3). Er öffnet sich erst per Klick; die Seitenläufe
+// oben sehen ihn deshalb nicht (so blieben "resources included" und Verwandtes lange unentdeckt).
+{
+  const page = await ctx.newPage()
+  await page.goto(base + '/easy-setup', { waitUntil: 'networkidle' })
+  const next = page.getByRole('button', { name: lang === 'de' ? 'Weiter' : 'Next', exact: true })
+  await page.getByText(lang === 'de' ? 'Wissensbibliothek' : 'Information Library', { exact: true }).first().click().catch(() => {})
+  for (let i = 0; i < 2 && (await next.count()) && !(await next.isDisabled()); i++) {
+    await next.click()
+    await page.waitForLoadState('networkidle')
+  }
+  const card = page.getByText(lang === 'de' ? 'Medizin' : 'Medicine', { exact: true }).first()
+  if (await card.count()) {
+    await card.click()
+    await page.waitForTimeout(500)
+    const dialog = page.locator('[role="dialog"], .fixed').last()
+    const texts = (await dialog.allInnerTexts()).join('\n').split('\n').map((x) => x.trim()).filter(Boolean)
+    report.push({ page: 'easy-setup Stufen-Dialog', lang, ...judge(texts) })
+  } else report.push({ page: 'easy-setup Stufen-Dialog', lang, error: 'Kategorie nicht gefunden (Katalog nicht geladen?)' })
+  await page.close()
+}
 await browser.close()
 console.log(JSON.stringify(report, null, 1))

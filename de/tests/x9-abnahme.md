@@ -43,12 +43,14 @@ VM `nomad-de-ubuntu` auf x9 (4 vCPU, 8 GiB, 80 GB, UEFI), Ubuntu 26.04.1 LTS Des
 
 1. **Karten:** Schnellstart bietet nur US-Regionen (Pacific, Mountain, … New England). Deutschland nur über den Karten-Manager. Katalog für Deutschland fehlt (Teilprojekt B).
 2. **Inhalte nur englisch:** alle 6 geladenen Kiwix-Bücher sind „EN“. Kein deutsches Wikipedia im Schnellstart.
-3. **Englische Reste im Dialog der Inhaltsstufen:** „4 resources included“, „2 additional resources(plus alles aus Basis)“ (Leerzeichen fehlt). Der Crawl findet das nicht, weil der Dialog erst per Klick aufgeht.
-4. **Aktivitätsprotokoll englisch:** auf der Schnellstart-Abschlussseite stehen englische Zeilen („Downloading Wikipedia ZIM file …“, „Pre-install actions … completed successfully“). Diese Meldungen kommen als Server-Ereignisse und laufen am Übersetzer vorbei.
-5. **Installer-Hinweis:** „Der Debug-Modus ist aktiviert, das Skript leert den Bildschirm nicht“ – prüfen, ob das gewollt ist oder ein Rest.
+3. **[behoben 2026-10-09]** **Englische Reste im Dialog der Inhaltsstufen:** „4 resources included“, „2 additional resources(plus alles aus Basis)“ (Leerzeichen fehlt). Der Crawl findet das nicht, weil der Dialog erst per Klick aufgeht.
+4. **[behoben 2026-10-09: 62 Meldungen übersetzt, Test `i18n_activity.spec.ts`, Sammler erfasst `_broadcast`]** **Aktivitätsprotokoll englisch:** auf der Schnellstart-Abschlussseite stehen englische Zeilen („Downloading Wikipedia ZIM file …“, „Pre-install actions … completed successfully“). Diese Meldungen kommen als Server-Ereignisse und laufen am Übersetzer vorbei.
+5. **[behoben 2026-10-09: Text umformuliert]** **Installer-Hinweis:** „Der Debug-Modus ist aktiviert, das Skript leert den Bildschirm nicht“ – prüfen, ob das gewollt ist oder ein Rest.
 6. **Auto-Index:** Der Dialog nennt „zusätzlicher Speicherplatz, wenn diese für den KI-Assistenten indiziert werden … Auto-Index Einstellung ist Immer“. Das heißt: NOMAD indiziert Kiwix-Inhalte für die KI (Notfall-KI, Phase 4). Noch nicht mit einem Modell geprüft.
 7. **Tastatur:** In der VM gilt die deutsche Belegung; ein Hilfsskript für die Eingabe musste darauf angepasst werden (nur Testwerkzeug).
 
 ## Noch offen aus Task 17
 
 Update-Test auf 1.35.2 (braucht ein zweites Release). KI-Chat (Ollama, kleines Modell) und die Frage, ob die Antworten auf die geladenen Inhalte zugreifen.
+
+Der Crawl (`de/tools/crawl/crawl.mjs`) öffnet seit 2026-10-09 auch den Stufen-Dialog des Schnellstarts (Interaktion 3).

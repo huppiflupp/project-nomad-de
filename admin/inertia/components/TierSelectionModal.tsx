@@ -1,3 +1,4 @@
+import { t } from '~/i18n/runtime'
 import { Fragment, useState, useEffect, useMemo } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { IconX, IconCheck, IconInfoCircle } from '@tabler/icons-react'
@@ -258,14 +259,13 @@ const TierSelectionModal: React.FC<TierSelectionModalProps> = ({
                               {/* Resources preview - only show this tier's own resources */}
                               <div className="bg-surface-secondary rounded p-3">
                                 <p className="text-xs text-text-muted mb-2 font-medium">
-                                  {includedTierName ? (
-                                    <>
-                                      {ownResourceCount} additional {ownResourceCount === 1 ? 'resource' : 'resources'}
-                                      <span className="text-text-muted"> (plus everything in {includedTierName})</span>
-                                    </>
-                                  ) : (
-                                    <>{ownResourceCount} {ownResourceCount === 1 ? 'resource' : 'resources'} included</>
-                                  )}
+                                  {includedTierName
+                                    ? ownResourceCount === 1
+                                      ? t('{0} additional resource (plus everything in {1})', ownResourceCount, includedTierName)
+                                      : t('{0} additional resources (plus everything in {1})', ownResourceCount, includedTierName)
+                                    : ownResourceCount === 1
+                                      ? t('{0} resource included', ownResourceCount)
+                                      : t('{0} resources included', ownResourceCount)}
                                 </p>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                                   {ownResources.map((resource, idx) => (
