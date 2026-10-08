@@ -156,7 +156,7 @@ ensure_dependencies_installed() {
 check_is_debug_mode(){
   # Check if the script is being run in debug mode
   if [[ "${script_option_debug}" == 'true' ]]; then
-    echo -e "${YELLOW}#${RESET} Der Debug-Modus ist aktiviert, das Skript leert den Bildschirm nicht ...\\n"
+    echo -e "${YELLOW}#${RESET} Alle Meldungen bleiben auf dem Bildschirm stehen, damit Sie sie in Ruhe lesen können ...\\n"
   else
     clear; clear
   fi
