@@ -22,3 +22,33 @@ veröffentlichte Images); der Stack wurde danach mit `docker compose up -d --pul
 | 4.4 App installieren | Kiwix per `/api/system/services/install` installiert, Container läuft; Supply-Depot-Seite komplett deutsch (Kategorie von Ollama zeigt „Ai“ statt „KI“). |
 | 4.5 KI-Chat | Nicht durchgeführt (optional). |
 | 5 Update-Test | Offen, braucht das Release (Task 16). |
+
+# Teil 2: Test von `main` mit Ubuntu 26.04.1 Desktop (2026-10-08, Abend)
+
+VM `nomad-de-ubuntu` auf x9 (4 vCPU, 8 GiB, 80 GB, UEFI), Ubuntu 26.04.1 LTS Desktop aus der ISO, Installation von Hand
+über die Oberfläche (Screenshots in `de/handbuch/bilder/roh/`). Danach die Befehle aus dem README, **ohne** Umwege:
+`apt-get install curl`, Skript von `raw.githubusercontent.com/.../main/install/install_nomad.sh` laden, `sudo bash install_nomad.sh`.
+
+## Ergebnis
+
+| Schritt | Ergebnis |
+|---|---|
+| Ubuntu installieren | ca. 15 Minuten, alle Seiten deutsch; Weg: Sprache, Tastatur, Netz, Installieren, Standard-Installation, Treiber-Haken, Festplatte löschen, keine Verschlüsselung, Konto, Zeitzone, Zusammenfassung |
+| NOMAD-Installer von `main` | **erfolgreich**, ca. 2 Minuten, alle Meldungen deutsch, Images von ghcr ohne Anmeldung gezogen |
+| Kommandozentrale | deutsch, Fuß zeigt „v1.35.1“ und „Inoffizielle deutsche Fassung …“ |
+| Schnellstart | Wissensbibliothek, Medizin-Basis (4 Dateien), Wikipedia Schnellreferenz: 662 MB, im LAN in unter 1 Minute geladen |
+| **Offline-Test** | Netz der VM getrennt: `ping` 100 % Verlust, GitHub nicht erreichbar. Kiwix (6 Bücher, mit Bildern) und die deutschen Anleitungen funktionieren weiter |
+
+## Funde (offen)
+
+1. **Karten:** Schnellstart bietet nur US-Regionen (Pacific, Mountain, … New England). Deutschland nur über den Karten-Manager. Katalog für Deutschland fehlt (Teilprojekt B).
+2. **Inhalte nur englisch:** alle 6 geladenen Kiwix-Bücher sind „EN“. Kein deutsches Wikipedia im Schnellstart.
+3. **Englische Reste im Dialog der Inhaltsstufen:** „4 resources included“, „2 additional resources(plus alles aus Basis)“ (Leerzeichen fehlt). Der Crawl findet das nicht, weil der Dialog erst per Klick aufgeht.
+4. **Aktivitätsprotokoll englisch:** auf der Schnellstart-Abschlussseite stehen englische Zeilen („Downloading Wikipedia ZIM file …“, „Pre-install actions … completed successfully“). Diese Meldungen kommen als Server-Ereignisse und laufen am Übersetzer vorbei.
+5. **Installer-Hinweis:** „Der Debug-Modus ist aktiviert, das Skript leert den Bildschirm nicht“ – prüfen, ob das gewollt ist oder ein Rest.
+6. **Auto-Index:** Der Dialog nennt „zusätzlicher Speicherplatz, wenn diese für den KI-Assistenten indiziert werden … Auto-Index Einstellung ist Immer“. Das heißt: NOMAD indiziert Kiwix-Inhalte für die KI (Notfall-KI, Phase 4). Noch nicht mit einem Modell geprüft.
+7. **Tastatur:** In der VM gilt die deutsche Belegung; ein Hilfsskript für die Eingabe musste darauf angepasst werden (nur Testwerkzeug).
+
+## Noch offen aus Task 17
+
+Update-Test auf 1.35.2 (braucht ein zweites Release). KI-Chat (Ollama, kleines Modell) und die Frage, ob die Antworten auf die geladenen Inhalte zugreifen.
