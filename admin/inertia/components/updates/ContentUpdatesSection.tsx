@@ -9,6 +9,7 @@ import api from '~/lib/api'
 import { useQueryClient } from '@tanstack/react-query'
 import { useNotifications } from '~/context/NotificationContext'
 import { formatBytes } from '~/lib/util'
+import { t } from '~/i18n/runtime'
 
 export default function ContentUpdatesSection() {
   const { addNotification } = useNotifications()
@@ -29,7 +30,7 @@ export default function ContentUpdatesSection() {
       setCheckResult({
         updates: [],
         checked_at: new Date().toISOString(),
-        error: 'Failed to check for content updates',
+        error: t('Failed to check for content updates'),
       })
     } finally {
       setIsChecking(false)

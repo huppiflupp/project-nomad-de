@@ -1,4 +1,5 @@
 import { computeJobHealth, type JobHealthStatus } from '../../app/utils/kb_job_health.js'
+import { t } from '~/i18n/runtime'
 
 export { computeJobHealth, type JobHealthStatus } from '../../app/utils/kb_job_health.js'
 
@@ -44,12 +45,12 @@ export const JOB_HEALTH_DISPLAY: Record<
  */
 export function formatTimeAgo(timestampMs: number, now: number): string {
   const seconds = Math.max(0, Math.floor((now - timestampMs) / 1000))
-  if (seconds < 5) return 'just now'
-  if (seconds < 60) return `${seconds}s ago`
+  if (seconds < 5) return t('just now')
+  if (seconds < 60) return t('{0}s ago', seconds)
   const minutes = Math.floor(seconds / 60)
-  if (minutes < 60) return `${minutes}m ago`
+  if (minutes < 60) return t('{0}m ago', minutes)
   const hours = Math.floor(minutes / 60)
-  return `${hours}h ago`
+  return t('{0}h ago', hours)
 }
 
 /**

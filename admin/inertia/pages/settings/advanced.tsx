@@ -8,6 +8,7 @@ import Input from '~/components/inputs/Input'
 import { useNotifications } from '~/context/NotificationContext'
 import { useMutation } from '@tanstack/react-query'
 import api from '~/lib/api'
+import { t } from '~/i18n/runtime'
 
 export default function AdvancedPage(props: {
   advanced: {
@@ -30,10 +31,10 @@ export default function AdvancedPage(props: {
     try {
       const url = new URL(value)
       if (url.protocol !== 'http:' && url.protocol !== 'https:') {
-        return 'Test URL must use http or https.'
+        return t('Test URL must use http or https.')
       }
     } catch {
-      return 'Test URL must be a valid URL (e.g. "https://example.com").'
+      return t('Test URL must be a valid URL (e.g. "https://example.com").')
     }
     return null
   }
@@ -49,7 +50,7 @@ export default function AdvancedPage(props: {
       const msg =
         error?.response?.data?.message ||
         error?.message ||
-        'There was an error updating the setting. Please try again.'
+        t('There was an error updating the setting. Please try again.')
       setTestUrlError(msg)
       addNotification({ message: msg, type: 'error' })
     },

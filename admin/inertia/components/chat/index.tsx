@@ -1,6 +1,7 @@
 import { useState, useCallback, useEffect, useRef } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import ChatSidebar from './ChatSidebar'
+import { t } from '~/i18n/runtime'
 import ChatInterface from './ChatInterface'
 import KbPolicyPromptBanner from './KbPolicyPromptBanner'
 import StyledModal from '../StyledModal'
@@ -211,7 +212,7 @@ export default function Chat({
       const assistantMessage: ChatMessage = {
         id: `msg-${Date.now()}-assistant`,
         role: 'assistant',
-        content: data.message?.content || 'Sorry, I could not generate a response.',
+        content: data.message?.content || t('Sorry, I could not generate a response.'),
         timestamp: new Date(),
         truncated: data.done_reason === 'length',
       }
@@ -227,7 +228,7 @@ export default function Chat({
       const errorMessage: ChatMessage = {
         id: `msg-${Date.now()}-error`,
         role: 'assistant',
-        content: 'Sorry, there was an error processing your request. Please try again.',
+        content: t('Sorry, there was an error processing your request. Please try again.'),
         timestamp: new Date(),
       }
       setMessages((prev) => [...prev, errorMessage])
@@ -403,7 +404,7 @@ export default function Chat({
       if (!sessionId) {
         let newSession: Awaited<ReturnType<typeof api.createChatSession>> | undefined
         try {
-          newSession = await api.createChatSession('New Chat', selectedModel)
+          newSession = await api.createChatSession(t('New Chat'), selectedModel)
         } catch {
           newSession = undefined
         }
@@ -417,7 +418,7 @@ export default function Chat({
             {
               id: `msg-${Date.now()}-error`,
               role: 'assistant',
-              content: 'Sorry, there was an error starting this chat. Please try again.',
+              content: t('Sorry, there was an error starting this chat. Please try again.'),
               timestamp: new Date(),
             },
           ])
@@ -537,7 +538,7 @@ export default function Chat({
                   content:
                     error instanceof Error
                       ? error.message
-                      : 'Sorry, there was an error processing your request. Please try again.',
+                      : t('Sorry, there was an error processing your request. Please try again.'),
                   timestamp: new Date(),
                 },
               ]

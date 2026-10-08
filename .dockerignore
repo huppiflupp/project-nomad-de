@@ -6,3 +6,5 @@ node_modules
 admin/storage
 admin/node_modules
 admin/build
+de/dev/data
+de/tools/crawl/node_modules

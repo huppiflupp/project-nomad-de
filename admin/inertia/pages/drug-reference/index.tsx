@@ -2,6 +2,7 @@ import { useState, useCallback, useRef, useMemo, useEffect } from 'react'
 import { Head, Link, router } from '@inertiajs/react'
 import { TabGroup, TabList, Tab, TabPanels, TabPanel } from '@headlessui/react'
 import AppLayout from '~/layouts/AppLayout'
+import { localize, t, tm } from '~/i18n/runtime'
 import StyledButton from '~/components/StyledButton'
 import DrugResultRow from '~/components/drug-reference/DrugResultRow'
 import IngredientGroup, { type IngredientGrouping } from '~/components/drug-reference/IngredientGroup'
@@ -58,17 +59,17 @@ const ROUTE_OPTIONS = [
 
 /** Friendly "form" label for a route value (how you take it), plainer than the raw route. */
 const ROUTE_FRIENDLY: Record<string, string> = {
-  ORAL: 'Oral (pill, liquid)',
-  TOPICAL: 'Topical (cream, gel)',
-  OPHTHALMIC: 'Eye drops',
-  OTIC: 'Ear drops',
-  NASAL: 'Nasal spray',
-  INHALATION: 'Inhaler',
-  SUBLINGUAL: 'Under the tongue',
-  RECTAL: 'Rectal',
-  VAGINAL: 'Vaginal',
-  TRANSDERMAL: 'Skin patch',
-  DENTAL: 'Dental',
+  ORAL: t('Oral (pill, liquid)'),
+  TOPICAL: t('Topical (cream, gel)'),
+  OPHTHALMIC: t('Eye drops'),
+  OTIC: t('Ear drops'),
+  NASAL: t('Nasal spray'),
+  INHALATION: t('Inhaler'),
+  SUBLINGUAL: t('Under the tongue'),
+  RECTAL: t('Rectal'),
+  VAGINAL: t('Vaginal'),
+  TRANSDERMAL: t('Skin patch'),
+  DENTAL: t('Dental'),
 }
 
 const DEBOUNCE_MS = 350
@@ -239,13 +240,13 @@ export default function DrugReferenceIndex({
         if (rt) params.set('route', rt)
         if (srt && srt !== 'relevance') params.set('sort', srt)
         const resp = await fetch(`/api/drug-reference/search?${params}`)
-        if (!resp.ok) throw new Error(`Search failed: HTTP ${resp.status}`)
+        if (!resp.ok) throw new Error(t('Search failed: HTTP {0}', resp.status))
         const json = (await resp.json()) as { results: DrugSearchResult[] }
         const next = json.results ?? []
         setDrugResults(append ? (prev) => [...prev, ...next] : next)
         setHasMore(next.length === LIMIT)
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Search failed')
+        setError(err instanceof Error ? tm(err.message) : t('Search failed'))
       } finally {
         setDrugLoading(false)
       }
@@ -310,7 +311,7 @@ export default function DrugReferenceIndex({
         if (rt) params.set('route', rt)
         if (srt && srt !== 'relevance') params.set('sort', srt)
         const resp = await fetch(`/api/conditions/drugs?${params}`)
-        if (!resp.ok) throw new Error(`Search failed: HTTP ${resp.status}`)
+        if (!resp.ok) throw new Error(t('Search failed: HTTP {0}', resp.status))
         const json = (await resp.json()) as ConditionDrugsResult
         setSitResults((prev) => ({
           ...prev,
@@ -322,7 +323,7 @@ export default function DrugReferenceIndex({
           },
         }))
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Search failed')
+        setError(err instanceof Error ? tm(err.message) : t('Search failed'))
         setSitResults((prev) => ({ ...prev, [c.slug]: { label: c.label, drugs: [], remedies: [], loading: false } }))
       }
     },
@@ -386,7 +387,7 @@ export default function DrugReferenceIndex({
   // ── Ingest handlers ─────────────────────────────────────────────────────────
   const refreshStatus = async () => {
     const statusResp = await fetch('/api/drug-reference/status')
-    if (statusResp.ok) setStatus(await statusResp.json())
+    if (statusResp.ok) setStatus(localize(await statusResp.json()))
   }
   const handleTriggerDownload = async () => {
     if (triggering) return
@@ -418,8 +419,10 @@ export default function DrugReferenceIndex({
     if (resetting) return
     if (
       !window.confirm(
-        'Restart the ingest? This clears the current (possibly stuck) ingest job and ' +
-          're-runs it from the already-downloaded files.'
+        t(
+          'Restart the ingest? This clears the current (possibly stuck) ingest job and ' +
+            're-runs it from the already-downloaded files.'
+        )
       )
     ) {
       return
@@ -439,7 +442,7 @@ export default function DrugReferenceIndex({
     try {
       const resp = await fetch('/api/drug-reference/status')
       if (resp.ok) {
-        const newStatus = (await resp.json()) as DrugIngestStatus
+        const newStatus = localize((await resp.json()) as DrugIngestStatus)
         setStatus(newStatus)
         if (newStatus.phase === 'ready' && newStatus.rowCount > rowCount) {
           router.reload({ only: ['rowCount', 'ingestStatus'] })
@@ -636,10 +639,10 @@ export default function DrugReferenceIndex({
                       <IconPill size={18} />
                     </span>
                     <h2 className="text-sm font-bold text-desert-green-darker">
-                      {ingredientGroups.length} ingredient{ingredientGroups.length !== 1 ? 's' : ''}
+                      {ingredientGroups.length === 1 ? t('{0} ingredient', ingredientGroups.length) : t('{0} ingredients', ingredientGroups.length)}
                     </h2>
                     <span className="ml-auto text-xs text-desert-stone">
-                      {drugResults.length} product{drugResults.length !== 1 ? 's' : ''}
+                      {drugResults.length === 1 ? t('{0} product', drugResults.length) : t('{0} products', drugResults.length)}
                     </span>
                   </div>
                   <div className="divide-y divide-desert-stone-lighter/40">

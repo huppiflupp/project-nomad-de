@@ -4,6 +4,7 @@ import { IconBrain } from '@tabler/icons-react'
 import api from '~/lib/api'
 import StyledButton from '~/components/StyledButton'
 import { useNotifications } from '~/context/NotificationContext'
+import { t } from '~/i18n/runtime'
 
 /**
  * First-chat onboarding banner (RFC #883 Phase 3 task 12).
@@ -32,7 +33,7 @@ export default function KbPolicyPromptBanner() {
   // "AI Assistant" when accessed outside that context (no-op for chat pages,
   // but keeps the component safe for future reuse elsewhere).
   const aiAssistantName =
-    usePage<{ aiAssistantName?: string }>().props?.aiAssistantName || 'AI Assistant'
+    usePage<{ aiAssistantName?: string }>().props?.aiAssistantName || t('AI Assistant')
 
   const { data: promptState } = useQuery({
     queryKey: ['kbPolicyPromptState'],

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { router, usePage } from '@inertiajs/react'
 import Alert from '~/components/Alert'
+import { t } from '~/i18n/runtime'
 
 /**
  * Post-upgrade "what's new" highlights shown once on the dashboard.
@@ -18,11 +19,11 @@ const WHATS_NEW = {
   version: '1.34',
   title: "What's new in v1.34",
   highlights: [
-    'Creator Packs - install curated video packs from your favorite creators and watch them fully offline.',
-    'Medication Reference - offline FDA drug-label lookup for quick, reliable medication information.',
-    'Benchmark Score v2 - a rebuilt scoring model, with live telemetry while the test runs and your score revealed at the end.',
-    'NOMAD.md - give your AI assistant standing instructions it follows in every conversation.',
-    'Knowledge Base collections - group what the assistant searches by subject, so answers stay on topic.',
+    t('Creator Packs - install curated video packs from your favorite creators and watch them fully offline.'),
+    t('Medication Reference - offline FDA drug-label lookup for quick, reliable medication information.'),
+    t('Benchmark Score v2 - a rebuilt scoring model, with live telemetry while the test runs and your score revealed at the end.'),
+    t('NOMAD.md - give your AI assistant standing instructions it follows in every conversation.'),
+    t('Knowledge Base collections - group what the assistant searches by subject, so answers stay on topic.'),
   ],
 }
 

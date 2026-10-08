@@ -1,0 +1,36 @@
+name: Deutsche Fassung – Prüfungen
+on:
+  push:
+    branches: [main, 'de/**', 'sync/**']
+  pull_request:
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: admin
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: admin/package-lock.json
+      - run: npm ci
+      - name: Übersetzungen vollständig
+        run: node i18n/cli.mjs check
+      - name: Anrede Sie
+        run: node ../de/tools/sie-check.mjs i18n/de.json i18n/catalog.de.json
+      - name: Anleitungen
+        working-directory: .
+        run: node de/tools/docs-check.mjs
+      - name: Herkunft Fork
+        working-directory: .
+        run: bash de/tools/check-distribution.sh
+      # Bewusst nur die eigenen Tests: 10 Testdateien schlagen schon im
+      # unveränderten Upstream fehl (siehe de/STAND.md); die volle Suite
+      # (npm run test:unit) wäre dauerhaft rot.
+      - name: Unit-Tests (deutsche Fassung)
+        run: node --import ts-node-maintained/register/esm --test tests/unit/i18n_*.spec.ts
+      - name: Typecheck und Build
+        run: npm run typecheck && npm run build

@@ -9,6 +9,7 @@ import BouncingDots from '../BouncingDots'
 import { usePage } from '@inertiajs/react'
 import InfoTooltip from '../InfoTooltip'
 import { visionAttachmentGuidance } from '../../lib/vision_guidance'
+import { t, tm } from '~/i18n/runtime'
 
 interface ChatInterfaceProps {
   messages: ChatMessage[]
@@ -23,7 +24,7 @@ interface ChatInterfaceProps {
 // Sent as an ordinary turn, so it goes through retrieval, budgeting and
 // persistence like any other message. The cut-off answer is the newest turn in
 // history, which the budget keeps first.
-const CONTINUE_PROMPT = 'Continue exactly where you left off. Do not repeat what you already wrote.'
+const CONTINUE_PROMPT = t('Continue exactly where you left off. Do not repeat what you already wrote.')
 
 const MAX_VISION_IMAGES = 4
 const MAX_VISION_IMAGE_BYTES = 8 * 1024 * 1024
@@ -76,7 +77,7 @@ export default function ChatInterface({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if ((input.trim() || images.length > 0) && !isLoading) {
-      onSendMessage(input.trim() || 'Describe the attached image.', images)
+      onSendMessage(input.trim() || t('Describe the attached image.'), images)
       setInput('')
       setImages([])
       if (imageInputRef.current) imageInputRef.current.value = ''
@@ -293,7 +294,7 @@ export default function ChatInterface({
                 position="top"
                 align="left"
                 text={
-                  visionAttachmentGuidance(visionCapability)
+                  tm(visionAttachmentGuidance(visionCapability))
                 }
               />
             )}
@@ -329,7 +330,7 @@ export default function ChatInterface({
           </button>
         </form>
         <p className="mt-2 text-xs text-text-muted" aria-live="polite">
-          {visionAttachmentGuidance(visionCapability)}
+          {tm(visionAttachmentGuidance(visionCapability))}
         </p>
       </div>
     </div>

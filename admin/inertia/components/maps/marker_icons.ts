@@ -39,6 +39,7 @@ import {
 } from '@tabler/icons-react'
 import type { IconProps } from '@tabler/icons-react'
 import type { ComponentType } from 'react'
+import { t } from '~/i18n/runtime'
 
 /**
  * The marker icon set: a curated 36, laid out as six rows of six.
@@ -69,52 +70,52 @@ const entry = (
 
 export const MARKER_ICONS: MarkerIconEntry[] = [
   // Water and food
-  entry(IconDroplet, 'IconDroplet', 'Water'),
-  entry(IconBarrel, 'IconBarrel', 'Water storage'),
-  entry(IconToolsKitchen2, 'IconToolsKitchen2', 'Food'),
-  entry(IconWheat, 'IconWheat', 'Grain or crops'),
-  entry(IconMeat, 'IconMeat', 'Meat or game'),
-  entry(IconFish, 'IconFish', 'Fishing'),
+  entry(IconDroplet, 'IconDroplet', t('Water')),
+  entry(IconBarrel, 'IconBarrel', t('Water storage')),
+  entry(IconToolsKitchen2, 'IconToolsKitchen2', t('Food')),
+  entry(IconWheat, 'IconWheat', t('Grain or crops')),
+  entry(IconMeat, 'IconMeat', t('Meat or game')),
+  entry(IconFish, 'IconFish', t('Fishing')),
 
   // Shelter and living
-  entry(IconHome, 'IconHome', 'Building'),
-  entry(IconTent, 'IconTent', 'Camp'),
-  entry(IconBed, 'IconBed', 'Shelter'),
-  entry(IconDoor, 'IconDoor', 'Entrance'),
-  entry(IconCampfire, 'IconCampfire', 'Fire'),
-  entry(IconSeeding, 'IconSeeding', 'Garden'),
+  entry(IconHome, 'IconHome', t('Building')),
+  entry(IconTent, 'IconTent', t('Camp')),
+  entry(IconBed, 'IconBed', t('Shelter')),
+  entry(IconDoor, 'IconDoor', t('Entrance')),
+  entry(IconCampfire, 'IconCampfire', t('Fire')),
+  entry(IconSeeding, 'IconSeeding', t('Garden')),
 
   // Medical
-  entry(IconFirstAidKit, 'IconFirstAidKit', 'First aid'),
-  entry(IconBuildingHospital, 'IconBuildingHospital', 'Hospital'),
-  entry(IconStethoscope, 'IconStethoscope', 'Clinic'),
-  entry(IconPill, 'IconPill', 'Medication'),
-  entry(IconBandage, 'IconBandage', 'Supplies'),
-  entry(IconAmbulance, 'IconAmbulance', 'Ambulance'),
+  entry(IconFirstAidKit, 'IconFirstAidKit', t('First aid')),
+  entry(IconBuildingHospital, 'IconBuildingHospital', t('Hospital')),
+  entry(IconStethoscope, 'IconStethoscope', t('Clinic')),
+  entry(IconPill, 'IconPill', t('Medication')),
+  entry(IconBandage, 'IconBandage', t('Supplies')),
+  entry(IconAmbulance, 'IconAmbulance', t('Ambulance')),
 
   // Power and communications
-  entry(IconBolt, 'IconBolt', 'Power'),
-  entry(IconSolarPanel, 'IconSolarPanel', 'Solar'),
-  entry(IconBattery, 'IconBattery', 'Battery'),
-  entry(IconAntenna, 'IconAntenna', 'Antenna'),
-  entry(IconRadio, 'IconRadio', 'Radio'),
-  entry(IconWifi, 'IconWifi', 'Network'),
+  entry(IconBolt, 'IconBolt', t('Power')),
+  entry(IconSolarPanel, 'IconSolarPanel', t('Solar')),
+  entry(IconBattery, 'IconBattery', t('Battery')),
+  entry(IconAntenna, 'IconAntenna', t('Antenna')),
+  entry(IconRadio, 'IconRadio', t('Radio')),
+  entry(IconWifi, 'IconWifi', t('Network')),
 
   // Transport and supply
-  entry(IconGasStation, 'IconGasStation', 'Fuel'),
-  entry(IconCar, 'IconCar', 'Vehicle'),
-  entry(IconTruck, 'IconTruck', 'Truck'),
-  entry(IconTractor, 'IconTractor', 'Machinery'),
-  entry(IconPackage, 'IconPackage', 'Cache or supplies'),
-  entry(IconTool, 'IconTool', 'Tools'),
+  entry(IconGasStation, 'IconGasStation', t('Fuel')),
+  entry(IconCar, 'IconCar', t('Vehicle')),
+  entry(IconTruck, 'IconTruck', t('Truck')),
+  entry(IconTractor, 'IconTractor', t('Machinery')),
+  entry(IconPackage, 'IconPackage', t('Cache or supplies')),
+  entry(IconTool, 'IconTool', t('Tools')),
 
   // Terrain, routes and hazards
-  entry(IconMountain, 'IconMountain', 'High ground'),
-  entry(IconTrees, 'IconTrees', 'Woodland'),
-  entry(IconRoute, 'IconRoute', 'Route'),
-  entry(IconFlag, 'IconFlag', 'Rally point'),
-  entry(IconAlertTriangle, 'IconAlertTriangle', 'Hazard'),
-  entry(IconSkull, 'IconSkull', 'Danger'),
+  entry(IconMountain, 'IconMountain', t('High ground')),
+  entry(IconTrees, 'IconTrees', t('Woodland')),
+  entry(IconRoute, 'IconRoute', t('Route')),
+  entry(IconFlag, 'IconFlag', t('Rally point')),
+  entry(IconAlertTriangle, 'IconAlertTriangle', t('Hazard')),
+  entry(IconSkull, 'IconSkull', t('Danger')),
 ]
 
 /** The pin used when a marker has no icon, or names one no longer in the set. */

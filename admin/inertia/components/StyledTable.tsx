@@ -2,6 +2,7 @@ import { capitalizeFirstLetter } from '~/lib/util'
 import classNames from '~/lib/classNames'
 import LoadingSpinner from '~/components/LoadingSpinner'
 import React, { RefObject, useState } from 'react'
+import { t } from '~/i18n/runtime'
 
 export type StyledTableProps<T extends { [key: string]: any }> = {
   loading?: boolean
@@ -43,7 +44,7 @@ function StyledTable<T extends { [key: string]: any }>({
   tableBodyClassName = '',
   tableBodyStyle = {},
   data = [],
-  noDataText = 'No records found',
+  noDataText = t('No records found'),
   onRowClick,
   columns = [],
   className = '',
@@ -104,7 +105,7 @@ function StyledTable<T extends { [key: string]: any }>({
                   compact ? `${leftPadding} py-2` : `${leftPadding} py-4  pr-3`
                 )}
               >
-                {column.title ?? capitalizeFirstLetter(column.accessor.toString())}
+                {column.title ?? t(capitalizeFirstLetter(column.accessor.toString()))}
               </th>
             ))}
           </tr>

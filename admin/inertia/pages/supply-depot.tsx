@@ -46,6 +46,7 @@ import { getSupplyDepotDocLink } from '../../constants/supply_depot_docs'
 import api from '~/lib/api'
 import { toTitleCase } from '../../app/utils/misc'
 import { SERVICE_NAMES } from '../../constants/service_names'
+import { t } from '~/i18n/runtime'
 
 function extractTag(containerImage: string): string {
   if (!containerImage) return ''
@@ -61,7 +62,7 @@ const CATEGORIES = [
   { id: 'security', label: 'Security' },
   { id: 'networking', label: 'Networking' },
   { id: 'utility', label: 'Utility' },
-  { id: 'ai', label: 'AI' },
+  { id: 'ai', label: t('AI') },
   { id: 'education', label: 'Education' },
   { id: 'custom', label: 'Custom' },
 ]
@@ -284,7 +285,7 @@ export default function SupplyDepotPage(props: { system: { services: ServiceSlim
     try {
       setCheckingUpdates(true)
       const response = await api.checkServiceUpdates()
-      if (!response?.success) throw new Error(response?.message || 'Failed to dispatch update check')
+      if (!response?.success) throw new Error(response?.message || t('Failed to dispatch update check'))
     } catch (error: any) {
       showError(`Failed to check for updates: ${error?.message || 'Unknown error'}`)
       setCheckingUpdates(false)
@@ -968,7 +969,7 @@ function AppCard({
       <div className="flex items-center gap-2 mb-4 flex-wrap">
         {service.category && (
           <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${catColor}`}>
-            {toTitleCase(service.category)}
+            {t(toTitleCase(service.category))}
           </span>
         )}
         {service.is_custom ? (

@@ -44,43 +44,43 @@ header_red() {
 
 check_has_sudo() {
   if sudo -n true 2>/dev/null; then
-    echo -e "${GREEN}#${RESET} User has sudo permissions.\\n"
+    echo -e "${GREEN}#${RESET} Der Benutzer hat sudo-Rechte.\\n"
   else
-    echo "User does not have sudo permissions"
+    echo "Der Benutzer hat keine sudo-Rechte"
     header_red
-    echo -e "${RED}#${RESET} This script requires sudo permissions to run. Please run the script with sudo.\\n"
-    echo -e "${RED}#${RESET} For example: sudo bash $(basename "$0")"
+    echo -e "${RED}#${RESET} Dieses Skript benötigt sudo-Rechte. Bitte führen Sie es mit sudo aus.\\n"
+    echo -e "${RED}#${RESET} Zum Beispiel: sudo bash $(basename "$0")"
     exit 1
   fi
 }
 
 check_current_directory(){
   if [ "$(pwd)" == "${NOMAD_DIR}" ]; then
-    echo "Please run this script from a directory other than ${NOMAD_DIR}."
+    echo "Bitte führen Sie dieses Skript in einem anderen Verzeichnis als ${NOMAD_DIR} aus."
     exit 1
   fi
 }
 
 ensure_management_compose_file_exists(){
   if [ ! -f "${MANAGEMENT_COMPOSE_FILE}" ]; then
-    echo "Unable to find the management Docker Compose file at ${MANAGEMENT_COMPOSE_FILE}. There may be a problem with your Project NOMAD installation."
+    echo "Die Docker-Compose-Datei der Verwaltung wurde unter ${MANAGEMENT_COMPOSE_FILE} nicht gefunden. Möglicherweise gibt es ein Problem mit Ihrer Project-NOMAD-Installation."
     exit 1
   fi
 }
 
 get_uninstall_confirmation(){
-  read -p "This script will remove ALL Project NOMAD files and containers. THIS CANNOT BE UNDONE. Are you sure you want to continue? (y/n): " choice
+  read -p "Dieses Skript entfernt ALLE Project-NOMAD-Dateien und -Container. DAS LÄSST SICH NICHT RÜCKGÄNGIG MACHEN. Möchten Sie wirklich fortfahren? (j/n): " choice
   case "$choice" in
-    y|Y )
-      echo -e "User chose to continue with the uninstallation."
+    y|Y|j|J )
+      echo -e "Sie haben sich für die Fortsetzung der Deinstallation entschieden."
       ;;
     n|N )
-      echo -e "User chose not to continue with the uninstallation."
+      echo -e "Sie haben sich gegen die Fortsetzung der Deinstallation entschieden."
       exit 0
       ;;
     * )
-      echo "Invalid Response"
-      echo "User chose not to continue with the uninstallation."
+      echo "Ungültige Eingabe"
+      echo "Sie haben sich gegen die Fortsetzung der Deinstallation entschieden."
       exit 0
       ;;
   esac
@@ -88,7 +88,7 @@ get_uninstall_confirmation(){
 
 ensure_docker_installed() {
     if ! command -v docker &> /dev/null; then
-        echo "Unable to find Docker. There may be a problem with your Docker installation."
+        echo "Docker wurde nicht gefunden. Möglicherweise gibt es ein Problem mit Ihrer Docker-Installation."
         exit 1
     fi
 }
@@ -96,57 +96,57 @@ ensure_docker_installed() {
 check_docker_compose() {
   # Check if 'docker compose' (v2 plugin) is available
   if ! docker compose version &>/dev/null; then
-    echo -e "${RED}#${RESET} Docker Compose v2 is not installed or not available as a Docker plugin."
-    echo -e "${YELLOW}#${RESET} This script requires 'docker compose' (v2), not 'docker-compose' (v1)."
-    echo -e "${YELLOW}#${RESET} Please read the Docker documentation at https://docs.docker.com/compose/install/ for instructions on how to install Docker Compose v2."
+    echo -e "${RED}#${RESET} Docker Compose v2 ist nicht installiert oder nicht als Docker-Plugin verfügbar."
+    echo -e "${YELLOW}#${RESET} Dieses Skript benötigt „docker compose“ (v2), nicht „docker-compose“ (v1)."
+    echo -e "${YELLOW}#${RESET} Eine Anleitung zur Installation von Docker Compose v2 finden Sie in der Docker-Dokumentation unter https://docs.docker.com/compose/install/."
     exit 1
   fi
 }
 
 storage_cleanup() {
-  read -p "Do you want to delete the Project NOMAD storage directory (${NOMAD_DIR})? This is best if you want to start a completely fresh install. This will PERMANENTLY DELETE all stored NOMAD data and can't be undone! (y/N): " delete_dir_choice
+  read -p "Möchten Sie das Project-NOMAD-Speicherverzeichnis (${NOMAD_DIR}) löschen? Das ist sinnvoll, wenn Sie komplett neu installieren möchten. Dabei werden ALLE gespeicherten NOMAD-Daten DAUERHAFT GELÖSCHT; das lässt sich nicht rückgängig machen! (j/N): " delete_dir_choice
   case "$delete_dir_choice" in
-      y|Y )
-          echo "Removing Project NOMAD files..."
+      y|Y|j|J )
+          echo "Project-NOMAD-Dateien werden entfernt ..."
           if rm -rf "${NOMAD_DIR}"; then
-              echo "Project NOMAD files removed."
+              echo "Project-NOMAD-Dateien wurden entfernt."
           else
-              echo "Warning: Failed to fully remove ${NOMAD_DIR}. You may need to remove it manually."
+              echo "Warnung: ${NOMAD_DIR} konnte nicht vollständig entfernt werden. Möglicherweise müssen Sie es manuell entfernen."
           fi
           ;;
       * )
-          echo "Skipping removal of ${NOMAD_DIR}."
+          echo "${NOMAD_DIR} wird nicht entfernt."
           ;;
   esac
 }
 
 uninstall_nomad() {
-    echo "Stopping and removing Project NOMAD management containers..."
+    echo "Die Verwaltungscontainer von Project NOMAD werden beendet und entfernt ..."
     docker compose -p project-nomad -f "${MANAGEMENT_COMPOSE_FILE}" down
-    echo "Allowing some time for management containers to stop..."
+    echo "Den Verwaltungscontainern wird etwas Zeit zum Beenden gegeben ..."
     sleep 5
 
 
     # Stop and remove all containers where name starts with "nomad_"
-    echo "Stopping and removing all Project NOMAD app containers..."
+    echo "Alle App-Container von Project NOMAD werden beendet und entfernt ..."
     docker ps -a --filter "name=^nomad_" --format "{{.Names}}" | xargs -r docker rm -f
-    echo "Allowing some time for app containers to stop..."
+    echo "Den App-Containern wird etwas Zeit zum Beenden gegeben ..."
     sleep 5
 
-    echo "Containers should be stopped now."
+    echo "Die Container sollten jetzt beendet sein."
 
     # Remove the shared Docker network (may still exist if app containers were using it during compose down)
-    echo "Removing project-nomad_default network if it exists..."
-    docker network rm project-nomad_default 2>/dev/null && echo "Network removed." || echo "Network already removed or not found."
+    echo "Das Netzwerk project-nomad_default wird entfernt, falls vorhanden ..."
+    docker network rm project-nomad_default 2>/dev/null && echo "Netzwerk entfernt." || echo "Netzwerk bereits entfernt oder nicht gefunden."
 
     # Remove the shared update volume
-    echo "Removing project-nomad_nomad-update-shared volume if it exists..."
-    docker volume rm project-nomad_nomad-update-shared 2>/dev/null && echo "Volume removed." || echo "Volume already removed or not found."
+    echo "Das Volume project-nomad_nomad-update-shared wird entfernt, falls vorhanden ..."
+    docker volume rm project-nomad_nomad-update-shared 2>/dev/null && echo "Volume entfernt." || echo "Volume bereits entfernt oder nicht gefunden."
 
     # Prompt user for storage cleanup and handle it if so
     storage_cleanup
 
-    echo "Project NOMAD has been uninstalled. We hope to see you again soon!"
+    echo "Project NOMAD wurde deinstalliert. Wir hoffen, Sie bald wiederzusehen!"
 }
 
 ###################################################################################################################################################################################################

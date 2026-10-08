@@ -70,14 +70,14 @@ RUN set -eux; \
     /usr/local/bin/pmtiles version
 
 # Labels
-LABEL org.opencontainers.image.title="Project NOMAD" \
-      org.opencontainers.image.description="The Project NOMAD Official Docker image" \
+LABEL org.opencontainers.image.title="Project NOMAD – Deutsche Fassung (inoffiziell)" \
+      org.opencontainers.image.description="Inoffizielle deutsche Fassung von Project NOMAD (Crosstalk Solutions)" \
       org.opencontainers.image.version="${VERSION}" \
       org.opencontainers.image.created="${BUILD_DATE}" \
       org.opencontainers.image.revision="${VCS_REF}" \
-      org.opencontainers.image.vendor="Crosstalk Solutions, LLC" \
-      org.opencontainers.image.documentation="https://github.com/CrosstalkSolutions/project-nomad/blob/main/README.md" \
-      org.opencontainers.image.source="https://github.com/CrosstalkSolutions/project-nomad" \
+      org.opencontainers.image.vendor="huppiflupp (Fork von Crosstalk Solutions, LLC)" \
+      org.opencontainers.image.documentation="https://github.com/huppiflupp/project-nomad-de/blob/main/README.md" \
+      org.opencontainers.image.source="https://github.com/huppiflupp/project-nomad-de" \
       org.opencontainers.image.licenses="Apache-2.0"
 
 ENV NODE_ENV=production
@@ -102,6 +102,7 @@ RUN echo "{\"version\":\"${VERSION}\"}" > /app/version.json
 
 # Copy docs and README for access within the container
 COPY admin/docs /app/docs
+COPY admin/docs-de /app/docs-de
 COPY README.md /app/README.md
 
 # Empty Calibre library, seeded into storage/books on Calibre-Web install

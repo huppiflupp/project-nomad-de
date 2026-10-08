@@ -4,10 +4,11 @@ import inertia from '@adonisjs/inertia/client'
 import react from '@vitejs/plugin-react'
 import adonisjs from '@adonisjs/vite/client'
 import tailwindcss from '@tailwindcss/vite'
+import nomadI18n from './i18n/babel-plugin.mjs'
 
 
 export default defineConfig({
-  plugins: [inertia({ ssr: { enabled: false } }), react(), tailwindcss(), adonisjs({ entrypoints: ['inertia/app/app.tsx'], reload: ['resources/views/**/*.edge'] })],
+  plugins: [inertia({ ssr: { enabled: false } }), react({ babel: { plugins: [[nomadI18n, { runtime: '~/i18n/runtime' }]] } }), tailwindcss(), adonisjs({ entrypoints: ['inertia/app/app.tsx'], reload: ['resources/views/**/*.edge'] })],
 
   /**
    * Define aliases for importing modules from

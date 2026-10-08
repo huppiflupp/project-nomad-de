@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
+import { t } from '~/i18n/runtime'
 
 interface CollectionComboboxProps {
   /** Current value. Empty string means "Uncategorized". */
@@ -31,7 +32,7 @@ export default function CollectionCombobox({
   value,
   onChange,
   options,
-  placeholder = 'Uncategorized',
+  placeholder = t('Uncategorized'),
   allowUncategorized = true,
   className = '',
   disabled = false,

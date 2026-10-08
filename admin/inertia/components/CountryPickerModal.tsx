@@ -17,6 +17,7 @@ import type {
   CountryGroup,
   MapExtractPreflight,
 } from '../../types/maps'
+import { t } from '~/i18n/runtime'
 
 export type CountryPickerModalProps = Omit<
   StyledModalProps,
@@ -147,7 +148,7 @@ const CountryPickerModal: React.FC<CountryPickerModalProps> = ({
           maxzoom,
         })
         if (requestId !== preflightRequestIdRef.current) return
-        if (!res) throw new Error('Preflight returned no data')
+        if (!res) throw new Error(t('Preflight returned no data'))
         setPreflight(res)
       } catch (err: any) {
         if (requestId !== preflightRequestIdRef.current) return

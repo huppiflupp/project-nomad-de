@@ -18,6 +18,7 @@ import { BenchmarkType, RunBenchmarkResponse, SubmitBenchmarkResponse, UpdateBui
 import type { CreateMapMarkerPayload, MapMarkerResponse, UpdateMapMarkerPayload } from '../../types/maps'
 import type { ChatSource } from '../../types/chat'
 import { chatStreamErrorMessage } from './chat_stream.js'
+import { localize, tm, t } from '~/i18n/runtime'
 
 type OllamaChatRequestWithImages = OllamaChatRequest & { images?: File[] }
 
@@ -49,6 +50,20 @@ class API {
         'Content-Type': 'application/json',
       },
     })
+
+    // German distribution: translate server messages and catalog texts (admin/i18n).
+    this.client.interceptors.response.use(
+      (response) => {
+        // skipLocalize: user data (chat sessions, map markers, custom libraries/apps) stays as typed
+        if ((response.config as any)?.skipLocalize) return response
+        response.data = localize(response.data)
+        return response
+      },
+      (error) => {
+        if (error?.response?.data) error.response.data = localize(error.response.data)
+        return Promise.reject(error)
+      },
+    )
   }
 
   async affectService(service_name: string, action: 'start' | 'stop' | 'restart') {
@@ -348,7 +363,7 @@ class API {
         })
         const responseBody = await response.json().catch(() => null)
         if (!response.ok) {
-          throw new Error(responseBody?.message ?? `HTTP error: ${response.status}`)
+          throw new Error(tm(responseBody?.message ?? `HTTP error: ${response.status}`))
         }
         return responseBody as NomadChatResponse
       }
@@ -376,7 +391,7 @@ class API {
 
     if (!response.ok || !response.body) {
       const errorBody = await response.json().catch(() => null)
-      throw new Error(errorBody?.message ?? `HTTP error: ${response.status}`)
+      throw new Error(tm(errorBody?.message ?? `HTTP error: ${response.status}`))
     }
 
     const reader = response.body.getReader()
@@ -400,7 +415,7 @@ class API {
           } catch { continue /* skip malformed chunks */ }
 
           const streamError = chatStreamErrorMessage(data)
-          if (streamError) throw new Error(streamError)
+          if (streamError) throw new Error(tm(streamError))
 
           // Citation metadata (#1179) arrives as a distinct trailing event with no
           // `message` key -- route it separately rather than through onChunk.
@@ -456,7 +471,7 @@ class API {
         model: string | null
         timestamp: string
         lastMessage: string | null
-      }>>('/chat/sessions')
+      }>>('/chat/sessions', { skipLocalize: true } as any)
       return response.data
     })()
   }
@@ -474,7 +489,7 @@ class API {
           content: string
           timestamp: string
         }>
-      }>(`/chat/sessions/${sessionId}`)
+      }>(`/chat/sessions/${sessionId}`, { skipLocalize: true } as any)
       return response.data
     })()
   }
@@ -486,7 +501,7 @@ class API {
         title: string
         model: string | null
         timestamp: string
-      }>('/chat/sessions', { title, model })
+      }>('/chat/sessions', { title, model }, { skipLocalize: true } as any)
       return response.data
     })()
   }
@@ -498,7 +513,7 @@ class API {
         title: string
         model: string | null
         timestamp: string
-      }>(`/chat/sessions/${sessionId}`, data)
+      }>(`/chat/sessions/${sessionId}`, data, { skipLocalize: true } as any)
       return response.data
     })()
   }
@@ -525,7 +540,7 @@ class API {
         role: 'system' | 'user' | 'assistant'
         content: string
         timestamp: string
-      }>(`/chat/sessions/${sessionId}/messages`, { role, content })
+      }>(`/chat/sessions/${sessionId}/messages`, { role, content }, { skipLocalize: true } as any)
       return response.data
     })()
   }
@@ -814,21 +829,21 @@ class API {
 
   async listMapMarkers() {
     return catchInternal(async () => {
-      const response = await this.client.get<MapMarkerResponse[]>('/maps/markers')
+      const response = await this.client.get<MapMarkerResponse[]>('/maps/markers', { skipLocalize: true } as any)
       return response.data
     })()
   }
 
   async createMapMarker(data: CreateMapMarkerPayload) {
     return catchInternal(async () => {
-      const response = await this.client.post<MapMarkerResponse>('/maps/markers', data)
+      const response = await this.client.post<MapMarkerResponse>('/maps/markers', data, { skipLocalize: true } as any)
       return response.data
     })()
   }
 
   async updateMapMarker(id: number, data: UpdateMapMarkerPayload) {
     return catchInternal(async () => {
-      const response = await this.client.patch<MapMarkerResponse>(`/maps/markers/${id}`, data)
+      const response = await this.client.patch<MapMarkerResponse>(`/maps/markers/${id}`, data, { skipLocalize: true } as any)
       return response.data
     })()
   }
@@ -858,7 +873,9 @@ class API {
           query,
           language,
         },
-      })
+        // title/summary/author go back to the server as stored metadata (downloadRemoteZimFile)
+        skipLocalize: true,
+      } as any)
     })()
   }
 
@@ -873,7 +890,8 @@ class API {
   async listCustomLibraries() {
     return catchInternal(async () => {
       const response = await this.client.get<{ id: number; name: string; base_url: string; is_default: boolean }[]>(
-        '/zim/custom-libraries'
+        '/zim/custom-libraries',
+        { skipLocalize: true } as any
       )
       return response.data
     })()
@@ -989,12 +1007,12 @@ class API {
     } catch (error: any) {
       // For 409 Conflict errors, throw a specific error that the UI can handle
       if (error.response?.status === 409) {
-        const err = new Error(error.response?.data?.error || 'This benchmark has already been submitted to the repository')
+        const err = new Error(error.response?.data?.error || t('This benchmark has already been submitted to the repository'))
           ; (err as any).status = 409
         throw err
       }
       // For other errors, extract the message and throw
-      const errorMessage = error.response?.data?.error || error.message || 'Failed to submit benchmark'
+      const errorMessage = error.response?.data?.error || error.message || t('Failed to submit benchmark')
       throw new Error(errorMessage)
     }
   }
@@ -1388,7 +1406,7 @@ class API {
           memory_mb?: number
           cpus?: number
         }
-      }>(`/system/services/custom/${service_name}`)
+      }>(`/system/services/custom/${service_name}`, { skipLocalize: true } as any)
       return response.data
     })()
   }

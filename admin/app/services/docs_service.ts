@@ -1,45 +1,25 @@
+// German distribution: DOC_ORDER/TITLE_OVERRIDES/prettify moved to app/utils/docs_locator.ts (apply upstream changes there).
 import Markdoc from '@markdoc/markdoc'
 import { streamToString } from '../../util/docs.js'
-import { getFile, getFileStatsIfExists, listDirectoryContentsRecursive } from '../utils/fs.js'
-import path from 'path'
+import { getFile } from '../utils/fs.js'
+import { DocsLocator } from '../utils/docs_locator.js'
+import type { Lang } from '../../i18n/core.js'
 import InternalServerErrorException from '#exceptions/internal_server_error_exception'
 import logger from '@adonisjs/core/services/logger'
 
 export class DocsService {
-  private docsPath = path.join(process.cwd(), 'docs')
+  private locator: DocsLocator
 
-  private static readonly DOC_ORDER: Record<string, number> = {
-    'home': 1,
-    'getting-started': 2,
-    'use-cases': 3,
-    'supply-depot-apps': 4,
-    'drug-reference': 5,
-    'community-add-ons': 6,
-    'updates': 7,
-    'faq': 8,
-    'about': 9,
-    'release-notes': 10,
+  constructor(baseDir: string = process.cwd()) {
+    this.locator = new DocsLocator(baseDir)
   }
 
-  async getDocs() {
-    const contents = await listDirectoryContentsRecursive(this.docsPath)
-    const files: Array<{ title: string; slug: string }> = []
+  async getDocs(lang: Lang = 'en') {
+    return this.locator.listDocs(lang)
+  }
 
-    for (const item of contents) {
-      if (item.type === 'file' && item.name.endsWith('.md')) {
-        const cleaned = this.prettify(item.name)
-        files.push({
-          title: cleaned,
-          slug: item.name.replace(/\.md$/, ''),
-        })
-      }
-    }
-
-    return files.sort((a, b) => {
-      const orderA = DocsService.DOC_ORDER[a.slug] ?? 999
-      const orderB = DocsService.DOC_ORDER[b.slug] ?? 999
-      return orderA - orderB
-    })
+  resolveDocPath(slug: string, lang: Lang): Promise<string> {
+    return this.locator.resolveDocPath(slug, lang)
   }
 
   parse(content: string) {
@@ -62,52 +42,18 @@ export class DocsService {
     }
   }
 
-  async parseFile(_filename: string) {
+  async parseFile(_filename: string, lang: Lang = 'en') {
     try {
-      if (!_filename) {
-        throw new Error('Filename is required')
-      }
-
-      const filename = _filename.endsWith('.md') ? _filename : `${_filename}.md`
-
-      // Prevent path traversal — resolved path must stay within the docs directory
-      const basePath = path.resolve(this.docsPath)
-      const fullPath = path.resolve(path.join(this.docsPath, filename))
-      if (!fullPath.startsWith(basePath + path.sep)) {
-        throw new Error('Invalid document slug')
-      }
-
-      const fileExists = await getFileStatsIfExists(fullPath)
-      if (!fileExists) {
-        throw new Error(`File not found: ${filename}`)
-      }
-
+      const fullPath = await this.resolveDocPath(_filename, lang)
       const fileStream = await getFile(fullPath, 'stream')
       if (!fileStream) {
-        throw new Error(`Failed to read file stream: ${filename}`)
+        throw new Error(`Failed to read file stream: ${_filename}`)
       }
       const content = await streamToString(fileStream)
       return this.parse(content)
     } catch (error) {
       throw new InternalServerErrorException(`Error parsing file: ${(error as Error).message}`)
     }
-  }
-
-  private static readonly TITLE_OVERRIDES: Record<string, string> = {
-    'faq': 'FAQ',
-    'community-add-ons': 'Community Add-Ons',
-  }
-
-  private prettify(filename: string) {
-    const slug = filename.replace(/\.md$/, '')
-    if (DocsService.TITLE_OVERRIDES[slug]) {
-      return DocsService.TITLE_OVERRIDES[slug]
-    }
-    // Remove hyphens, underscores, and file extension
-    const cleaned = slug.replace(/_/g, ' ').replace(/-/g, ' ')
-    // Convert to Title Case
-    const titleCased = cleaned.replace(/\b\w/g, (char) => char.toUpperCase())
-    return titleCased.charAt(0).toUpperCase() + titleCased.slice(1)
   }
 
   private getConfig() {

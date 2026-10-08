@@ -34,6 +34,7 @@ import CollectionsManager from './CollectionsManager'
 import { KB_COLLECTIONS } from '../../../constants/kb_collections'
 import CollectionCombobox from './CollectionCombobox'
 import Switch from '~/components/inputs/Switch'
+import { tm, t } from '~/i18n/runtime'
 
 interface KnowledgeBaseModalProps {
   aiAssistantName?: string
@@ -189,7 +190,7 @@ function pickRowAction(record: KbFileGroup, hasWarnings: boolean): RowAction | n
 }
 
 export default function KnowledgeBaseModal({
-  aiAssistantName = 'AI Assistant',
+  aiAssistantName = t('AI Assistant'),
   onClose,
 }: KnowledgeBaseModalProps) {
   const { addNotification } = useNotifications()
@@ -487,7 +488,8 @@ export default function KnowledgeBaseModal({
     if (successCount > 0) {
       addNotification({
         type: 'success',
-        message: `${successCount} file${successCount > 1 ? 's' : ''} queued for processing.`,
+        message:
+          successCount === 1 ? '1 file queued for processing.' : `${successCount} files queued for processing.`,
       })
     }
     for (const name of failedNames) {
@@ -522,7 +524,7 @@ export default function KnowledgeBaseModal({
         confirmVariant="danger"
       >
         <p className="text-text-primary">
-          This stops <strong>every</strong> embedding job — including ones still in progress or
+          This stops <strong>{t('every')}</strong> embedding job — including ones still in progress or
           stuck — and clears the processing queue. The uploaded source files for those jobs are
           deleted, so you'll need to re-upload anything you still want indexed. Stored files that
           already finished embedding are not affected. Are you sure you want to proceed?
@@ -851,7 +853,7 @@ export default function KnowledgeBaseModal({
                               aria-hidden="true"
                             />
                           )}
-                          {record.displayName}
+                          {tm(record.displayName)}
                         </button>
                       )
                     }
@@ -1136,7 +1138,7 @@ export default function KnowledgeBaseModal({
               This will re-process every document currently in your knowledge base — about
               <strong>
                 {' '}
-                {storedFiles.length} file{storedFiles.length === 1 ? '' : 's'}
+                {storedFiles.length === 1 ? t('{0} file', storedFiles.length) : t('{0} files', storedFiles.length)}
               </strong>
               . For each file, NOMAD will delete the existing embeddings from Qdrant and queue a
               fresh embedding job using the current chunking and embedding model.
@@ -1145,7 +1147,7 @@ export default function KnowledgeBaseModal({
               <p className="font-semibold mb-1">What this is for</p>
               <p className="text-text-secondary">
                 Use this when the embedding model or chunking logic has changed, or when you suspect
-                stored vectors are stale. Files on disk are <em>not</em> deleted, and any orphan
+                stored vectors are stale. Files on disk are <em>{t('not')}</em> deleted, and any orphan
                 points whose source file is no longer present will be preserved untouched (see
                 <em> Reset &amp; Rebuild </em>if you want a fully clean slate).
               </p>
@@ -1154,8 +1156,14 @@ export default function KnowledgeBaseModal({
               <p className="font-semibold mb-1">Heads up</p>
               <ul className="list-disc pl-5 space-y-1">
                 <li>
-                  Embedding {storedFiles.length} file{storedFiles.length === 1 ? '' : 's'} may take
-                  a long time, especially for large PDFs or ZIM archives.
+                  {storedFiles.length === 1 ? (
+                    <>Embedding 1 file may take a long time, especially for large PDFs or ZIM archives.</>
+                  ) : (
+                    <>
+                      Embedding {storedFiles.length} files may take a long time, especially for large PDFs
+                      or ZIM archives.
+                    </>
+                  )}
                 </li>
                 <li>
                   On systems without GPU acceleration, expect sustained high CPU usage for the
@@ -1197,7 +1205,7 @@ export default function KnowledgeBaseModal({
               <code> nomad_knowledge_base </code>Qdrant collection and rebuild from the
               <strong>
                 {' '}
-                {storedFiles.length} file{storedFiles.length === 1 ? '' : 's'}
+                {storedFiles.length === 1 ? t('{0} file', storedFiles.length) : t('{0} files', storedFiles.length)}
               </strong>{' '}
               currently on disk. The collection is dropped, recreated, and every file is re-queued
               for embedding.

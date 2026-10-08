@@ -2,6 +2,7 @@ import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/re
 import StyledButton, { StyledButtonProps } from './StyledButton'
 import React from 'react'
 import classNames from '~/lib/classNames'
+import { t } from '~/i18n/runtime'
 
 export type StyledModalProps = {
   onClose?: () => void
@@ -27,10 +28,10 @@ const StyledModal: React.FC<StyledModalProps> = ({
   title,
   open,
   onClose,
-  cancelText = 'Cancel',
+  cancelText = t('Cancel'),
   cancelIcon,
   cancelLoading = false,
-  confirmText = 'Confirm',
+  confirmText = t('Confirm'),
   confirmIcon,
   confirmVariant = 'action',
   confirmLoading = false,

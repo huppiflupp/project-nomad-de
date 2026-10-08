@@ -1,6 +1,7 @@
 import { QdrantClient } from '@qdrant/js-client-rest'
 import { DockerService } from './docker_service.js'
 import { inject } from '@adonisjs/core'
+import { DocsLocator } from '../utils/docs_locator.js'
 import logger from '@adonisjs/core/services/logger'
 import { TokenChunker } from '@chonkiejs/core'
 import sharp from 'sharp'
@@ -1615,10 +1616,16 @@ export class RagService {
       }
 
       const label = collection ?? 'Uncategorized'
-      const verb = active ? 'Turned on' : 'Turned off'
+      // Whole sentences per case (no plural suffix as a placeholder) so the German dictionary can match them.
       return {
         success: true,
-        message: `${verb} ${affectedCount} file${affectedCount === 1 ? '' : 's'} in "${label}".`,
+        message: active
+          ? affectedCount === 1
+            ? `Turned on 1 file in "${label}".`
+            : `Turned on ${affectedCount} files in "${label}".`
+          : affectedCount === 1
+            ? `Turned off 1 file in "${label}".`
+            : `Turned off ${affectedCount} files in "${label}".`,
         affectedCount,
       }
     } catch (error) {
@@ -2070,7 +2077,7 @@ export class RagService {
 
   public async discoverNomadDocs(force?: boolean): Promise<{ success: boolean; message: string }> {
     try {
-      const { readmePath: README_PATH, docsDir: DOCS_DIR } = this._nomadDocsRoots()
+      const { readmePath: README_PATH } = this._nomadDocsRoots()
 
       const alreadyEmbeddedRaw = await KVStore.getValue('rag.docsEmbedded')
       if (alreadyEmbeddedRaw && !force) {
@@ -2088,11 +2095,9 @@ export class RagService {
         filesToEmbed.push({ path: README_PATH, source: 'README.md' })
       }
 
-      const dirContents = await listDirectoryContentsRecursive(DOCS_DIR)
-      for (const entry of dirContents) {
-        if (entry.type === 'file') {
-          filesToEmbed.push({ path: entry.key, source: join('docs', entry.name) })
-        }
+      // German distribution: German docs win, English fills gaps (see DocsLocator.embedList).
+      for (const entry of await new DocsLocator(process.cwd()).embedList()) {
+        filesToEmbed.push({ path: entry.path, source: join('docs', entry.name) })
       }
 
       logger.info(`[RAG] Discovered ${filesToEmbed.length} Nomad doc files to embed`)
@@ -2679,7 +2684,9 @@ export class RagService {
       return {
         success: failedPaths.length === 0,
         message:
-          `Re-embedding ${queuedCount} file${queuedCount === 1 ? '' : 's'}. Existing points were replaced.` +
+          (queuedCount === 1
+            ? 'Re-embedding 1 file. Existing points were replaced.'
+            : `Re-embedding ${queuedCount} files. Existing points were replaced.`) +
           failureSuffix,
         filesScanned: filesInStorage.length,
         filesQueued: queuedCount,
@@ -2762,7 +2769,9 @@ export class RagService {
       return {
         success: failedPaths.length === 0,
         message:
-          `Collection wiped. Queued ${queuedCount} file${queuedCount === 1 ? '' : 's'} for a full rebuild.` +
+          (queuedCount === 1
+            ? 'Collection wiped. Queued 1 file for a full rebuild.'
+            : `Collection wiped. Queued ${queuedCount} files for a full rebuild.`) +
           failureSuffix,
         filesScanned: filesInStorage.length,
         filesQueued: queuedCount,

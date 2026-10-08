@@ -11,6 +11,7 @@ import GpuPassthroughAlert from '~/components/GpuPassthroughAlert'
 import { useSystemInfo } from '~/hooks/useSystemInfo'
 import StatusCard from '~/components/systeminfo/StatusCard'
 import { IconCpu, IconDatabase, IconServer, IconDeviceDesktop, IconComponents } from '@tabler/icons-react'
+import { t } from '~/i18n/runtime'
 
 export default function SettingsPage(props: {
   system: { info: SystemInformationResponse | undefined }
@@ -80,7 +81,7 @@ export default function SettingsPage(props: {
                   label="CPU Usage"
                   size="lg"
                   variant="cpu"
-                  subtext={`${info?.cpu.cores || 0} cores`}
+                  subtext={t('{0} cores', info?.cpu.cores || 0)}
                   icon={<IconCpu className="w-8 h-8" />}
                 />
               </div>
@@ -136,7 +137,7 @@ export default function SettingsPage(props: {
                   { label: 'Physical Cores', value: info?.cpu.physicalCores },
                   {
                     label: 'Virtualization',
-                    value: info?.cpu.virtualization ? 'Enabled' : 'Disabled',
+                    value: info?.cpu.virtualization ? t('Enabled') : t('Disabled'),
                   },
                 ]}
               />

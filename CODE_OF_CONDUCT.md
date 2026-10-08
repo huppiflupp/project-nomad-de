@@ -1,3 +1,11 @@
+# Verhaltenskodex (deutsche Fassung)
+
+Diese deutsche Fassung übernimmt den Verhaltenskodex des Originals (Contributor Covenant, Englisch, unverändert unten). Wir erwarten einen respektvollen, belästigungsfreien Umgang miteinander. Verstöße melden Sie bitte den Betreuern dieses Repositorys.
+
+*Original (Englisch, unverändert):*
+
+---
+
 # Contributor Covenant Code of Conduct
 
 ## Our Pledge

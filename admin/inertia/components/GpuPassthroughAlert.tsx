@@ -6,6 +6,7 @@ import { useNotifications } from '~/context/NotificationContext'
 import { useModals } from '~/context/ModalContext'
 import api from '~/lib/api'
 import type { GpuHealthStatus } from '../../types/system'
+import { t } from '~/i18n/runtime'
 
 const DISMISS_KEY = 'nomad:gpu-banner-dismissed'
 const HSA_OVERRIDE_PATTERN = /^\d{1,2}\.\d{1,2}\.\d{1,2}$/
@@ -54,7 +55,7 @@ export default function GpuPassthroughAlert({
     try {
       const response = await api.forceReinstallService('nomad_ollama')
       if (!response || !response.success) {
-        throw new Error(response?.message || 'Force reinstall failed')
+        throw new Error(response?.message || t('Force reinstall failed'))
       }
       addNotification({
         message: `${assistantName} is being reinstalled with GPU support. This page will reload shortly.`,
@@ -111,10 +112,18 @@ export default function GpuPassthroughAlert({
     )
   }
 
-  const vendorName = isAmd ? 'an AMD' : 'an NVIDIA'
+  const vendorName = isAmd ? t('an AMD') : t('an NVIDIA')
   const message = needsHsaOverride
-    ? `Your system has an AMD GPU, but ${assistantName} is running on CPU only. Reinstalling won't fix this: the GPU${gpuHealth.amdGfxTarget ? ` (${gpuHealth.amdGfxTarget})` : ''} isn't on ROCm's supported list and needs a GFX version override.`
-    : `Your system has ${vendorName} GPU, but ${assistantName} can't access it. AI is running on CPU only, which is significantly slower.`
+    ? t(
+        "Your system has an AMD GPU, but {0} is running on CPU only. Reinstalling won't fix this: the GPU{1} isn't on ROCm's supported list and needs a GFX version override.",
+        assistantName,
+        gpuHealth.amdGfxTarget ? ` (${gpuHealth.amdGfxTarget})` : ''
+      )
+    : t(
+        "Your system has {0} GPU, but {1} can't access it. AI is running on CPU only, which is significantly slower.",
+        vendorName,
+        assistantName
+      )
 
   return (
     <Alert

@@ -1,0 +1,9 @@
+Project NOMAD – Deutsche Fassung (inoffiziell)
+Copyright des Originals: Crosstalk Solutions, LLC – https://github.com/Crosstalk-Solutions/project-nomad
+Lizenz: Apache License 2.0 (siehe LICENSE)
+
+Änderungen in diesem Fork (huppiflupp/project-nomad-de):
+- Deutsche Oberfläche (admin/i18n/, Babel-Plugin zur Bauzeit), Sprachumschalter
+- Deutsche Anleitungen (admin/docs-de/), README, FAQ, Install-Skripte
+- Installation, Updates, Kataloge und Images aus diesem Fork
+Dieser Fork steht in keiner Verbindung zu Crosstalk Solutions.
