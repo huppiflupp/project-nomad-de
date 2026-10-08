@@ -29,3 +29,15 @@ SSH ist aus. Hostname `nomad`.
 ## Nicht in der VM testbar
 
 Boot an echter Hardware (Boot-Menü, Secure Boot-Schlüssel, Grafik, WLAN), Geschwindigkeit der USB-SSD.
+
+## Ergebnis des Baus (2026-10-09)
+
+`nomad.img.xz`: 4,9 GB (entpackt 14,1 GiB), SHA-256 `20c0094ee54dd556d6f3284fd7696cbbe2027996254f4d375e2ac9f1a1e260f8`.
+Liegt auf x9 unter `/data/vms/image-build/`; noch nicht veröffentlicht.
+
+## Offen
+
+- Erststart ohne Netzwerkkabel am echten PC prüfen (NetworkManager, WLAN-Auswahl).
+- Ob ein Update über die Oberfläche funktioniert, obwohl im Image `pull_policy: missing` statt `always` gilt (der Updater zieht Images selbst).
+- Kein erzwungener Passwortwechsel beim ersten Start; für Laien ggf. einen Dialog einbauen.
+- Schlüssel (SSH-Host-Schlüssel) entstehen je Stick beim ersten Start; die NOMAD-Zugangsdaten (APP_KEY, Datenbankpasswort) erzeugt der Installer ebenfalls erst dann.
