@@ -1,0 +1,88 @@
+\chapter{Energie: Wie lange läuft das System?}
+
+Im Notfall sind Strom und Zeit knapp. Dieses Kapitel zeigt, wie Sie mit wenigen Zahlen ausrechnen, wie lange ein Akku, eine Powerstation oder eine Solarfläche das System versorgt. Rechnen Sie mit Ihren eigenen Messwerten; die Beispielwerte in diesem Kapitel sind \textbf{Annahmen} und mit einem Stern (*) gekennzeichnet.
+
+\section{Die drei Formeln}
+\kasten{nomadbraun}{Formeln}{%
+\textbf{Energie} in Wattstunden (Wh) $=$ Leistung in Watt (W) $\times$ Zeit in Stunden (h)\par\vspace{4pt}
+\textbf{Laufzeit} in Stunden $=$ Akkuinhalt in Wh $\times$ 0,85 $\div$ Leistung in W\par
+\textbf{Der Faktor 0,85} (Wirkungsgrad des Wandlers) gilt, wenn Sie über einen Wechselrichter oder ein Netzteil gehen.\par\vspace{4pt}
+\textbf{Kosten in €} $=$ Energie in kWh $\times$ Strompreis in €/kWh\par
+1 kWh $=$ 1000 Wh.}
+
+\section{Wie viel Strom braucht Ihr System?}
+Die Leistung hängt vom Rechner ab. Richtwerte* (Mittel im Leerlauf mit Bildschirm aus):
+
+\begin{center}\small
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{@{}lrr@{}}
+\toprule
+\textbf{Gerät} & \textbf{Leerlauf*} & \textbf{unter Last*} \\
+\midrule
+Mini-PC / Einplatinenrechner & \SIrange{5}{15}{W} & \SIrange{15}{30}{W} \\
+Notebook (Bildschirm an) & \SIrange{10}{20}{W} & \SIrange{30}{60}{W} \\
+Desktop-PC (ohne Grafikkarte) & \SIrange{30}{60}{W} & \SIrange{80}{150}{W} \\
+Desktop-PC mit Grafikkarte (KI) & \SIrange{50}{80}{W} & \SIrange{200}{400}{W} \\
+USB-SSD (zusätzlich) & \SI{1}{W} & \SI{3}{W} \\
+WLAN-Router (zusätzlich) & \SIrange{6}{12}{W} & \SIrange{6}{12}{W} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\hinweis{Messen Sie selbst: Ein Strommessgerät für die Steckdose kostet etwa 10~€ und zeigt die Leistung direkt in Watt. Tragen Sie die Werte in die Tabelle am Ende dieses Kapitels ein.}
+
+\section{Beispielrechnungen (mit Annahmen*)}
+\textbf{Annahme*:} Notebook mit NOMAD, Bildschirm meist aus, im Mittel \SI{20}{W}.
+
+\begin{description}[leftmargin=1.2em,style=nextline]
+\item[Wie viel Energie am Tag?] \SI{20}{W} $\times$ 24~h $=$ \SI{480}{Wh} $=$ \SI{0,48}{kWh}.
+\item[Kosten bei Dauerbetrieb?] \SI{0,48}{kWh} $\times$ 0,35~€/kWh* $=$ 0,17~€ am Tag, rund 61~€ im Jahr.
+\item[Laufzeit an einer Powerbank?] Eine Powerbank mit \SI{99}{Wh} (größte erlaubte Akkus im Flugzeug): $99 \times 0{,}85 \div 20 \approx$ \SI{4,2}{h}.
+\item[Laufzeit an einer Powerstation?] Eine Powerstation mit \SI{500}{Wh}: $500 \times 0{,}85 \div 20 \approx$ \SI{21}{h}.
+\item[Wie viel Solarfläche?] Ein Panel mit \SI{100}{W} liefert im Sommer rund \SI{350}{Wh} am Tag (5 volle Sonnenstunden*, 30\,\% Verluste: $100 \times 5 \times 0{,}7$), im Winter in Deutschland oft nur \SI{50}{Wh} bis \SI{100}{Wh} am Tag.
+\end{description}
+
+\begin{center}\small
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+\textbf{Pro Tag} & \textbf{20~W*, 24~h} & \textbf{20~W*, 4~h} & \textbf{60~W*, 4~h} \\
+\midrule
+Energiebedarf & \SI{480}{Wh} & \SI{80}{Wh} & \SI{240}{Wh} \\
+Powerbank \SI{99}{Wh} reicht & 0,2 Tage & 1,1 Tage & 0,35 Tage \\
+Powerstation \SI{500}{Wh} reicht & 0,9 Tage & 5,3 Tage & 1,8 Tage \\
+Panel \SI{100}{W} deckt im Sommer* (\SI{350}{Wh}) & 73\,\% & 100\,\% & 100\,\% \\
+Panel \SI{100}{W} deckt im Winter* (\SI{75}{Wh}) & 16\,\% & 94\,\% & 31\,\% \\
+\bottomrule
+\end{tabular}
+\end{center}
+\small „Reicht“ heißt: Akkuinhalt $\times$ 0,85 $\div$ Energiebedarf pro Tag. Die Laufzeit-Beispiele der Zeilen darüber gelten bei Dauerbetrieb.\normalsize
+
+\section{Tipps zum Strom sparen}
+\begin{itemize}[leftmargin=1.5em,itemsep=3pt]
+\item \textbf{Bildschirm aus oder dunkel.} Bei Notebooks sind das oft 3 bis 6~W.
+\item \textbf{Nur nutzen, wenn nötig.} Der Rechner lässt sich in Sekunden ausschalten; NOMAD startet beim Einschalten selbst.
+\item \textbf{Keine KI nebenher.} Die KI (Kapitel~10) verbraucht je nach Rechner das Drei- bis Zehnfache.
+\item \textbf{Router aus,} wenn Sie ihn nicht brauchen: Offline funktioniert alles auch am Rechner selbst.
+\end{itemize}
+
+\section{Ihre Messwerte}
+\renewcommand{\arraystretch}{1.9}
+\begin{center}
+\begin{tabularx}{\linewidth}{@{}>{\RaggedRight\arraybackslash}p{4cm}XXX@{}}
+\toprule
+\textbf{Gerät / Zustand} & \textbf{Leistung (W)} & \textbf{Stunden/Tag} & \textbf{Wh/Tag} \\
+\midrule
+\feld[3.6cm] & & & \\
+\midrule
+\feld[3.6cm] & & & \\
+\midrule
+\feld[3.6cm] & & & \\
+\midrule
+\feld[3.6cm] & & & \\
+\midrule
+\multicolumn{3}{@{}r}{\textbf{Summe Wh/Tag:}} & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+Akku/Powerstation: \feld[2cm]~Wh $\times$ 0,85 $\div$ Summe \feld[2cm]~W $=$ \feld[2cm]~Stunden.

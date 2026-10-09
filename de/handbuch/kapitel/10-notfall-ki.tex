@@ -1,0 +1,65 @@
+\chapter{Die Notfall-KI: Ein Sprachassistent ohne Internet}
+
+NOMAD kann einen Sprachassistenten (KI) betreiben, der \textbf{auf Ihrem Rechner} läuft: Sie stellen Fragen in ganzen Sätzen, die Antwort wird lokal berechnet. Es geht nichts ins Internet.
+
+\kasten{warnrot}{Was die KI nicht ist}{%
+Die KI kann sich irren und Dinge erfinden. Bei Medizin, Sicherheit, Recht und Chemikalien \textbf{prüfen Sie jede Antwort an den Quellen} in der Wissensbibliothek (Kapitel~5) oder in gedruckten Unterlagen. Sie ist ein Helfer zum Suchen und Erklären, kein Arzt.}
+
+\section{Was dafür nötig ist}
+\begin{itemize}[leftmargin=1.5em,itemsep=3pt]
+\item \textbf{Internet beim Einrichten:} Das Sprachmodell (je nach Größe 1 bis mehrere GB) wird einmal heruntergeladen.
+\item \textbf{Arbeitsspeicher:} Je größer das Modell, desto besser die Antworten, aber desto mehr Speicher und Zeit. Richtwerte*:
+\end{itemize}
+
+\begin{center}\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\linewidth}{@{}>{\RaggedRight\arraybackslash}p{4.2cm}>{\RaggedRight\arraybackslash}p{3.5cm}X@{}}
+\toprule
+\textbf{Rechner} & \textbf{Modellgröße*} & \textbf{Zu erwarten*} \\
+\midrule
+Wenig Speicher (4--8~GB), keine Grafikkarte & ca. 1--3 Milliarden Parameter & einfache Fragen; langsam bis ordentlich \\
+\midrule
+Mittel (16~GB) & ca. 7--9 Milliarden & brauchbare deutsche Antworten, bei Rechnern ohne Grafikkarte einige Sekunden bis Minuten pro Antwort \\
+\midrule
+Grafikkarte (NVIDIA, 8~GB+ Speicher) & ca. 8--14 Milliarden & flott, bessere Qualität \\
+\bottomrule
+\end{tabularx}
+\end{center}
+\small * Diese Richtwerte stammen aus allgemeiner Erfahrung und sind von uns für dieses Heft noch \textbf{nicht} auf Ihrem Rechner gemessen. NOMAD empfiehlt selbst, mit kleinen Modellen zu beginnen und größere auszuprobieren.\normalsize
+
+\section{Einrichten}
+\begin{enumerate}[leftmargin=1.5em,itemsep=3pt]
+\item Internet anschließen.
+\item Startseite $\rightarrow$ \menue{Schnellstart} oder \menue{Einstellungen} $\rightarrow$ \menue{Apps verwalten}: den \textbf{KI-Assistenten} installieren.
+\item In den KI-Einstellungen ein \textbf{kleines} Modell wählen und laden. Erst probieren, dann ein größeres.
+\item Internet trennen, Frage stellen (Kapitel~6, Checkliste).
+\end{enumerate}
+
+\hinweis{Hat der Rechner eine NVIDIA-Grafikkarte, nutzt NOMAD sie, wenn der Installer sie erkennt (steht am Ende der Installation). Ohne Grafikkarte läuft die KI auf dem Prozessor und ist langsamer.}
+
+\section{Eigene Dokumente für die KI}
+In der Wissensdatenbank können Sie Dateien (PDF, Text) hochladen, aus denen die KI Antworten ableitet. Sinnvoll sind Ihre eigenen Notfallpläne, Telefonlisten, das Handbuch als PDF oder Medikamentenpläne der Familie.
+
+\kasten{hinweisblau}{Noch nicht geprüft}{%
+Ob die KI auch die per Kiwix geladenen Bücher (Wikipedia, Nachschlagewerke) \emph{selbst} nutzt, haben wir noch nicht abschließend geprüft. Verlassen Sie sich nicht darauf: Suchen Sie bei wichtigen Fragen selbst in der Wissensbibliothek.}
+
+\section{Fragen stellen}
+\begin{itemize}[leftmargin=1.5em,itemsep=3pt]
+\item Kurz und konkret fragen: „Wie bereite ich Wasser mit Tabletten auf?“
+\item Bei Zahlen und Dosierungen immer gegenprüfen.
+\item Antwort unklar? Frage anders formulieren oder die Quelle in der Wissensbibliothek lesen.
+\end{itemize}
+
+\section{Ihre Notizen zur KI}
+\renewcommand{\arraystretch}{1.9}
+\begin{tabularx}{\linewidth}{@{}>{\RaggedRight\arraybackslash}p{4.8cm}X@{}}
+\toprule
+Gewähltes Modell & \\
+\midrule
+Größe auf der Platte & \\
+\midrule
+Dauer einer typischen Antwort & \\
+\midrule
+Hochgeladene Dokumente & \\
+\bottomrule
+\end{tabularx}

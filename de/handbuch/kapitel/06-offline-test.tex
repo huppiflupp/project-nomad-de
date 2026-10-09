@@ -1,0 +1,52 @@
+\chapter{Der Offline-Test}
+
+Erst dieser Test zeigt, ob Ihr System im Notfall wirklich ohne Internet funktioniert. Machen Sie ihn \textbf{einmal gründlich, solange das Internet noch erreichbar ist}, damit Sie fehlende Inhalte nachladen können. Wiederholen Sie ihn nach jeder größeren Änderung (Kapitel~9: Tabelle „Offline-Test“).
+
+\section{Vorbereitung}
+\begin{itemize}[leftmargin=1.5em,itemsep=3pt,label={\abhaken}]
+\item Alle Downloads sind fertig (Kapitel~5, Seite „Downloads“).
+\item Sie haben die Notfall-Karte (Kapitel~7) zur Hand.
+\end{itemize}
+
+\section{Internet trennen}
+\begin{enumerate}[leftmargin=1.5em,itemsep=3pt]
+\item \textbf{Netzwerkkabel ziehen.} Bei WLAN: oben rechts im Desktop auf das Netzwerksymbol klicken und WLAN ausschalten.
+\item \textbf{Beweis:} Öffnen Sie das Terminal (\taste{Strg}+\taste{Alt}+\taste{T}) und tippen Sie:
+\befehl{ping -c 2 8.8.8.8}
+Es muss „100\,\% packet loss“ erscheinen (Abbildung~\ref{fig:offline}). Sonst sind Sie noch im Internet.
+\end{enumerate}
+\bild[0.8]{44-offline-test-terminal}{Offline-Beweis im Terminal (hier zusätzlich mit der Liste der geladenen Inhaltsdateien).}\label{fig:offline}
+
+\section{Neu starten ohne Internet}
+Starten Sie den Rechner \textbf{neu, ohne Netzwerk}. Das ist der eigentliche Test: Im Notfall startet er genau so. Warten Sie etwa zwei Minuten nach dem Desktop.
+
+\section{Die Checkliste}
+\renewcommand{\arraystretch}{1.5}
+\begin{center}
+\begin{tabularx}{\linewidth}{@{}c>{\RaggedRight\arraybackslash}X>{\RaggedRight\arraybackslash}p{3.2cm}@{}}
+\toprule
+ & \textbf{Prüfung} & \textbf{Ergebnis} \\
+\midrule
+\abhaken & Der Rechner startet ohne Netzwerkkabel bis zum Desktop. & \\
+\abhaken & Im Browser \texttt{http://localhost:8080} zeigt die Kommandozentrale. & \\
+\abhaken & Unter \menue{Docs} lassen sich die deutschen Anleitungen lesen. & \\
+\abhaken & Die \menue{Wissensbibliothek} (Kiwix, \texttt{http://localhost:8090}) zeigt alle geladenen Bücher. & \\
+\abhaken & Eine Suche nach einem Begriff liefert einen Artikel (zum Beispiel „Wasser“ oder „water“). & \\
+\abhaken & Wikipedia öffnet einen Artikel samt Seitenlinks. & \\
+\abhaken & (falls geladen) Karten zeigen den gewählten Ausschnitt. & \\
+\abhaken & (falls eingerichtet) Die KI antwortet auf eine Frage. & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\bild[0.85]{45-kiwix-offline}{Die Wissensbibliothek (Kiwix) ohne Internet: Alle geladenen Bücher sind da.}
+\bild[0.85]{47-wikipedia-offline}{Ein Wikipedia-Artikel ohne Internetverbindung.}
+
+\hinweis{Zeigt NOMAD Bilder oder Texte in \emph{anderer} Sprache als Deutsch, ist das richtig: Die geladenen Bücher sind überwiegend englisch (Anhang).}
+
+\section{Wenn etwas nicht geht}
+\begin{itemize}[leftmargin=1.5em,itemsep=3pt]
+\item \textbf{Seite nicht erreichbar:} noch eine Minute warten, dann Notfall-Karte (Kapitel~7), Punkt „NOMAD starten“.
+\item \textbf{Ein Buch fehlt:} Internet wieder anschließen, Download im Content-Manager wiederholen, Test erneut machen.
+\item \textbf{Zeigt nur eine weiße Seite:} Browser mit \taste{Strg}+\taste{F5} neu laden.
+\end{itemize}

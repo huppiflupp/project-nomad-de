@@ -1,0 +1,84 @@
+% NOMAD-Handbuch – Notfall-Wissensserver für Zuhause
+% Bauen: make -C de/handbuch   (benötigt xelatex, polyglossia, tikz, siunitx, ImageMagick)
+\documentclass[fontsize=13pt,a4paper,oneside]{scrbook}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainlanguage[spelling=new]{german}
+\setmainfont{Liberation Sans}
+\setmonofont{Liberation Mono}[Scale=0.95]
+\usepackage[top=2.2cm,bottom=2.4cm,left=2.4cm,right=2.2cm]{geometry}
+\usepackage{xcolor,tikz,graphicx,booktabs,longtable,array,tabularx,colortbl,enumitem,fancyhdr,amssymb,caption,float,ragged2e,siunitx}
+\usepackage[hidelinks]{hyperref}
+
+% Ohne Silbentrennung (Muster fehlen im System): linksbündig ist für Leser ab 60 ohnehin ruhiger.
+\RaggedRight
+\setlength{\parindent}{0pt}\setlength{\parskip}{0.7em}
+\linespread{1.18}
+\sisetup{mode=text,locale=DE,group-separator={.},output-decimal-marker={,}}
+
+\definecolor{nomadbraun}{HTML}{3B4021}
+\definecolor{nomadhell}{HTML}{F4EDD8}
+\definecolor{warnrot}{HTML}{9B1C1C}
+\definecolor{hinweisblau}{HTML}{1F4E79}
+\definecolor{gruen}{HTML}{2F6B2F}
+
+\addtokomafont{chapter}{\color{nomadbraun}\sffamily\bfseries}
+\addtokomafont{section}{\color{nomadbraun}\sffamily\bfseries}
+\addtokomafont{subsection}{\color{nomadbraun}\sffamily\bfseries}
+\renewcommand*{\chapterformat}{\thechapter\enskip}
+
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\small NOMAD}
+\fancyhead[R]{\small\nouppercase{\leftmark}}
+\fancyfoot[C]{\small Seite \thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\fancypagestyle{plain}{\fancyhf{}\fancyfoot[C]{\small Seite \thepage}\renewcommand{\headrulewidth}{0pt}}
+
+% ---------- Kästen ----------
+% \kasten{Farbe}{Titel}{Inhalt}: einfacher Rahmen aus TikZ, bricht nicht über Seiten.
+\newcommand{\kasten}[3]{\par\noindent\begin{tikzpicture}
+\node[draw=#1,fill=#1!7,line width=1.4pt,rounded corners=3pt,inner sep=9pt,text width=\dimexpr\linewidth-18pt-2.8pt\relax,align=flush left]{%
+{\sffamily\bfseries\color{#1}#2}\par\vspace{2pt}\RaggedRight #3};
+\end{tikzpicture}\par}
+\newcommand{\hinweis}[1]{\kasten{hinweisblau}{Hinweis}{#1}}
+\newcommand{\achtung}[1]{\kasten{warnrot}{Achtung}{#1}}
+\newcommand{\merke}[1]{\kasten{gruen}{Merken}{#1}}
+% Befehl zum Abtippen
+\newcommand{\befehl}[1]{\par\noindent\begin{tikzpicture}
+\node[draw=black!70,fill=black!5,line width=0.8pt,inner sep=7pt,text width=\dimexpr\linewidth-14pt-1.6pt\relax,align=flush left]{\ttfamily #1};
+\end{tikzpicture}\par}
+\newcommand{\taste}[1]{\fbox{\strut\,\textsf{#1}\,}}
+\newcommand{\menue}[1]{\textbf{\textsf{#1}}}
+\newcommand{\abhaken}{$\square$\enspace}
+\newcommand{\zeile}[1][6cm]{\rule[-2pt]{#1}{0.4pt}}
+\newcommand{\feld}[1][4cm]{\raisebox{-3pt}{\rule{0pt}{14pt}}\rule[-3pt]{#1}{0.4pt}}
+
+% Abbildungen: verkleinerte JPG-Kopien aus bilder/web (siehe Makefile)
+\newcommand{\bild}[3][0.92]{\begin{figure}[H]\centering
+\includegraphics[width=#1\linewidth]{bilder/web/#2}
+\caption{#3}\end{figure}}
+\captionsetup{font={small,sf},labelfont=bf,labelsep=colon}
+
+\title{\sffamily\bfseries NOMAD-Handbuch}
+\subtitle{Ein Wissensserver, der ohne Internet funktioniert}
+\author{Deutsche Fassung von Project NOMAD}
+\date{Stand: Oktober 2026 \,\textperiodcentered\, Software-Version 1.35.2}
+
+\begin{document}
+\frontmatter
+\input{kapitel/00-titel}
+\tableofcontents
+\mainmatter
+\input{kapitel/01-was-ist-nomad}
+\input{kapitel/02-vorbereitung-windows}
+\input{kapitel/03-ubuntu-installieren}
+\input{kapitel/04-nomad-installieren}
+\input{kapitel/05-daten-laden}
+\input{kapitel/06-offline-test}
+\input{kapitel/07-notfallkarte}
+\input{kapitel/08-energie}
+\input{kapitel/09-tabellen}
+\input{kapitel/10-notfall-ki}
+\appendix
+\input{kapitel/anhang-grenzen}
+\end{document}

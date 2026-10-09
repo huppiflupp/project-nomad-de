@@ -1,0 +1,37 @@
+\chapter{Weg 1: NOMAD installieren}
+
+\hinweis{Haben Sie die fertige USB-SSD aus Kapitel~2 benutzt, ist NOMAD schon eingerichtet. Springen Sie zu Kapitel~5.}
+
+Auf dem frisch installierten Ubuntu richten Sie NOMAD mit einem einzigen Befehl ein. Der Rechner braucht dafür Internet; die Installation lädt etwa 4~GB.
+
+\section{Terminal öffnen}
+Drücken Sie gleichzeitig \taste{Strg} + \taste{Alt} + \taste{T}. Es öffnet sich ein schwarzes Fenster, das Terminal.
+\bild[0.75]{25-terminal}{Das Terminal. Hier tippen Sie die Befehle ein.}
+
+\section{Befehle eingeben}
+Tippen Sie die folgenden Zeilen \textbf{genau so} ein (oder schreiben Sie sie in der Reihenfolge ab) und bestätigen Sie jede mit \taste{Enter}. Das Passwort, nach dem das System fragt, ist das Passwort Ihres Benutzerkontos; beim Tippen erscheint nichts, das ist normal.
+
+\befehl{sudo apt-get update \&\& sudo apt-get install -y curl}
+Der zweite Befehl ist lang und darf im Heft in zwei Zeilen stehen; tippen Sie ihn \textbf{ohne Zeilenwechsel} ab.
+\befehl{curl -fsSL https://raw.githubusercontent.com/\allowbreak huppiflupp/\allowbreak project-nomad-de/\allowbreak refs/\allowbreak heads/\allowbreak main/\allowbreak install/\allowbreak install\_nomad.sh -o install\_nomad.sh}
+\befehl{sudo bash install\_nomad.sh}
+
+\bild[0.75]{29-installer-start}{Der Installer meldet sich auf Deutsch und fragt, ob er fortfahren soll.}
+
+\begin{itemize}[leftmargin=1.5em,itemsep=3pt]
+\item Auf die Frage „Möchten Sie wirklich fortfahren? (j/N)“ antworten Sie mit \taste{j} und \taste{Enter}.
+\item Auf die Frage nach der Lizenzvereinbarung antworten Sie ebenfalls mit \taste{j} und \taste{Enter}.
+\item Dann läuft die Installation selbst (etwa 5 bis 15 Minuten, je nach Internet). Meldungen bleiben auf dem Bildschirm stehen. Schließen Sie das Fenster nicht.
+\end{itemize}
+
+\bild[0.75]{32-fertig}{Am Ende steht: „Die Installation von Project NOMAD wurde erfolgreich abgeschlossen!“ und die Adresse der Oberfläche. Ein Hinweis zur fehlenden NVIDIA-Grafikkarte ist unbedenklich. Danach können Sie das Terminal schließen.}
+
+\section{NOMAD im Browser öffnen}
+Öffnen Sie den Browser (Firefox) und tippen Sie in die Adresszeile:
+\befehl{http://localhost:8080}
+\bild[0.75]{34-nomad-start}{Die Startseite „Kommandozentrale“. Wenn Sie sie sehen, ist NOMAD eingerichtet.}
+
+\hinweis{Das Wort \texttt{localhost} heißt „dieser Rechner“. Von einem anderen Gerät im selben WLAN erreichen Sie NOMAD über die Adresse des Rechners, zum Beispiel \texttt{http://192.168.1.20:8080}. Die Adresse finden Sie, indem Sie im Terminal \texttt{hostname -I} eingeben. Tragen Sie sie in Kapitel~9 ein.}
+
+\section{Ein-/Ausschalten und Neustart}
+NOMAD startet bei jedem Einschalten des Rechners von selbst. Falls es einmal nicht erreichbar ist, finden Sie die Handgriffe auf der Notfall-Karte (Kapitel~7).

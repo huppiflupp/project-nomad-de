@@ -1,0 +1,84 @@
+\chapter{Weg 2: Die USB-SSD vorbereiten (unter Windows)}
+
+Dieses Kapitel macht aus einer leeren USB-SSD ein startfähiges NOMAD-System. Ihr Windows-PC wird dabei \textbf{nicht verändert}: Sie starten ihn später nur von der USB-SSD statt von der eingebauten Festplatte. Ziehen Sie die SSD ab und starten neu, ist alles wie vorher.
+
+\section{Das brauchen Sie}
+\begin{itemize}[leftmargin=1.5em,itemsep=2pt,label={\abhaken}]
+\item Einen Windows-PC mit Internet (zum Herunterladen). Zum Starten des NOMAD-Systems geht auch ein anderer PC, der ab 2015 gebaut wurde, mit mindestens 4~GB Arbeitsspeicher (besser 8~GB).
+\item Eine \textbf{USB-SSD oder USB-Festplatte mit mindestens 512~GB} und USB~3 (blauer oder beschrifteter Anschluss „SS“). Ein normaler USB-Stick ist zu klein und zu langsam.
+\item Etwa \SI{6}{GB} freien Platz auf dem Windows-PC für die heruntergeladene Datei.
+\item Das Programm \textbf{balenaEtcher} (kostenlos, \texttt{etcher.balena.io}). Alternativ geht Rufus (\texttt{rufus.ie}).
+\end{itemize}
+
+\achtung{Beim Schreiben wird die USB-SSD \textbf{vollständig gelöscht}. Prüfen Sie, dass nichts Wichtiges darauf liegt, und wählen Sie im Programm unbedingt die richtige Platte. Wählen Sie nie die Platte, auf der Windows läuft.}
+
+\section{Schritt 1: Das System herunterladen}
+\begin{enumerate}[leftmargin=1.5em,itemsep=3pt]
+\item Öffnen Sie im Browser die Seite \texttt{github.com/huppiflupp/project-nomad-de/releases}.
+\item Laden Sie die Datei \texttt{nomad.img.xz} aus der neuesten Version herunter (etwa \SI{5}{GB}). Entpacken Sie sie \textbf{nicht}; Etcher kann sie so lesen.
+\item Notieren Sie die dort angegebene Prüfsumme (SHA-256): \feld[8.5cm]
+\end{enumerate}
+
+\subsection*{Prüfen, ob die Datei vollständig ist (empfohlen)}
+Öffnen Sie die Eingabeaufforderung (Windows-Taste, „cmd“ tippen, \taste{Enter}) und geben Sie ein, mit dem Pfad Ihrer Datei:
+\befehl{certutil -hashfile "C:\textbackslash Users\textbackslash Name\textbackslash Downloads\textbackslash nomad.img.xz" SHA256}
+Die lange Zahl, die erscheint, muss mit der Prüfsumme von der Webseite übereinstimmen. Weicht sie ab, laden Sie die Datei neu herunter.
+
+\section{Schritt 2: Auf die USB-SSD schreiben}
+\begin{enumerate}[leftmargin=1.5em,itemsep=3pt]
+\item Schließen Sie die USB-SSD an. Starten Sie \menue{balenaEtcher}.
+\item Klicken Sie auf \menue{Aus Datei flashen} und wählen Sie \texttt{nomad.img.xz}.
+\item Klicken Sie auf \menue{Ziel wählen} und wählen Sie Ihre USB-SSD. Kontrollieren Sie die Größe: Es muss die Größe Ihrer SSD sein (zum Beispiel 500~GB oder 1~TB).
+\item Klicken Sie auf \menue{Flash!}. Bestätigen Sie die Windows-Rückfrage zur Administrator-Berechtigung.
+\item Warten Sie, bis „Flash erfolgreich“ erscheint (je nach SSD 10 bis 40 Minuten). Etcher prüft das Ergebnis danach automatisch.
+\end{enumerate}
+
+\hinweis{Meldet Windows nach dem Schreiben „Sie müssen den Datenträger formatieren“, klicken Sie auf \menue{Abbrechen}. Das System auf der SSD ist ein Linux-System, das Windows nicht lesen kann. Das ist richtig so.}
+
+Mit \emph{Rufus} geht es ebenso: Datei wählen, Laufwerk wählen, auf \menue{Start} klicken und, falls gefragt, den \textbf{DD-Modus} (Abbild-Modus) wählen.
+
+\section{Schritt 3: Den PC von der USB-SSD starten}
+\begin{enumerate}[leftmargin=1.5em,itemsep=3pt]
+\item PC \textbf{herunterfahren} (nicht „Neu starten“: Windows nutzt sonst manchmal einen Schnellstart, der das Starten von der SSD erschwert).
+\item USB-SSD anschließen, PC einschalten und \textbf{sofort mehrfach} die Taste für das Startmenü drücken. Welche Taste das ist, hängt vom Hersteller ab:
+\end{enumerate}
+
+\begin{center}\small
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{Hersteller} & \textbf{Taste für das Startmenü} \\
+\midrule
+Acer, Dell, Lenovo, Samsung & \taste{F12} \\
+Asus & \taste{Esc} oder \taste{F8} \\
+HP & \taste{F9} (bei manchen erst \taste{Esc}) \\
+MSI, Gigabyte & \taste{F11} oder \taste{F12} \\
+\bottomrule
+\end{tabular}
+\end{center}
+Diese Angaben sind Erfahrungswerte; steht beim Einschalten eine Zeile wie „Press F12 for Boot Menu“ auf dem Bildschirm, gilt diese. Ihre Taste tragen Sie hier ein: \taste{\feld[1.2cm]}
+
+\begin{enumerate}[leftmargin=1.5em,itemsep=3pt,resume]
+\item Wählen Sie im Startmenü Ihre USB-SSD (oft mit „USB“ im Namen) und bestätigen Sie mit \taste{Enter}.
+\item Nach etwa einer Minute erscheint der Desktop (Abbildung~\ref{fig:boot}). Eine Anmeldung ist nicht nötig. Nach einer weiteren Minute öffnet sich der Browser mit der NOMAD-Kommandozentrale.
+\end{enumerate}
+
+\bild[0.7]{img-boot1}{Das System ist gestartet. Das Fenster mit der NOMAD-Seite öffnet sich von allein, sobald NOMAD bereit ist.}\label{fig:boot}
+
+\hinweis{Beim ersten Start richtet das System NOMAD ein und vergrößert sich auf die ganze Platte. Das braucht etwa eine bis zwei Minuten länger. Schalten Sie in dieser Zeit nicht aus. Auch ohne Internet funktioniert das.}
+
+\section{Wenn der PC nicht startet}
+\begin{itemize}[leftmargin=1.5em,itemsep=3pt]
+\item \textbf{Die SSD erscheint nicht im Startmenü.} Anderen USB-Anschluss versuchen (am besten blau, direkt am PC, nicht an einem Hub). Im Startmenü auf „UEFI“ achten.
+\item \textbf{Meldung zu „Secure Boot“.} Das System ist mit aktivem Secure Boot getestet und sollte so starten. Zeigt Ihr PC trotzdem eine Sicherheitswarnung, hilft es, im BIOS Secure Boot auszuschalten (Menü „Security“ oder „Boot“). Notieren Sie sich, was Sie geändert haben.
+\item \textbf{Schwarzer Bildschirm, Fehlermeldung oder Absturz.} Notieren Sie Hersteller und Modell des PCs im Feld „Hardware“ in Kapitel~9 und probieren Sie einen anderen PC. Sehr neue Grafikchips und manche WLAN-Chips können Probleme machen. Dafür gibt es kein allgemeines Mittel.
+\item \textbf{BitLocker-Abfrage von Windows.} Wenn Windows beim nächsten normalen Start nach einem Wiederherstellungsschlüssel fragt, weil Sie im BIOS etwas geändert haben, brauchen Sie den Schlüssel aus Ihrem Microsoft-Konto (\texttt{aka.ms/myrecoverykey}). Notieren Sie sich vorher, ob BitLocker aktiv ist.
+\end{itemize}
+
+\section{Nach dem Start: Passwort ändern}
+Benutzer und Passwort des Systems sind \textbf{bei jeder USB-SSD gleich}: Benutzer \texttt{nomad}, Passwort \texttt{nomad}. Das Passwort wird nur bei Änderungen am System gebraucht, aber jeder, der das Heft kennt, kennt es auch. Ändern Sie es, sobald das System steht:
+\begin{enumerate}[leftmargin=1.5em,itemsep=3pt]
+\item Öffnen Sie ein Terminal: gleichzeitig \taste{Strg} + \taste{Alt} + \taste{T}.
+\item Tippen Sie \texttt{passwd} und \taste{Enter}.
+\item Geben Sie das alte Passwort (\texttt{nomad}) ein, dann zweimal das neue. Beim Tippen erscheint nichts auf dem Bildschirm. Das ist normal.
+\item Tragen Sie das neue Passwort im Feld „Zugangsdaten“ in Kapitel~9 ein.
+\end{enumerate}

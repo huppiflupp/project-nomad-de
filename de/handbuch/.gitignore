@@ -1,0 +1,5 @@
+bilder/web/
+*.aux
+*.log
+*.out
+*.toc
