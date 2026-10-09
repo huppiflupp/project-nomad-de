@@ -2,113 +2,111 @@
 
 Beiträge zu dieser deutschen Fassung (Übersetzungen, Korrekturen, Install-Skripte) sind willkommen: Eröffnen Sie ein Issue oder einen Pull Request in diesem Repository. Beiträge, die das Original betreffen (Funktionen, Fehler in der englischen Fassung), gehören dagegen in das [Original-Projekt](https://github.com/Crosstalk-Solutions/project-nomad). Übersetzungen halten Sie bitte in der Sie-Form und nach dem Glossar der Übersetzungsrichtlinien; Hinweise zur Pflege des Forks finden Sie in [de/README.md](de/README.md).
 
-Die folgenden Richtlinien des Originals (Englisch) gelten sinngemäß weiter.
+Die folgenden Richtlinien des Originals gelten sinngemäß weiter (deutsche Übersetzung, nicht verbindlich; maßgeblich ist das englische Original).
 
-*Original (Englisch, unverändert):*
-
----
-
-# Contributing to Project NOMAD
-
-Thank you for your interest in contributing to Project NOMAD! Community contributions are what keep this project growing and improving. Please read this guide fully before getting started — it will save you (and the maintainers) a lot of time.
-
-> **Note:** Acceptance of contributions is not guaranteed. All pull requests are evaluated based on quality, relevance, and alignment with the project's goals. The maintainers of Project NOMAD ("NOMAD") reserve the right to accept, deny, or modify any pull request at their sole discretion.
+*Übersetzung des Originals:*
 
 ---
 
-## Table of Contents
+# Mitwirken an Project NOMAD
 
-- [Code of Conduct](#code-of-conduct)
-- [Before You Start](#before-you-start)
-- [Getting Started](#getting-started)
-- [Development Workflow](#development-workflow)
-- [UI Consistency](#ui-consistency)
-- [Commit Messages](#commit-messages)
-- [Release Notes](#release-notes)
-- [Versioning](#versioning)
-- [Submitting a Pull Request](#submitting-a-pull-request)
-- [Feedback & Community](#feedback--community)
+Vielen Dank für Ihr Interesse, an Project NOMAD mitzuwirken! Beiträge aus der Community halten dieses Projekt am Wachsen und machen es besser. Bitte lesen Sie diese Anleitung vollständig, bevor Sie beginnen – das spart Ihnen (und den Betreuern) viel Zeit.
+
+> **Hinweis:** Beiträge werden nicht zwangsläufig angenommen. Alle Pull Requests werden nach Qualität, Relevanz und Übereinstimmung mit den Zielen des Projekts beurteilt. Die Betreuer von Project NOMAD („NOMAD“) behalten sich vor, jeden Pull Request nach eigenem Ermessen anzunehmen, abzulehnen oder zu ändern.
 
 ---
 
-## Code of Conduct
+## Inhaltsverzeichnis
 
-Please read and review our full [Code of Conduct](https://github.com/Crosstalk-Solutions/project-nomad/blob/main/CODE_OF_CONDUCT.md) before contributing. In short: please be respectful and considerate in all interactions with maintainers and other contributors.
-
-We are committed to providing a welcoming environment for everyone. Disrespectful or abusive behavior will not be tolerated. 
-
----
-
-## Before You Start
-
-**Open an issue first.** Before writing any code for a non-trivial change, you must [open an issue](../../issues/new) to discuss your proposed change. This helps avoid duplicate work and ensures your contribution aligns with the project's direction. **Pull requests submitted without a corresponding issue may be closed at the maintainers' discretion.**
-
-**Trivial fixes are exempt** and may be submitted directly as a PR. Examples:
-- Typo and grammar corrections
-- Documentation clarifications
-- Small one-line bug fixes with an obvious cause
-
-If you're not sure whether your change qualifies as trivial, open an issue first.
-
-When opening an issue:
-- Use a clear, descriptive title
-- Describe the problem you're solving or the feature you want to add
-- If it's a bug, include steps to reproduce it and as much detail about your environment as possible
-- Ensure you redact any personal or sensitive information in any logs, configs, etc.
+- [Verhaltenskodex](#verhaltenskodex)
+- [Bevor Sie beginnen](#bevor-sie-beginnen)
+- [Erste Schritte](#erste-schritte)
+- [Entwicklungsablauf](#entwicklungsablauf)
+- [Einheitliche Benutzeroberfläche](#einheitliche-benutzeroberfläche)
+- [Commit-Nachrichten](#commit-nachrichten)
+- [Versionshinweise](#versionshinweise)
+- [Versionierung](#versionierung)
+- [Pull Request einreichen](#pull-request-einreichen)
+- [Feedback und Community](#feedback-und-community)
 
 ---
 
-## Getting Started with Contributing
-**Please note**: this is the Getting Started guide for developing and contributing to NOMAD, NOT [installing NOMAD](https://github.com/Crosstalk-Solutions/project-nomad/blob/main/README.md) for regular use! 
+## Verhaltenskodex
 
-### Prerequisites
+Bitte lesen Sie vor Ihrem Beitrag den vollständigen [Verhaltenskodex](https://github.com/Crosstalk-Solutions/project-nomad/blob/main/CODE_OF_CONDUCT.md) (Original, Englisch). Kurz gesagt: Bitte gehen Sie mit den Betreuern und anderen Mitwirkenden stets respektvoll und rücksichtsvoll um.
 
-- A Debian-based OS (Ubuntu 26.04 LTS recommended)
-- `sudo`/root privileges
-- Docker installed and running
-- A stable internet connection (required for dependency downloads)
-- Node.js (for frontend/admin work)
+Wir möchten allen ein einladendes Umfeld bieten. Respektloses oder beleidigendes Verhalten wird nicht geduldet.
 
-### Fork & Clone
+---
 
-1. Click **Fork** at the top right of this repository
-2. Clone your fork locally:
+## Bevor Sie beginnen
+
+**Eröffnen Sie zuerst ein Issue.** Bevor Sie bei einer nicht trivialen Änderung Code schreiben, müssen Sie [ein Issue eröffnen](../../issues/new), um Ihre geplante Änderung zu besprechen. Das vermeidet doppelte Arbeit und stellt sicher, dass Ihr Beitrag zur Ausrichtung des Projekts passt. **Pull Requests ohne zugehöriges Issue können nach Ermessen der Betreuer geschlossen werden.**
+
+**Triviale Korrekturen sind ausgenommen** und können direkt als PR eingereicht werden. Beispiele:
+- Korrekturen von Tippfehlern und Grammatik
+- Klarstellungen in der Dokumentation
+- Kleine Fehlerbehebungen in einer Zeile mit offensichtlicher Ursache
+
+Wenn Sie nicht sicher sind, ob Ihre Änderung als trivial gilt, eröffnen Sie zuerst ein Issue.
+
+Beim Eröffnen eines Issues:
+- Verwenden Sie einen klaren, aussagekräftigen Titel
+- Beschreiben Sie das Problem, das Sie lösen, oder die Funktion, die Sie hinzufügen möchten
+- Bei einem Fehler: Geben Sie die Schritte zur Reproduktion und möglichst viele Angaben zu Ihrer Umgebung an
+- Entfernen Sie persönliche oder sensible Informationen in Protokollen, Konfigurationen usw.
+
+---
+
+## Erste Schritte beim Mitwirken
+**Bitte beachten Sie**: Dies ist die Einstiegsanleitung für die Entwicklung von und das Mitwirken an NOMAD, NICHT für die [Installation von NOMAD](https://github.com/Crosstalk-Solutions/project-nomad/blob/main/README.md) zur normalen Nutzung! 
+
+### Voraussetzungen
+
+- Ein Debian-basiertes Betriebssystem (empfohlen: Ubuntu 26.04 LTS)
+- `sudo`-/Root-Rechte
+- Installiertes und laufendes Docker
+- Eine stabile Internetverbindung (für den Download von Abhängigkeiten erforderlich)
+- Node.js (für Arbeiten am Frontend bzw. an der Verwaltung)
+
+### Forken und Klonen
+
+1. Klicken Sie oben rechts in diesem Repository auf **Fork**
+2. Klonen Sie Ihren Fork lokal:
    ```bash
    git clone https://github.com/YOUR_USERNAME/project-nomad.git
    cd project-nomad
    ```
-3. Add the upstream remote so you can stay in sync:
+3. Fügen Sie das Upstream-Remote hinzu, damit Sie auf dem Laufenden bleiben:
    ```bash
    git remote add upstream https://github.com/Crosstalk-Solutions/project-nomad.git
    ```
 
-### Avoid Installing a Release Version Locally
-Because NOMAD relies heavily on Docker, we actually recommend against installing a release version of the project on the same local machine where you are developing. This can lead to conflicts with ports, volumes, and other resources. Instead, you can run your development version in a separate Docker environment while keeping your local machine clean. It certainly __can__ be done, but it adds complexity to your setup and workflow. If you choose to install a release version locally, please ensure you have a clear strategy for managing potential conflicts and resource usage.
+### Keine Release-Version lokal installieren
+Da NOMAD stark auf Docker setzt, raten wir davon ab, auf demselben Rechner, auf dem Sie entwickeln, eine Release-Version des Projekts zu installieren. Das kann zu Konflikten bei Ports, Volumes und anderen Ressourcen führen. Besser betreiben Sie Ihre Entwicklungsversion in einer separaten Docker-Umgebung und halten Ihren lokalen Rechner sauber. Es __lässt sich__ durchaus machen, macht Ihre Einrichtung und Ihren Arbeitsablauf aber komplizierter. Wenn Sie sich trotzdem für eine lokale Release-Installation entscheiden, sorgen Sie bitte für eine klare Strategie im Umgang mit möglichen Konflikten und der Ressourcennutzung.
 
 ---
 
-## Development Workflow
+## Entwicklungsablauf
 
-1. **Sync with upstream** before starting any new work. We prefer rebasing over merge commits to keep a clean, linear git history as much as possible (this also makes it easier for maintainers to review and merge your changes). To sync with upstream:
+1. **Mit Upstream synchronisieren**, bevor Sie neue Arbeit beginnen. Wir bevorzugen Rebasing statt Merge-Commits, um die Git-Historie möglichst sauber und linear zu halten (das erleichtert den Betreuern auch das Prüfen und Übernehmen Ihrer Änderungen). So synchronisieren Sie mit Upstream:
    ```bash
    git fetch upstream
    git checkout dev
    git rebase upstream/dev
    ```
 
-2. **Create a feature branch** off `dev` with a descriptive name:
+2. **Erstellen Sie einen Feature-Branch** von `dev` mit einem aussagekräftigen Namen:
    ```bash
    git checkout -b fix/issue-123
    # or
    git checkout -b feature/add-new-tool
    ```
 
-3. **Make your changes.** Follow existing code style and conventions. Test your changes locally against a running NOMAD instance before submitting.
+3. **Nehmen Sie Ihre Änderungen vor.** Halten Sie sich an den vorhandenen Code-Stil und die Konventionen. Testen Sie Ihre Änderungen vor dem Einreichen lokal gegen eine laufende NOMAD-Instanz.
 
-4. **If you touched the AI Assistant or RAG, measure it.** Anything affecting
-   chunking, embedding, retrieval, reranking, thresholds, the system prompts, or
-   context assembly should be backed by numbers rather than a spot check —
-   "it seemed better in the chat window" is how a regression ships. From `admin/`:
+4. **Wenn Sie den KI-Assistenten oder RAG verändert haben, messen Sie das.** Alles, was Chunking, Embedding, Retrieval, Reranking, Schwellenwerte, die System-Prompts oder den Aufbau des Kontexts betrifft, sollte durch Zahlen statt durch eine Stichprobe belegt sein –
+   „im Chatfenster schien es besser“ ist der Weg, auf dem Rückschritte ausgeliefert werden. Aus dem Verzeichnis `admin/`:
 
    ```bash
    node ace eval:corpus --ingest        # once; safe, never touches your real knowledge base
@@ -116,67 +114,68 @@ Because NOMAD relies heavily on Docker, we actually recommend against installing
    node ace eval:generation --model=<your model> --all-modes
    ```
 
-   Include the before/after numbers in your pull request. See
-   [`admin/tests/eval/README.md`](admin/tests/eval/README.md) for what the
-   metrics mean, how the three generation modes separate a code bug from a model
-   that is simply too small, and the harness's known limitations.
+   Geben Sie die Zahlen vorher/nachher in Ihrem Pull Request an. Was die
+   Metriken bedeuten, wie die drei Generierungsmodi einen Fehler im Code von
+   einem schlicht zu kleinen Modell unterscheiden und welche bekannten
+   Einschränkungen das Testwerkzeug hat, steht in
+   [`admin/tests/eval/README.md`](admin/tests/eval/README.md).
 
-5. **Commit your changes** using [Conventional Commits](#commit-messages).
+5. **Committen Sie Ihre Änderungen** nach [Conventional Commits](#commit-nachrichten).
 
-6. **Push your branch** and open a pull request.
+6. **Pushen Sie Ihren Branch** und eröffnen Sie einen Pull Request.
 
 ---
 
-## UI Consistency
+## Einheitliche Benutzeroberfläche
 
-NOMAD's guiding principle is that **user-friendliness is paramount**: a control that looks or behaves differently from the rest of the app reads as broken to a non-technical user. New frontend (inertia/React) work should be visually and behaviorally uniform with what is already there. Before adding a UI element, look at its neighbors and reuse the shared building blocks rather than hand-rolling a one-off.
+Leitprinzip von NOMAD ist, dass **Benutzerfreundlichkeit an erster Stelle steht**: Ein Bedienelement, das anders aussieht oder sich anders verhält als der Rest der Anwendung, wirkt auf technisch nicht versierte Nutzer kaputt. Neue Arbeiten am Frontend (Inertia/React) sollten optisch und im Verhalten zum Vorhandenen passen. Schauen Sie sich vor dem Hinzufügen eines UI-Elements seine Nachbarn an und verwenden Sie die gemeinsamen Bausteine, statt eine Einzellösung zu bauen.
 
-**Reuse the shared components** in `admin/inertia/components/` (and `.../components/inputs/`):
+**Verwenden Sie die gemeinsamen Komponenten** in `admin/inertia/components/` (und `.../components/inputs/`):
 
-| Need | Use | Not |
+| Bedarf | Verwenden | Nicht |
 |------|-----|-----|
-| Binary on/off setting | `Switch` | a raw `<input type="checkbox">` |
-| Explanatory hover help | `InfoTooltip` | a raw `title=` attribute or a bespoke tooltip |
-| Modal / confirmation dialog | `StyledModal` | a hand-built overlay |
-| Text field | `Input` | a bare `<input>` |
-| Section heading | `StyledSectionHeader` | ad-hoc heading markup |
+| Binäre Ein/Aus-Einstellung | `Switch` | ein einfaches `<input type="checkbox">` |
+| Erklärende Hover-Hilfe | `InfoTooltip` | ein einfaches `title=`-Attribut oder ein eigener Tooltip |
+| Modal / Bestätigungsdialog | `StyledModal` | ein selbstgebautes Overlay |
+| Textfeld | `Input` | ein nacktes `<input>` |
+| Abschnittsüberschrift | `StyledSectionHeader` | selbst gebaute Überschriften-Markups |
 
-Grep for an existing component before building a new one.
+Suchen Sie per Grep nach einer vorhandenen Komponente, bevor Sie eine neue bauen.
 
-**Match the neighbors.** Copy the exact classes and conventions of adjacent elements:
+**Passen Sie sich den Nachbarn an.** Übernehmen Sie genau die Klassen und Konventionen benachbarter Elemente:
 
-- **Labels:** match punctuation and casing of sibling labels. If the field beside yours reads `Model:` (with a colon), yours should read `Thinking:`, not `Thinking`. Reuse the same typography tokens (e.g. `text-sm text-text-secondary`).
-- **Theme:** use design tokens (`text-*`, `bg-*`, `border-*`) so the element works in light and dark mode. Never hardcode colors.
-- **Placement:** make sure popovers and tooltips are not clipped or crushed against a viewport edge, including when the trigger sits near an edge of the screen.
+- **Beschriftungen:** Gleichen Sie Zeichensetzung und Groß-/Kleinschreibung benachbarter Beschriftungen an. Wenn das Feld neben Ihrem `Model:` (mit Doppelpunkt) heißt, sollte Ihres `Thinking:` heißen, nicht `Thinking`. Verwenden Sie dieselben Typografie-Tokens (z. B. `text-sm text-text-secondary`).
+- **Design:** Verwenden Sie Design-Tokens (`text-*`, `bg-*`, `border-*`), damit das Element im hellen und im dunklen Modus funktioniert. Codieren Sie Farben niemals fest.
+- **Platzierung:** Stellen Sie sicher, dass Popovers und Tooltips nicht am Rand des Anzeigebereichs abgeschnitten oder gequetscht werden, auch wenn der Auslöser nahe an einem Bildschirmrand sitzt.
 
-**When a raw control is fine.** These conventions are about matching intent, not banning primitives. A raw checkbox is appropriate for a multi-select list or a consent box; radio groups and native selects are fine where a shared component does not exist. The point is to reach for the shared component when your case matches its intent (a binary setting toggle should be a `Switch`), not to eliminate primitives.
+**Wann ein einfaches Bedienelement in Ordnung ist.** Diese Konventionen sollen die Absicht treffen, nicht Grundelemente verbieten. Eine einfache Checkbox ist bei einer Mehrfachauswahl oder einem Einwilligungsfeld angemessen; Radiogruppen und native Auswahlfelder sind in Ordnung, wo es keine gemeinsame Komponente gibt. Es geht darum, zur gemeinsamen Komponente zu greifen, wenn Ihr Fall ihrem Zweck entspricht (ein Schalter für eine binäre Einstellung sollte ein `Switch` sein), nicht darum, Grundelemente abzuschaffen.
 
-**Test UI changes in a real browser.** Most of these conventions are judgment calls that tooling cannot fully enforce, so the single most important habit is to load your change in a browser against a running instance before submitting. Several classes of issue (clipped or cramped tooltips, layout breaking at different window widths, blank-screen render errors) are invisible to type-checking and only show up when you actually look at the page. Check the states that should appear *and* the states that should be hidden, and try more than one window width when layout or positioning is involved.
+**Testen Sie UI-Änderungen in einem echten Browser.** Die meisten dieser Konventionen sind Ermessenssache, die sich mit Werkzeugen nicht vollständig durchsetzen lässt. Die wichtigste Gewohnheit ist daher, Ihre Änderung vor dem Einreichen gegen eine laufende Instanz in einem Browser zu laden. Mehrere Arten von Problemen (abgeschnittene oder gequetschte Tooltips, Layout, das bei anderen Fensterbreiten bricht, leere Seiten durch Renderfehler) sind für die Typprüfung unsichtbar und zeigen sich erst, wenn Sie sich die Seite wirklich ansehen. Prüfen Sie die Zustände, die erscheinen sollen, *und* die, die verborgen sein sollen, und probieren Sie mehr als eine Fensterbreite aus, wenn Layout oder Positionierung eine Rolle spielen.
 
 ---
 
-## Commit Messages
+## Commit-Nachrichten
 
-This project uses [Conventional Commits](https://www.conventionalcommits.org/). All commit messages must follow this format:
+Dieses Projekt verwendet [Conventional Commits](https://www.conventionalcommits.org/). Alle Commit-Nachrichten müssen diesem Format folgen:
 
 ```
 <type>(<scope>): <description>
 ```
 
-**Common types:**
+**Gängige Typen:**
 
-| Type | When to use |
+| Typ | Wann verwenden |
 |------|-------------|
-| `feat` | A new user-facing feature |
-| `fix` | A bug fix |
-| `docs` | Documentation changes only |
-| `refactor` | Code change that isn't a fix or feature and does not affect functionality |
-| `chore` | Build process, dependency updates, tooling |
-| `test` | Adding or updating tests |
+| `feat` | Eine neue, für Nutzer sichtbare Funktion |
+| `fix` | Eine Fehlerbehebung |
+| `docs` | Ausschließlich Änderungen an der Dokumentation |
+| `refactor` | Codeänderung, die weder Fehlerbehebung noch Funktion ist und die Funktionalität nicht beeinflusst |
+| `chore` | Build-Prozess, Aktualisierung von Abhängigkeiten, Werkzeuge |
+| `test` | Hinzufügen oder Aktualisieren von Tests |
 
-**Scope** is optional but encouraged — use it to indicate the area of the codebase affected (e.g., `api`, `ui`, `maps`).
+Der **Scope** ist optional, wird aber empfohlen – er gibt den betroffenen Bereich der Codebasis an (z. B. `api`, `ui`, `maps`).
 
-**Examples:**
+**Beispiele:**
 ```
 feat(ui): add dark mode toggle to Command Center
 fix(api): resolve container status not updating after restart
@@ -186,43 +185,43 @@ chore(deps): bump docker-compose to v2.24
 
 ---
 
-## Release Notes
+## Versionshinweise
 
-Human-readable release notes live in [`admin/docs/release-notes.md`](admin/docs/release-notes.md) and are displayed directly in the Command Center UI.
+Die für Menschen lesbaren Versionshinweise liegen in [`admin/docs/release-notes.md`](admin/docs/release-notes.md) und werden direkt in der Oberfläche des Command Centers angezeigt.
 
-If your PR is merged in, the maintainers will update the release notes with a summary of your contribution and credit you as the author. You do not need to add this yourself in the PR (please don't, as it may cause merge conflicts), but you can include a suggested note in the PR description if you like.
-
----
-
-## Versioning
-
-This project uses [Semantic Versioning](https://semver.org/). Versions are managed in the root `package.json` and updated automatically by `semantic-release`. The `project-nomad` Docker image uses this version. The `admin/package.json` version stays at `0.0.0` and should not be changed manually.
+Wenn Ihr PR übernommen wird, aktualisieren die Betreuer die Versionshinweise mit einer Zusammenfassung Ihres Beitrags und nennen Sie als Autor. Sie müssen das nicht selbst im PR ergänzen (bitte tun Sie es nicht, da es Merge-Konflikte verursachen kann), können aber gern einen Textvorschlag in die PR-Beschreibung aufnehmen.
 
 ---
 
-## Submitting a Pull Request
+## Versionierung
 
-1. Push your branch to your fork:
+Dieses Projekt verwendet [Semantic Versioning](https://semver.org/). Die Versionen werden in der `package.json` im Wurzelverzeichnis verwaltet und von `semantic-release` automatisch aktualisiert. Das Docker-Image `project-nomad` verwendet diese Version. Die Version in `admin/package.json` bleibt bei `0.0.0` und sollte nicht von Hand geändert werden.
+
+---
+
+## Pull Request einreichen
+
+1. Pushen Sie Ihren Branch in Ihren Fork:
    ```bash
    git push origin your-branch-name
    ```
-2. Open a pull request against the `dev` branch of this repository
-3. In the PR description:
-   - Summarize what your changes do and why
-   - Reference the related issue (e.g., `Closes #123`) — required for non-trivial changes
-   - Note any relevant testing steps or environment details
-4. Be responsive to feedback — maintainers may request changes. Pull requests with no activity for an extended period may be closed.
+2. Eröffnen Sie einen Pull Request gegen den Branch `dev` dieses Repositorys
+3. In der PR-Beschreibung:
+   - Fassen Sie zusammen, was Ihre Änderungen bewirken und warum
+   - Verweisen Sie auf das zugehörige Issue (z. B. `Closes #123`) – bei nicht trivialen Änderungen erforderlich
+   - Nennen Sie relevante Testschritte oder Angaben zur Umgebung
+4. Reagieren Sie auf Rückmeldungen – die Betreuer können Änderungen anfordern. Pull Requests, die längere Zeit ohne Aktivität bleiben, können geschlossen werden.
 
 ---
 
-## Feedback & Community
+## Feedback und Community
 
-Have questions or want to discuss ideas before opening an issue? Join the community:
+Haben Sie Fragen oder möchten Sie Ideen besprechen, bevor Sie ein Issue eröffnen? Treten Sie der Community bei (englischsprachig):
 
-- **Discord:** [Join the Crosstalk Solutions server](https://discord.com/invite/crosstalksolutions) — the best place to get help, share your builds, and talk with other NOMAD users
+- **Discord:** [Dem Server von Crosstalk Solutions beitreten](https://discord.com/invite/crosstalksolutions) – der beste Ort, um Hilfe zu bekommen, Ihre Aufbauten zu zeigen und sich mit anderen NOMAD-Nutzern auszutauschen
 - **Website:** [www.projectnomad.us](https://www.projectnomad.us)
-- **Benchmark Leaderboard:** [benchmark.projectnomad.us](https://benchmark.projectnomad.us)
+- **Benchmark-Bestenliste:** [benchmark.projectnomad.us](https://benchmark.projectnomad.us)
 
 ---
 
-*Project NOMAD is licensed under the [Apache License 2.0](LICENSE).*
+*Project NOMAD steht unter der [Apache License 2.0](LICENSE).*

@@ -1,150 +1,150 @@
-name: Feature Request
-description: Suggest a new feature or enhancement for Project NOMAD
-title: "[Feature]: "
+name: Funktionswunsch
+description: Eine neue Funktion oder Verbesserung für Project NOMAD vorschlagen
+title: "[Funktion]: "
 labels: ["enhancement", "needs-discussion"]
 body:
   - type: markdown
     attributes:
       value: |
-        Thanks for your interest in improving Project NOMAD! Before you submit a feature request, consider checking our [roadmap](https://roadmap.projectnomad.us) to see if it's already planned or in progress. You're welcome to suggest new ideas there if you don't plan on opening PRs yourself.
+        Vielen Dank für Ihr Interesse, Project NOMAD zu verbessern! Bevor Sie einen Funktionswunsch einreichen, prüfen Sie bitte unsere [Roadmap](https://roadmap.projectnomad.us) (englischsprachig, Original-Projekt), ob er bereits geplant ist oder umgesetzt wird. Neue Ideen können Sie dort ebenfalls vorschlagen, wenn Sie nicht selbst PRs eröffnen möchten.
 
         
-        **Please note:** Feature requests are not guaranteed to be implemented. All requests are evaluated based on alignment with the project's goals, feasibility, and community demand.
+        **Bitte beachten Sie:** Funktionswünsche werden nicht zwangsläufig umgesetzt. Alle Wünsche werden danach beurteilt, ob sie zu den Zielen des Projekts passen, wie machbar sie sind und wie groß der Bedarf in der Community ist.
         
-        **Before submitting:**
-        - Search existing feature requests and our [roadmap](https://roadmap.projectnomad.us) to avoid duplicates
-        - Consider if this aligns with NOMAD's mission: offline-first knowledge and education
-        - Consider the technical feasibility of the feature: NOMAD is designed to be containerized and run on a wide range of hardware, so features that require heavy resources (aside from GPU-intensive tasks) or complex host configurations may be less likely to be implemented
-        - Consider the scope of the feature: Small, focused enhancements that can be implemented incrementally are more likely to be implemented than large, broad features that would require significant development effort or have an unclear path forward
-        - If you're able to contribute code, testing, or documentation, that significantly increases the chances of your feature being implemented
+        **Vor dem Absenden:**
+        - Suchen Sie in vorhandenen Funktionswünschen und in unserer [Roadmap](https://roadmap.projectnomad.us), um Duplikate zu vermeiden
+        - Überlegen Sie, ob der Wunsch zur Mission von NOMAD passt: Wissen und Bildung, zuerst offline
+        - Bedenken Sie die technische Machbarkeit: NOMAD ist als Container-Anwendung für eine breite Palette an Hardware ausgelegt, daher werden Funktionen, die viele Ressourcen (abgesehen von GPU-intensiven Aufgaben) oder aufwendige Host-Konfigurationen erfordern, eher seltener umgesetzt
+        - Bedenken Sie den Umfang: Kleine, gezielte Verbesserungen, die schrittweise umgesetzt werden können, werden eher realisiert als große, breit angelegte Funktionen, die erheblichen Entwicklungsaufwand erfordern oder deren Weg unklar ist
+        - Wenn Sie Code, Tests oder Dokumentation beisteuern können, erhöht das die Chancen auf eine Umsetzung erheblich
 
   - type: dropdown
     id: feature-category
     attributes:
-      label: Feature Category
-      description: What area does this feature relate to?
+      label: Funktionskategorie
+      description: Auf welchen Bereich bezieht sich die Funktion?
       options:
-        - New Service/Tool Integration
-        - AI Assistant Enhancement
-        - Knowledge Base/RAG Improvement
-        - Content Management (ZIM, Maps, Collections)
-        - UI/UX Improvement
-        - System Management
-        - Performance Optimization
-        - Documentation
-        - Security
-        - Other
+        - Neue Dienst-/Werkzeug-Integration
+        - Verbesserung des KI-Assistenten
+        - Verbesserung der Wissensdatenbank/RAG
+        - Inhaltsverwaltung (ZIM, Karten, Sammlungen)
+        - Verbesserung von UI/UX
+        - Systemverwaltung
+        - Leistungsoptimierung
+        - Dokumentation
+        - Sicherheit
+        - Sonstiges
     validations:
       required: true
 
   - type: textarea
     id: problem
     attributes:
-      label: Problem Statement
-      description: What problem does this feature solve? Is your feature request related to a pain point?
-      placeholder: I find it frustrating when... / It would be helpful if... / Users struggle with...
+      label: Problembeschreibung
+      description: Welches Problem löst diese Funktion? Hängt Ihr Wunsch mit einem Ärgernis zusammen?
+      placeholder: Es ärgert mich, wenn ... / Es wäre hilfreich, wenn ... / Nutzer haben Schwierigkeiten mit ...
     validations:
       required: true
 
   - type: textarea
     id: solution
     attributes:
-      label: Proposed Solution
-      description: Describe the feature or enhancement you'd like to see
-      placeholder: Add a feature that... / Change the behavior to... / Integrate with...
+      label: Lösungsvorschlag
+      description: Beschreiben Sie die Funktion oder Verbesserung, die Sie sich wünschen
+      placeholder: Eine Funktion hinzufügen, die ... / Das Verhalten ändern auf ... / Anbindung an ...
     validations:
       required: true
 
   - type: textarea
     id: alternatives
     attributes:
-      label: Alternative Solutions
-      description: Have you considered any alternative solutions or workarounds?
-      placeholder: I've tried... / Another approach could be... / A workaround is...
+      label: Alternative Lösungen
+      description: Haben Sie alternative Lösungen oder Umgehungen in Betracht gezogen?
+      placeholder: Ich habe ... versucht / Ein anderer Ansatz wäre ... / Eine Umgehung ist ...
 
   - type: textarea
     id: use-case
     attributes:
-      label: Use Case
-      description: Describe a specific scenario where this feature would be valuable
+      label: Anwendungsfall
+      description: Beschreiben Sie ein konkretes Szenario, in dem diese Funktion nützlich wäre
       placeholder: |
-        As a [type of user], when I [do something], I want to [accomplish something] so that [benefit].
+        Als [Art von Nutzer] möchte ich, wenn ich [etwas tue], [etwas erreichen], damit [Nutzen].
         
-        Example: Because I have a dedicated GPU, I want to be able to see in the UI if GPU support is enabled so that I can optimize performance and troubleshoot issues more easily.
+        Beispiel: Da ich eine dedizierte GPU habe, möchte ich in der Oberfläche sehen können, ob die GPU-Unterstützung aktiviert ist, damit ich die Leistung optimieren und Probleme leichter beheben kann.
 
   - type: dropdown
     id: user-type
     attributes:
-      label: Who would benefit from this feature?
-      description: What type of users would find this most valuable?
+      label: Wer würde von dieser Funktion profitieren?
+      description: Welche Nutzergruppen hätten davon den größten Nutzen?
       multiple: true
       options:
-        - Individual/Home Users
-        - Families
-        - Teachers/Educators
-        - Students
-        - Survivalists/Preppers
-        - Developers/Contributors
-        - Organizations
-        - All Users
+        - Einzel-/Privatnutzer
+        - Familien
+        - Lehrkräfte/Pädagogen
+        - Schüler/Studierende
+        - Survivalisten/Prepper
+        - Entwickler/Mitwirkende
+        - Organisationen
+        - Alle Nutzer
     validations:
       required: true
 
   - type: dropdown
     id: priority
     attributes:
-      label: How important is this feature to you?
+      label: Wie wichtig ist Ihnen diese Funktion?
       options:
-        - Critical - Blocking my use of NOMAD
-        - High - Would significantly improve my experience
-        - Medium - Would be nice to have
-        - Low - Minor convenience
+        - Kritisch – hindert mich an der Nutzung von NOMAD
+        - Hoch – würde meine Nutzung deutlich verbessern
+        - Mittel – wäre schön zu haben
+        - Niedrig – kleine Erleichterung
     validations:
       required: true
 
   - type: textarea
     id: implementation-ideas
     attributes:
-      label: Implementation Ideas (Optional)
-      description: If you have technical suggestions for how this could be implemented, share them here
-      placeholder: This could potentially use... / It might integrate with... / A possible approach is...
+      label: Ideen zur Umsetzung (optional)
+      description: Falls Sie technische Vorschläge zur Umsetzung haben, teilen Sie sie hier mit
+      placeholder: Dafür könnte man ... verwenden / Es könnte sich in ... einbinden lassen / Ein möglicher Ansatz ist ...
 
   - type: textarea
     id: examples
     attributes:
-      label: Examples or References
-      description: Are there similar features in other applications? Include links, screenshots, or descriptions
-      placeholder: Similar to how [app name] does... / See this example at [URL]
+      label: Beispiele oder Referenzen
+      description: Gibt es ähnliche Funktionen in anderen Anwendungen? Fügen Sie Links, Screenshots oder Beschreibungen bei
+      placeholder: Ähnlich wie bei [App-Name] ... / Siehe dieses Beispiel unter [URL]
 
   - type: dropdown
     id: willing-to-contribute
     attributes:
-      label: Would you be willing to help implement this?
-      description: Contributing increases the likelihood of implementation
+      label: Würden Sie bei der Umsetzung helfen?
+      description: Ihre Mithilfe erhöht die Wahrscheinlichkeit einer Umsetzung
       options:
-        - "Yes - I can write the code"
-        - "Yes - I can help test"
-        - "Yes - I can help with documentation"
-        - "Maybe - with guidance"
-        - "No - I don't have the skills/time"
+        - "Ja – ich kann den Code schreiben"
+        - "Ja – ich kann beim Testen helfen"
+        - "Ja – ich kann bei der Dokumentation helfen"
+        - "Vielleicht – mit Anleitung"
+        - "Nein – mir fehlen die Kenntnisse/die Zeit"
     validations:
       required: true
 
   - type: textarea
     id: additional-context
     attributes:
-      label: Additional Context
-      description: Add any other context, mockups, diagrams, or information about the feature request
+      label: Zusätzlicher Kontext
+      description: Weitere Angaben, Entwürfe, Diagramme oder Informationen zum Funktionswunsch
 
   - type: checkboxes
     id: checklist
     attributes:
-      label: Pre-submission Checklist
-      description: Please confirm the following before submitting
+      label: Checkliste vor dem Absenden
+      description: Bitte bestätigen Sie vor dem Absenden Folgendes
       options:
-        - label: I have searched for existing feature requests that might be similar
+        - label: Ich habe nach vorhandenen, ähnlichen Funktionswünschen gesucht
           required: true
-        - label: This feature aligns with NOMAD's mission of offline-first knowledge and education
+        - label: Diese Funktion passt zur Mission von NOMAD (Wissen und Bildung, zuerst offline)
           required: true
-        - label: I understand that feature requests are not guaranteed to be implemented
+        - label: Ich verstehe, dass Funktionswünsche nicht zwangsläufig umgesetzt werden
           required: true
