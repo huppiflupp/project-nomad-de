@@ -21,6 +21,11 @@ Image auf eine größere „Platte“ (64 GB) kopieren, per UEFI **mit Secure Bo
 Start bis zum Desktop in etwa einer Minute, Autologin, Erststart richtet NOMAD ein (ca. 1 Minute, ohne Internet), Browser
 öffnet die Kommandozentrale, Systempartition ist auf die ganze Platte gewachsen (62,9 GB).
 
+Update-Test vom 2026-10-09: Image mit 1.35.1 gestartet, in der Oberfläche unter Einstellungen → System-Update „Erneut prüfen“,
+1.35.2 wurde gefunden, „Update starten“ lud die Images und startete neu (ca. 3 Minuten, Verbindungsfehler dazwischen sind erwartet).
+Danach „System ist aktuell“, Fußzeile v1.35.2, Oberfläche deutsch. `pull_policy: missing` im Image stört den Updater also nicht.
+Screenshots: `de/handbuch/bilder/roh/upd3…upd8`.
+
 ## Zugang im fertigen System
 
 Benutzer `nomad`, Passwort `nomad`, Autologin an. **Passwort ändern**, sobald das System im Netz steht (Handbuch).
@@ -38,6 +43,5 @@ Liegt auf x9 unter `/data/vms/image-build/`; noch nicht veröffentlicht.
 ## Offen
 
 - Erststart ohne Netzwerkkabel am echten PC prüfen (NetworkManager, WLAN-Auswahl).
-- Ob ein Update über die Oberfläche funktioniert, obwohl im Image `pull_policy: missing` statt `always` gilt (der Updater zieht Images selbst).
 - Kein erzwungener Passwortwechsel beim ersten Start; für Laien ggf. einen Dialog einbauen.
 - Schlüssel (SSH-Host-Schlüssel) entstehen je Stick beim ersten Start; die NOMAD-Zugangsdaten (APP_KEY, Datenbankpasswort) erzeugt der Installer ebenfalls erst dann.
