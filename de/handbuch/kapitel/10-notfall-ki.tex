@@ -3,52 +3,78 @@
 NOMAD kann einen Sprachassistenten (KI) betreiben, der \textbf{auf Ihrem Rechner} läuft: Sie stellen Fragen in ganzen Sätzen, die Antwort wird lokal berechnet. Es geht nichts ins Internet.
 
 \kasten{warnrot}{Was die KI nicht ist}{%
-Die KI kann sich irren und Dinge erfinden. Bei Medizin, Sicherheit, Recht und Chemikalien \textbf{prüfen Sie jede Antwort an den Quellen} in der Wissensbibliothek (Kapitel~5) oder in gedruckten Unterlagen. Sie ist ein Helfer zum Suchen und Erklären, kein Arzt.}
+Die KI kann sich irren und Dinge erfinden, \textbf{auch wenn sie eine Quelle nennt}. In unserem Test beantwortete ein kleines Modell die Frage „Wie viel Plattenplatz braucht NOMAD?“ mit einer erfundenen Geschichte über ein Funkgerät und nannte dazu die Quelle \texttt{faq.md} (Abbildung~\ref{fig:ki-antwort}). Bei Medizin, Sicherheit, Recht und Chemikalien \textbf{prüfen Sie jede Antwort an der Quelle} in der Wissensbibliothek (Kapitel~5) oder in gedruckten Unterlagen. Die KI ist ein Helfer zum Suchen und Erklären, kein Arzt.}
 
 \section{Was dafür nötig ist}
 \begin{itemize}[leftmargin=1.5em,itemsep=3pt]
-\item \textbf{Internet beim Einrichten:} Das Sprachmodell (je nach Größe 1 bis mehrere GB) wird einmal heruntergeladen.
-\item \textbf{Arbeitsspeicher:} Je größer das Modell, desto besser die Antworten, aber desto mehr Speicher und Zeit. Richtwerte*:
+\item \textbf{Internet beim Einrichten:} Das Sprachmodell (3 bis 7~GB) wird einmal heruntergeladen.
+\item \textbf{Genug Arbeitsspeicher:} Das Modell muss in den Arbeitsspeicher passen, zusätzlich braucht der Rechner etwa 2~GB für sich.
+\item \textbf{Geduld:} Auf Rechnern ohne Grafikkarte dauert eine Antwort Sekunden bis Minuten.
 \end{itemize}
+
+\section{Welches Modell?}
+Wir haben sechs Modelle mit deutschen Fragen zu Erster Hilfe und Trinkwasser getestet (Messrechner: moderner Desktop, 14 Kerne, \textbf{ohne} Grafikkarte). Die Zahlen sind „Wörter-Stücke“ (Token) pro Sekunde; als Faustregel entspricht eine Sekunde etwa einem bis zwei deutschen Wörtern.
 
 \begin{center}\small
 \renewcommand{\arraystretch}{1.3}
-\begin{tabularx}{\linewidth}{@{}>{\RaggedRight\arraybackslash}p{4.2cm}>{\RaggedRight\arraybackslash}p{3.5cm}X@{}}
+\begin{tabularx}{\linewidth}{@{}>{\RaggedRight\arraybackslash}p{2.8cm}r>{\RaggedRight\arraybackslash}p{1.9cm}>{\RaggedRight\arraybackslash}X@{}}
 \toprule
-\textbf{Rechner} & \textbf{Modellgröße*} & \textbf{Zu erwarten*} \\
+\textbf{Modell} & \textbf{Größe} & \textbf{Tempo} & \textbf{Antwortqualität (Deutsch)} \\
 \midrule
-Wenig Speicher (4--8~GB), keine Grafikkarte & ca. 1--3 Milliarden Parameter & einfache Fragen; langsam bis ordentlich \\
-\midrule
-Mittel (16~GB) & ca. 7--9 Milliarden & brauchbare deutsche Antworten, bei Rechnern ohne Grafikkarte einige Sekunden bis Minuten pro Antwort \\
-\midrule
-Grafikkarte (NVIDIA, 8~GB+ Speicher) & ca. 8--14 Milliarden & flott, bessere Qualität \\
+\texttt{gemma4:e4b} & \SI{6,6}{GB} & 14 pro s & \textbf{am besten}: korrekt, höflich, Notruf~112 genannt \\
+\texttt{qwen3:8b} & \SI{5,2}{GB} & 7 pro s & gut, aber langsam \\
+\texttt{gemma3:4b} & \SI{3,4}{GB} & 15 pro s & brauchbar bis gut, Wassermenge zu hoch \\
+\texttt{llama3.2:3b} & \SI{2,0}{GB} & 16 pro s & ungenau \\
+\texttt{qwen3:4b} & \SI{2,5}{GB} & 12 pro s & denkt laut auf Englisch, unbrauchbar \\
+\texttt{qwen3:1.7b} & \SI{1,4}{GB} & 26 pro s & \textbf{gefährlich falsch} (zum Beispiel „Blut in eine Plastiktüte sammeln“) \\
 \bottomrule
 \end{tabularx}
 \end{center}
-\small * Diese Richtwerte stammen aus allgemeiner Erfahrung und sind von uns für dieses Heft noch \textbf{nicht} auf Ihrem Rechner gemessen. NOMAD empfiehlt selbst, mit kleinen Modellen zu beginnen und größere auszuprobieren.\normalsize
+
+\kasten{nomadbraun}{Unsere Empfehlung}{%
+\textbf{16~GB Arbeitsspeicher oder mehr:} \texttt{gemma4:e4b}.\par
+\textbf{Etwa 8~GB, älterer Rechner:} \texttt{gemma3:4b}; rechnen Sie mit mehreren Minuten pro Antwort.\par
+\textbf{Nicht verwenden:} die Modelle der Reihe \texttt{qwen3} und alle Modelle unter 2~GB. Sie antworten bei Erster Hilfe falsch.\par
+Mit NVIDIA-Grafikkarte läuft alles deutlich schneller; das haben wir nicht gemessen.}
+
+\small Auf einem alten Rechner (4 Kerne, 8~GB, Baujahr 2013) brauchte \texttt{gemma3:4b} allein für das Lesen des Kontexts 3,5 Minuten, eine Antwort insgesamt zwei bis fünf Minuten. Zum Ausprobieren geht das, im Notfall ist es zu langsam.\normalsize
 
 \section{Einrichten}
 \begin{enumerate}[leftmargin=1.5em,itemsep=3pt]
 \item Internet anschließen.
-\item Startseite $\rightarrow$ \menue{Schnellstart} oder \menue{Einstellungen} $\rightarrow$ \menue{Apps verwalten}: den \textbf{KI-Assistenten} installieren.
-\item In den KI-Einstellungen ein \textbf{kleines} Modell wählen und laden. Erst probieren, dann ein größeres.
-\item Internet trennen, Frage stellen (Kapitel~6, Checkliste).
+\item Auf der Startseite \menue{Supply Depot} öffnen und den \textbf{KI-Assistenten} installieren (oder im Schnellstart anhaken). Das Bild zeigt die Seite; „KI-Assistent“ steht bei den installierten Apps.
+\item \menue{Einstellungen} $\rightarrow$ \menue{KI-Assistent}: Unter „Sprachmodelle“ das gewählte Modell laden (Abbildung~\ref{fig:ki-modelle}). Die Beschreibungen dort sind englisch.
+\item Zusätzlich lädt NOMAD das kleine Hilfsmodell \texttt{nomic-embed-text} (\SI{0,3}{GB}); es macht Texte durchsuchbar.
+\item Internet trennen und den Chat ausprobieren (Kapitel~6, Checkliste).
 \end{enumerate}
 
-\hinweis{Hat der Rechner eine NVIDIA-Grafikkarte, nutzt NOMAD sie, wenn der Installer sie erkennt (steht am Ende der Installation). Ohne Grafikkarte läuft die KI auf dem Prozessor und ist langsamer.}
+\bild[0.8]{ki03-supply-depot}{Supply Depot: Der KI-Assistent (Ollama) steht unter „Installiert“.}
+\bild[0.8]{ki05-modelle}{Unter „Einstellungen“ $\rightarrow$ „KI-Assistent“ finden Sie die Liste der Sprachmodelle.}\label{fig:ki-modelle}
 
-\section{Eigene Dokumente für die KI}
-In der Wissensdatenbank können Sie Dateien (PDF, Text) hochladen, aus denen die KI Antworten ableitet. Sinnvoll sind Ihre eigenen Notfallpläne, Telefonlisten, das Handbuch als PDF oder Medikamentenpläne der Familie.
+\section{Der Chat}
+\bild[0.85]{ki07-chat-leer}{Der Chat: oben das Modell und der Schalter „Wissensdatenbank“. Ist er an, sucht die KI vor jeder Antwort in Ihren Dokumenten.}
+\bild[0.85]{ki09-chat-antwort}{Eine Antwort mit „Quellen“-Hinweis. Die Antwort ist hier falsch: Eine genannte Quelle ist \textbf{kein Beweis}, dass der Inhalt stimmt.}\label{fig:ki-antwort}
 
-\kasten{hinweisblau}{Noch nicht geprüft}{%
-Ob die KI auch die per Kiwix geladenen Bücher (Wikipedia, Nachschlagewerke) \emph{selbst} nutzt, haben wir noch nicht abschließend geprüft. Verlassen Sie sich nicht darauf: Suchen Sie bei wichtigen Fragen selbst in der Wissensbibliothek.}
-
-\section{Fragen stellen}
 \begin{itemize}[leftmargin=1.5em,itemsep=3pt]
 \item Kurz und konkret fragen: „Wie bereite ich Wasser mit Tabletten auf?“
 \item Bei Zahlen und Dosierungen immer gegenprüfen.
-\item Antwort unklar? Frage anders formulieren oder die Quelle in der Wissensbibliothek lesen.
+\item Antwort unklar? Frage anders formulieren oder die Quelle in der Wissensbibliothek selbst lesen.
 \end{itemize}
+
+\section{Kann die KI auch Wikipedia und die Nachschlagewerke nutzen?}
+Ja, aber \textbf{nur, wenn Sie sie dafür vorbereiten} („indizieren“). Im Chat erscheint oben ein Hinweis „Ihre vorhandenen Dateien für KI-Assistent indizieren?“ mit dem Knopf \menue{Vorhandene Inhalte indizieren}.
+
+\achtung{Ein Klick startet das Indizieren aller geladenen Inhalte sofort, ohne Warnung. Das belegt den Rechner \textbf{stundenlang}: ungefähr eine Minute je MB Inhalt auf einem alten, 20 Sekunden je MB auf einem modernen Rechner (gemessen beziehungsweise hochgerechnet). Beispiel „Medizin, Essential“ (etwa 525~MB): alter Rechner rund 9 Stunden, moderner Rechner rund 3 Stunden. Währenddessen reagiert der Chat nicht oder bricht mit einem Fehler ab. Starten Sie das Indizieren nur über Nacht, nur mit Netzteil und mit wenig Inhalten.}
+
+\bild[0.85]{ki13-wissensdatenbank-liste}{Die Wissensdatenbank zeigt, welche Dateien gerade indiziert werden (hier die NOMAD-Anleitungen).}
+
+\kasten{warnrot}{Nicht alles wird durchsuchbar}{%
+Bücher, die als PDF im Kiwix-Paket stecken, bringen der KI fast nichts: Bei „Military Medicine“ (\SI{81}{MB}) und „Medical Library“ (\SI{70}{MB}) entstanden nur 1 beziehungsweise 2 Textstücke. Diese Bücher können Sie in der Wissensbibliothek (Kiwix) lesen, die KI kennt ihren Inhalt aber nicht. Wikipedia ließ sich dagegen vollständig indizieren (Seiten mit normalem Text). Wie gut die Treffer dann sind, haben wir noch nicht geprüft.}
+
+\section{Eigene Dokumente für die KI}
+In der Wissensdatenbank können Sie Dateien (PDF, Text) hochladen, aus denen die KI Antworten ableitet. Sinnvoll sind Ihre eigenen Notfallpläne, Telefonlisten, dieses Handbuch als PDF oder Medikamentenpläne der Familie. Kleine Dateien sind in Sekunden bis Minuten durchsuchbar.
+
+\hinweis{Das Feld „NOMAD.md“ im Chat enthält die Grundanweisungen für die KI. Die Vorlage ist englisch. Wenn die KI auf Englisch antwortet, tragen Sie dort als erste Zeile ein: „Antworte immer auf Deutsch und sieze den Benutzer.“}
 
 \section{Ihre Notizen zur KI}
 \renewcommand{\arraystretch}{1.9}
@@ -61,5 +87,7 @@ Größe auf der Platte & \\
 Dauer einer typischen Antwort & \\
 \midrule
 Hochgeladene Dokumente & \\
+\midrule
+Indizierte Inhalte (ja/nein, Datum) & \\
 \bottomrule
 \end{tabularx}

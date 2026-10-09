@@ -1,0 +1,100 @@
+
+=== qwen3:1.7b
+Laden: 2.0 s
+Prompt 2k: 1908 Token in 14.8 s = 129.1 Token/s; Antwort 25.7 Token/s
+- Q: Wie mache ich verschmutztes Wasser trinkbar, wenn ich nur ei…
+  Tempo 36.2 Token/s, 66 Token, 4 s gesamt
+  A: Mit einem Topf und einem Feuer kannst du verschmutztes Wasser trinkbar machen, indem du es mit Salz und Wasser mischst, dann den Topf abdeckst und das Feuer anstellt. Nachdem das Wasser köchelt, filtrierst du es mit einem Tuch.
+- Q: Was ist bei einer stark blutenden Wunde am Unterarm die rich…
+  Tempo 36.1 Token/s, 75 Token, 4 s gesamt
+  A: Bei einer stark blutenden Wunde am Unterarm ist die richtige Erste Hilfe, die Blutung zu stoppen, durch eine Klette zu verhindern und das Blut in eine Plastikbeutel oder eine Tüte zu sammeln. Es ist wichtig, den Menschen zu beruhigen und ihn nicht zu bewegen.
+- Q: Wie viel Wasser braucht ein Erwachsener im Notfall mindesten…
+  Tempo 37.6 Token/s, 24 Token, 2 s gesamt
+  A: Ein Erwachsener im Notfall braucht mindestens 2,5 Litern Wasser pro Tag.
+
+=== llama3.2:3b
+Laden: 2.3 s
+Prompt 2k: 1912 Token in 27.1 s = 70.5 Token/s; Antwort 15.9 Token/s
+- Q: Wie mache ich verschmutztes Wasser trinkbar, wenn ich nur ei…
+  Tempo 21.0 Token/s, 106 Token, 8 s gesamt
+  A: Um verschmutztes Wasser zu desinfizieren, kannst du es über ein Feuer erhitzen, um es zu sterilisieren. Fülle den Topf mit Wasser und bringe es zum Kochen. Dann reduziere die Hitze und lasse es für etwa 10-15 Minuten köcheln, um die meisten Bakterien und Schadstoffe zu eliminieren. Nachdem es gekocht hat, lasse es abkühlen, bevor du es trinkst.
+- Q: Was ist bei einer stark blutenden Wunde am Unterarm die rich…
+  Tempo 20.8 Token/s, 139 Token, 9 s gesamt
+  A: Bei einer stark blutenden Wunde am Unterarm ist es wichtig, sofortige Hilfe zu leisten. Zuerst sollte man die Wunde mit einem sauberen Tuch oder einem Verband abdecken, um Blutfluss zu stoppen. Dann sollte man die Wunde mit einem Druckverband abdecken, um weiteres Blut zu verhindern. Es ist auch ratsam, die Wunde nicht zu reinigen oder zu verarbeiten, da dies zu Infektionen führen kann. Es ist am besten, einen Arzt oder eine medizinische Fachkraft zu kontaktieren, um die Wunde zu behandeln.
+- Q: Wie viel Wasser braucht ein Erwachsener im Notfall mindesten…
+  Tempo 21.5 Token/s, 33 Token, 4 s gesamt
+  A: Ein Erwachsener benötigt mindestens 2 Liter Wasser pro Tag, um in einem Notfall ausreichend hydriert zu bleiben.
+
+=== gemma3:4b
+Laden: 4.1 s
+Prompt 2k: 1488 Token in 24.0 s = 62.0 Token/s; Antwort 14.8 Token/s
+- Q: Wie mache ich verschmutztes Wasser trinkbar, wenn ich nur ei…
+  Tempo 17.0 Token/s, 151 Token, 13 s gesamt
+  A: Wenn du verschmutztes Wasser mit nur einem Topf und Feuer trinkbar machen musst, ist die Abkochen die effektivste Methode. Erhitze das Wasser in dem Topf so heiß wie möglich für mindestens eine Minute, um Bakterien und Viren abzutöten.  Lass das Wasser nach dem Abkochen abkühlen und entferne eventuell Schwebstoffe, indem du es mit einem sauberen Tuch oder Stofffilter filtern kannst.  Es ist wichtig zu beachten, dass das Abkochen nur die meisten Krankheitserreger beseitigt, nicht aber Schwermetalle oder Chemikalien.  Trinke das gefilterte Wasser erst, wenn es vollständig abgekühlt ist.
+- Q: Was ist bei einer stark blutenden Wunde am Unterarm die rich…
+  Tempo 17.2 Token/s, 152 Token, 12 s gesamt
+  A: Bei einer stark blutenden Wunde am Unterarm ist die richtige Erste Hilfe entscheidend, um eine Blutstillung zu erreichen. Zuerst sollte man ruhig bleiben und die Wunde mit einer sauberen, sterilen Kompresse oder einem Tuch fest, aber nicht zu stark, eindrücken, bis das Blut austritt.  Wichtig ist, dass man den Druck nicht aufhebt, sondern ihn konstant hält.  Parallel dazu sollte man den Arm hochlagern, um den Blutdruck zu reduzieren und die Durchblutung zu verlangsamen.  Ruft man den Notruf (112) oder einen Arzt, sollte man die Wunde weiterhin mit Druck versorgen, bis professionelle Hilfe eintrifft.
+- Q: Wie viel Wasser braucht ein Erwachsener im Notfall mindesten…
+  Tempo 17.6 Token/s, 40 Token, 6 s gesamt
+  A: Ein Erwachsener im Notfall benötigt mindestens 3 bis 4 Liter Wasser pro Tag, um seinen Körper ausreichend zu hydratisieren und die grundlegenden Funktionen aufrechtzuerhalten.
+
+=== qwen3:4b
+Laden: 3.0 s
+Prompt 2k: 1902 Token in 36.8 s = 51.6 Token/s; Antwort 12.0 Token/s
+- Q: Wie mache ich verschmutztes Wasser trinkbar, wenn ich nur ei…
+  Tempo 16.2 Token/s, 220 Token, 17 s gesamt
+  A: Okay, let's tackle this question. The user wants to know how to make dirty water drinkable using only a pot and a fire. They need the answer in German, max five sentences.
+
+First, I need to think about the steps. Since they have a pot and a fire, the main methods would be boiling. Boiling is a common way to kill pathogens in water. So, the answer should involve boiling the water.
+
+Wait, but the user says "verschmutztes Wasser" which is dirty water. So, they need to purify it. Boiling is the standard method here. But maybe they need to clarify if there's any other step. But with just a pot and fire, boiling should be sufficient.
+
+Wait, in some cases, if the water is very dirty, maybe they need to filter first, but the user only has a pot and fire. So probably just boiling. Let me check.
+
+In German, the steps would be: Bringe das Wasser in den Topf, bringe es zum Kochen über dem Feuer, lasse es k
+- Q: Was ist bei einer stark blutenden Wunde am Unterarm die rich…
+  Tempo 16.2 Token/s, 220 Token, 17 s gesamt
+  A: Okay, I need to figure out the correct first aid for a severely bleeding wound on the forearm in German, and keep it to five sentences max.
+
+First, I should recall the standard first aid steps for bleeding. For severe bleeding, the main steps are applying direct pressure, elevating the area, and maybe using a tourniquet if necessary. But since it's the forearm, which is a bit more complex than an arm, but maybe the same steps apply.
+
+Wait, the user specified "stark blutende Wunde" which is a severely bleeding wound. So the first step is to apply pressure with a clean cloth or bandage. If that doesn't stop the bleeding, then elevate the arm above heart level. If it's still bleeding, maybe a tourniquet is needed, but tourniquets are for more severe cases where direct pressure isn't working. However, for the forearm, applying pressure directly is the first step.
+
+Wait, in German first aid guidelines, they might have specific terms. Let me think. The correct steps would be: 1
+- Q: Wie viel Wasser braucht ein Erwachsener im Notfall mindesten…
+  Tempo 16.4 Token/s, 220 Token, 17 s gesamt
+  A: Okay, I need to figure out how much water an adult needs at least per day in an emergency situation, and answer in German in one sentence.
+
+First, I should recall the general daily water intake for adults. Normally, it's around 2-3 liters, but in an emergency, maybe it's different. Wait, the question is about the minimum in an emergency. Emergency situations might mean limited access to water, so maybe the minimum required to survive.
+
+I remember that in survival situations, the minimum water intake to avoid dehydration is about 1 liter per day. But I'm not sure. Wait, some sources say that the human body can survive without water for about 3 days, but that's not helpful here. The question is about the minimum per day.
+
+Wait, maybe in an emergency context, like if someone is stranded, they need at least 1 liter per day to prevent severe dehydration. But I should check.
+
+Alternatively, the standard recommendation for adults in normal conditions is about 2 liters per day, but in emergencies, maybe less. Wait, no, the question
+
+=== qwen3:8b
+Laden: 4.6 s
+Prompt 2k: 1908 Token in 66.0 s = 28.9 Token/s; Antwort 7.3 Token/s
+- Q: Wie mache ich verschmutztes Wasser trinkbar, wenn ich nur ei…
+  Tempo 8.7 Token/s, 129 Token, 21 s gesamt
+  A: Um verschmutztes Wasser trinkbar zu machen, kochst du es in dem Topf mit Feuer zunächst auf, um Bakterien und Schadstoffe zu töten. Danach lässt du das Wasser abkühlen und filterst es ggf. mit einem Tuch oder einer Pflanze wie der Rohrkolbenpflanze. Falls möglich, fügst du einen Tropfen Jod oder einen Tropfen Chlor zur Desinfektion hinzu. Achte darauf, dass das Wasser nicht zu stark verschmutzt ist, damit die Methode wirksam bleibt.
+- Q: Was ist bei einer stark blutenden Wunde am Unterarm die rich…
+  Tempo 8.7 Token/s, 123 Token, 20 s gesamt
+  A: Bei einer stark blutenden Wunde am Unterarm sollte man zunächst den Druck mit sauberen Verbandmaterialien oder einem Tuch auf die Wunde ausüben, um das Blutung zu stillen. Falls der Druck nicht ausreicht, sollte man den Verletzten so schnell wie möglich zum Notarzt bringen. Während der Transport sollte der Druck weiterhin angelegt bleiben. Man sollte dabei darauf achten, keine Fremdkörper in die Wunde zu setzen und die Verletzung nicht zu reinigen, um Infektionen zu vermeiden.
+- Q: Wie viel Wasser braucht ein Erwachsener im Notfall mindesten…
+  Tempo 8.9 Token/s, 37 Token, 10 s gesamt
+  A: Ein Erwachsener benötigt im Notfall mindestens 1 bis 2 Liter Wasser pro Tag, um seine körperlichen Bedürfnisse zu decken.
+
+=== gemma4:e4b
+Laden: 5.7 s
+Prompt 2k: 1485 Token in 29.5 s = 50.4 Token/s; Antwort 13.7 Token/s
+- Q: Wie mache ich verschmutztes Wasser trinkbar, wenn ich nur ei…
+  Tempo 10.2 Token/s, 84 Token, 15 s gesamt
+  A: Das Wichtigste ist, das Wasser abzukochen. Gießen Sie das verschmutzte Wasser in den Topf und bringen Sie es zum sprudelnden Kochen. Lassen Sie es anschließend mindestens eine volle Minute (bei höheren Lagen länger) stark kochen. Das Abkochen tötet die meisten Krankheitserreger ab. Danach lassen Sie das Wasser abkühlen, bevor Sie es trinken.
+- Q: Was ist bei einer stark blutenden Wunde am Unterarm die rich…
+  Tempo 11.9 Token/s, 118 Token, 16 s gesamt
+  A: Bei einer stark blutenden Wunde am Unterarm ist **sofort Druck** mit einem sauberen Tuch oder Verband auf die Wunde auszuüben. Halten Sie den Druck fest und ununterbrochen, um die Blutung zu stoppen. Wenn der direkte Druck nicht ausreicht, können Sie eine **Hochlagerung** des Arms anwenden. Sollte die Blutung sehr stark sein und nicht aufhört, rufen Sie **umgehend den Notarzt (112)**. Entfernen Sie keine feststeckenden Fremdkörper.
+- Q: Wie viel Wasser braucht ein Erwachsener im Notfall mindesten…
+  Tempo 16.8 Token/s, 30 Token, 8 s gesamt
+  A: Im Notfall benötigt ein Erwachsener mindestens 2 bis 3 Liter Wasser pro Tag, um eine ausreichende Hydratation zu gewährleisten.
