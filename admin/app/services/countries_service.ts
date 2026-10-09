@@ -79,6 +79,31 @@ const EXTRA_GROUPS: { id: string; name: string; description: string; countries: 
     description: 'Deutschland, Österreich, Schweiz und Liechtenstein.',
     countries: ['AT', 'CH', 'DE', 'LI'],
   },
+  {
+    id: 'europa',
+    name: 'Europa (inkl. Schweiz)',
+    description: 'Westliches, nördliches, südliches und mittleres Europa mit Schweiz, Großbritannien und Irland (ohne Russland, Belarus, Ukraine).',
+    countries: [
+      'AD', 'AL', 'AT', 'BA', 'BE', 'BG', 'CH', 'CY', 'CZ', 'DE', 'DK', 'EE', 'ES', 'FI', 'FR', 'GB', 'GR', 'HR', 'HU', 'IE',
+      'IS', 'IT', 'LI', 'LT', 'LU', 'LV', 'MC', 'MD', 'ME', 'MK', 'MT', 'NL', 'NO', 'PL', 'PT', 'RO', 'RS', 'SE', 'SI', 'SK',
+      'SM', 'XK',
+    ],
+  },
+  {
+    id: 'skandinavien',
+    name: 'Skandinavien',
+    description: 'Norwegen, Schweden, Dänemark, Finnland und Island.',
+    countries: ['DK', 'FI', 'IS', 'NO', 'SE'],
+  },
+  {
+    id: 'mittelmeer',
+    name: 'Mittelmeer',
+    description: 'Alle Anrainerstaaten des Mittelmeers in Europa, Nordafrika und dem Nahen Osten.',
+    countries: [
+      'AL', 'BA', 'CY', 'DZ', 'EG', 'ES', 'FR', 'GR', 'HR', 'IL', 'IT', 'LB', 'LY', 'MA', 'MC', 'ME', 'MT', 'PS', 'SI', 'SY',
+      'TN', 'TR',
+    ],
+  },
 ]
 
 export class CountriesService {
