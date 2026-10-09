@@ -31,6 +31,12 @@ jobs:
       # unveränderten Upstream fehl (siehe de/STAND.md); die volle Suite
       # (npm run test:unit) wäre dauerhaft rot.
       - name: Unit-Tests (deutsche Fassung)
-        run: node --import ts-node-maintained/register/esm --test tests/unit/i18n_*.spec.ts
+        run: node --import ts-node-maintained/register/esm --test tests/unit/i18n_*.spec.ts tests/unit/catalogs_de.spec.ts
+      - name: Übersetzungsdienst (Python-Tests, ohne Bergamot)
+        working-directory: .
+        run: |
+          python3 install/nomad-translate/test_blocks.py
+          python3 install/nomad-translate/test_fetch_models.py
+          python3 install/nomad-translate/test_de_zusatz.py
       - name: Typecheck und Build
         run: npm run typecheck && npm run build
