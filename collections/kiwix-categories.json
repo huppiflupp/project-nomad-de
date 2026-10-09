@@ -683,14 +683,6 @@
               "description": "Docker container reference and guides",
               "url": "https://download.kiwix.org/zim/devdocs/devdocs_en_docker_2026-07.zim",
               "size_mb": 2
-            },
-            {
-              "id": "devdocs_en_bash",
-              "version": "2026-01",
-              "title": "Linux Documentation",
-              "description": "Linux command reference and system administration",
-              "url": "https://download.kiwix.org/zim/devdocs/devdocs_en_bash_2026-01.zim",
-              "size_mb": 1
             }
           ]
         }
