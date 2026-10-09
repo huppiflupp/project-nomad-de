@@ -1,4 +1,4 @@
-import { forwardRef, useImperativeHandle, useState } from 'react'
+import { forwardRef, useImperativeHandle, useMemo, useState } from 'react'
 import Uppy from '@uppy/core'
 import '@uppy/core/css/style.min.css'
 import '@uppy/dashboard/css/style.min.css'
@@ -50,6 +50,24 @@ const FileUploader = forwardRef<FileUploaderRef, FileUploaderProps>((props, ref)
     return uppy
   })
 
+  // Stabile Referenz: ein bei jedem Rendern neues Objekt lässt das Uppy-Dashboard in eine Endlosschleife laufen
+  // („Maximum update depth exceeded“, leere Seite).
+  const locale = useMemo(
+    () => ({
+      strings: {
+        dropPasteFiles: t('Drop files here or %{browseFiles}'),
+        browseFiles: t('browse files'),
+        dropHint: t('Drop your files here'),
+        addMore: t('Add more'),
+        addMoreFiles: t('Add more files'),
+        removeFile: t('Remove file'),
+        cancel: t('Cancel'),
+        done: t('Done'),
+      },
+    }),
+    []
+  )
+
   useImperativeHandle(ref, () => ({
     clear: () => {
       uppy.clear()
@@ -88,18 +106,7 @@ const FileUploader = forwardRef<FileUploaderRef, FileUploaderProps>((props, ref)
       width={'100%'}
       height={'250px'}
       hideUploadButton
-      locale={{
-        strings: {
-          dropPasteFiles: t('Drop files here or %{browseFiles}'),
-          browseFiles: t('browse files'),
-          dropHint: t('Drop your files here'),
-          addMore: t('Add more'),
-          addMoreFiles: t('Add more files'),
-          removeFile: t('Remove file'),
-          cancel: t('Cancel'),
-          done: t('Done'),
-        },
-      }}
+      locale={locale}
       disabled={disabled}
       className={classNames(className)}
     />

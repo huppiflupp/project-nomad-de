@@ -125,5 +125,21 @@ for (const p of PAGES) {
   } else report.push({ page: 'easy-setup Stufen-Dialog', lang, error: 'Kategorie nicht gefunden (Katalog nicht geladen?)' })
   await page.close()
 }
+// Interaktion 4: Dialoge, die per Klick aufgehen, dürfen die Seite nicht abstürzen lassen (JS-Fehler = leere Seite).
+// Anlass: v1.35.3 – ein bei jedem Rendern neues `locale`-Objekt ließ den Upload-Dialog der Wissensdatenbank in eine Endlosschleife laufen.
+{
+  const page = await ctx.newPage()
+  const fehler = []
+  page.on('pageerror', (e) => fehler.push(String(e).slice(0, 160)))
+  await page.goto(base + '/chat', { waitUntil: 'networkidle' }).catch(() => {})
+  const knopf = page.getByRole('button', { name: lang === 'de' ? /Wissensdatenbank/ : /Knowledge Base/ }).first()
+  if (await knopf.count()) {
+    await knopf.click()
+    await page.waitForTimeout(2000)
+    const laenge = (await page.innerText('body')).length
+    report.push({ page: 'chat Wissensdatenbank-Dialog', lang, ...(fehler.length || laenge < 50 ? { error: `Seite abgestürzt: ${fehler[0] ?? 'leer'}` } : { ok: true }) })
+  } else report.push({ page: 'chat Wissensdatenbank-Dialog', lang, skipped: 'KI-Assistent nicht installiert' })
+  await page.close()
+}
 await browser.close()
 console.log(JSON.stringify(report, null, 1))
