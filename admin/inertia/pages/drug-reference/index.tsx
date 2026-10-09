@@ -463,6 +463,10 @@ export default function DrugReferenceIndex({
         <div className="p-4 max-w-4xl mx-auto">
           <PageHeader rowCount={rowCount} />
           <DrugDisclaimerModal open={showDisclaimer} onAcknowledge={() => setShowDisclaimer(false)} />
+
+        <div className="mb-4 rounded-lg border border-desert-orange/40 bg-desert-orange/10 p-3 text-sm text-text-primary">
+          <strong>{t('US data, in English.')}</strong> {t('These drug labels come from the US FDA. Medicine names, brands and approvals differ in Germany, Austria and Switzerland — for example paracetamol is called acetaminophen here. Ask a pharmacist or doctor before using any medicine.')}
+        </div>
           <div className="border-2 border-dashed border-desert-stone-lighter rounded-2xl p-8 text-center bg-desert-white">
             <p className="text-lg font-semibold mb-2 text-desert-green-darker">No FDA drug data yet</p>
             <p className="mb-6 opacity-70">
