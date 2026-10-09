@@ -1,5 +1,5 @@
 {
-  "spec_version": "2026-08-02",
+  "spec_version": "2026-10-09",
   "options": [
     {
       "id": "none",
@@ -8,6 +8,46 @@
       "size_mb": 0,
       "url": null,
       "version": null
+    },
+    {
+      "id": "de-top-mini",
+      "name": "Deutsche Wikipedia – Schnellreferenz",
+      "description": "Die wichtigsten deutschen Artikel in Kurzfassung. Gut zum schnellen Nachschlagen.",
+      "size_mb": 137,
+      "url": "https://download.kiwix.org/zim/wikipedia/wikipedia_de_top_mini_2026-07.zim",
+      "version": "2026-07"
+    },
+    {
+      "id": "de-top-nopic",
+      "name": "Deutsche Wikipedia – Beliebte Artikel",
+      "description": "Die wichtigsten deutschen Artikel in voller Länge, ohne Bilder. Guter Mittelweg zwischen Inhalt und Größe.",
+      "size_mb": 1215,
+      "url": "https://download.kiwix.org/zim/wikipedia/wikipedia_de_top_nopic_2026-07.zim",
+      "version": "2026-07"
+    },
+    {
+      "id": "de-all-mini",
+      "name": "Deutsche Wikipedia – Komplett (Kompakt)",
+      "description": "Alle deutschen Artikel, jeweils nur die Einleitung.",
+      "size_mb": 4686,
+      "url": "https://download.kiwix.org/zim/wikipedia/wikipedia_de_all_mini_2026-10.zim",
+      "version": "2026-10"
+    },
+    {
+      "id": "de-all-nopic",
+      "name": "Deutsche Wikipedia – Komplett (ohne Bilder)",
+      "description": "Alle deutschen Artikel in voller Länge, ohne Bilder. Umfassendes Offline-Nachschlagewerk.",
+      "size_mb": 18585,
+      "url": "https://download.kiwix.org/zim/wikipedia/wikipedia_de_all_nopic_2026-10.zim",
+      "version": "2026-10"
+    },
+    {
+      "id": "de-all-maxi",
+      "name": "Deutsche Wikipedia – Komplett (Vollständig)",
+      "description": "Alle deutschen Artikel mit Bildern und Medien. Nur für große Datenträger.",
+      "size_mb": 52392,
+      "url": "https://download.kiwix.org/zim/wikipedia/wikipedia_de_all_maxi_2026-01.zim",
+      "version": "2026-01"
     },
     {
       "id": "top-mini",

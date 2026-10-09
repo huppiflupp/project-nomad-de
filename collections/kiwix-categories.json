@@ -1,5 +1,5 @@
 {
-  "spec_version": "2026-03-15",
+  "spec_version": "2026-10-09",
   "categories": [
     {
       "name": "Medicine",
@@ -683,6 +683,281 @@
               "description": "Docker container reference and guides",
               "url": "https://download.kiwix.org/zim/devdocs/devdocs_en_docker_2026-07.zim",
               "size_mb": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Medizin (Deutsch)",
+      "slug": "medizin-de",
+      "icon": "IconStethoscope",
+      "description": "Deutschsprachige Medizin: Medizin-Enzyklopädie und Grundlagen aus der Wikipedia.",
+      "language": "de",
+      "tiers": [
+        {
+          "name": "Basis",
+          "slug": "medizin-de-basis",
+          "description": "Medizin-Enzyklopädie der deutschen Wikipedia (WikiMed), ohne Bilder.",
+          "recommended": true,
+          "resources": [
+            {
+              "id": "wikipedia_de_medicine_nopic",
+              "version": "2026-07",
+              "title": "Wikipedia Medizin (WikiMed)",
+              "description": "Die medizinischen Artikel der deutschen Wikipedia, ohne Bilder.",
+              "url": "https://download.kiwix.org/zim/wikipedia/wikipedia_de_medicine_nopic_2026-07.zim",
+              "size_mb": 160
+            }
+          ]
+        },
+        {
+          "name": "Standard",
+          "slug": "medizin-de-standard",
+          "description": "Dazu die biologischen Grundlagen. Enthält alles aus Basis.",
+          "includesTier": "medizin-de-basis",
+          "resources": [
+            {
+              "id": "wikipedia_de_molcell_nopic",
+              "version": "2026-07",
+              "title": "Wikipedia Molekular- und Zellbiologie",
+              "description": "Biologische Grundlagen der Medizin, ohne Bilder.",
+              "url": "https://download.kiwix.org/zim/wikipedia/wikipedia_de_molcell_nopic_2026-07.zim",
+              "size_mb": 40
+            }
+          ]
+        },
+        {
+          "name": "Umfassend",
+          "slug": "medizin-de-umfassend",
+          "description": "Medizin-Enzyklopädie mit Bildern. Enthält alles aus Standard.",
+          "includesTier": "medizin-de-standard",
+          "resources": [
+            {
+              "id": "wikipedia_de_medicine_maxi",
+              "version": "2026-07",
+              "title": "Wikipedia Medizin (WikiMed) mit Bildern",
+              "description": "Die medizinischen Artikel mit Abbildungen und Grafiken.",
+              "url": "https://download.kiwix.org/zim/wikipedia/wikipedia_de_medicine_maxi_2026-07.zim",
+              "size_mb": 488
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Nachschlagen und Lernen (Deutsch)",
+      "slug": "bildung-de",
+      "icon": "IconSchool",
+      "description": "Deutschsprachige Nachschlagewerke, Lehrbücher und Lernmaterial.",
+      "language": "de",
+      "tiers": [
+        {
+          "name": "Basis",
+          "slug": "bildung-de-basis",
+          "description": "Kinderlexikon, Simulationen und Rechtschreibhilfe. Klein und sofort nützlich.",
+          "recommended": true,
+          "resources": [
+            {
+              "id": "klexikon_de_all_nopic",
+              "version": "2026-08",
+              "title": "Klexikon – das Kinderlexikon",
+              "description": "Verständliche Erklärungen für Kinder, auch für Erwachsene gut zum Einstieg.",
+              "url": "https://download.kiwix.org/zim/other/klexikon_de_all_nopic_2026-08.zim",
+              "size_mb": 10
+            },
+            {
+              "id": "phet_de_all",
+              "version": "2026-08",
+              "title": "PhET Interaktive Simulationen",
+              "description": "Physik, Chemie, Biologie und Mathematik zum Ausprobieren.",
+              "url": "https://download.kiwix.org/zim/phet/phet_de_all_2026-08.zim",
+              "size_mb": 109
+            },
+            {
+              "id": "wikipedia_de_mathematics_nopic",
+              "version": "2026-07",
+              "title": "Wikipedia Mathematik",
+              "description": "Mathematik-Artikel der deutschen Wikipedia, ohne Bilder.",
+              "url": "https://download.kiwix.org/zim/wikipedia/wikipedia_de_mathematics_nopic_2026-07.zim",
+              "size_mb": 142
+            }
+          ]
+        },
+        {
+          "name": "Standard",
+          "slug": "bildung-de-standard",
+          "description": "Lehrbücher, Hochschulkurse, Wörterbuch und Naturwissenschaften. Enthält alles aus Basis.",
+          "includesTier": "bildung-de-basis",
+          "resources": [
+            {
+              "id": "wikibooks_de_all_nopic",
+              "version": "2026-01",
+              "title": "Wikibooks",
+              "description": "Freie deutsche Lehr- und Sachbücher, ohne Bilder.",
+              "url": "https://download.kiwix.org/zim/wikibooks/wikibooks_de_all_nopic_2026-01.zim",
+              "size_mb": 2865
+            },
+            {
+              "id": "wikiversity_de_all_nopic",
+              "version": "2026-07",
+              "title": "Wikiversity",
+              "description": "Freie Lernressourcen und Kurse, ohne Bilder.",
+              "url": "https://download.kiwix.org/zim/wikiversity/wikiversity_de_all_nopic_2026-07.zim",
+              "size_mb": 1224
+            },
+            {
+              "id": "wiktionary_de_all_nopic",
+              "version": "2026-07",
+              "title": "Wiktionary",
+              "description": "Deutsches Wörterbuch mit Bedeutung, Herkunft und Grammatik.",
+              "url": "https://download.kiwix.org/zim/wiktionary/wiktionary_de_all_nopic_2026-07.zim",
+              "size_mb": 1305
+            },
+            {
+              "id": "wikipedia_de_physics_nopic",
+              "version": "2026-07",
+              "title": "Wikipedia Physik",
+              "description": "Physik-Artikel der deutschen Wikipedia, ohne Bilder.",
+              "url": "https://download.kiwix.org/zim/wikipedia/wikipedia_de_physics_nopic_2026-07.zim",
+              "size_mb": 125
+            },
+            {
+              "id": "wikipedia_de_chemistry_nopic",
+              "version": "2026-07",
+              "title": "Wikipedia Chemie",
+              "description": "Chemie-Artikel der deutschen Wikipedia, ohne Bilder.",
+              "url": "https://download.kiwix.org/zim/wikipedia/wikipedia_de_chemistry_nopic_2026-07.zim",
+              "size_mb": 45
+            },
+            {
+              "id": "wikipedia_de_geography_nopic",
+              "version": "2026-07",
+              "title": "Wikipedia Geographie",
+              "description": "Länder, Städte und Landschaften, ohne Bilder.",
+              "url": "https://download.kiwix.org/zim/wikipedia/wikipedia_de_geography_nopic_2026-07.zim",
+              "size_mb": 75
+            },
+            {
+              "id": "wikipedia_de_history_nopic",
+              "version": "2026-07",
+              "title": "Wikipedia Geschichte",
+              "description": "Geschichts-Artikel der deutschen Wikipedia, ohne Bilder.",
+              "url": "https://download.kiwix.org/zim/wikipedia/wikipedia_de_history_nopic_2026-07.zim",
+              "size_mb": 217
+            },
+            {
+              "id": "wikipedia_de_climate-change_nopic",
+              "version": "2026-07",
+              "title": "Wikipedia Klimawandel",
+              "description": "Artikel zu Klima und Klimawandel, ohne Bilder.",
+              "url": "https://download.kiwix.org/zim/wikipedia/wikipedia_de_climate-change_nopic_2026-07.zim",
+              "size_mb": 27
+            },
+            {
+              "id": "wikivoyage_de_all_nopic",
+              "version": "2026-07",
+              "title": "Wikivoyage",
+              "description": "Reiseführer der deutschen Wikivoyage, ohne Bilder.",
+              "url": "https://download.kiwix.org/zim/wikivoyage/wikivoyage_de_all_nopic_2026-07.zim",
+              "size_mb": 179
+            }
+          ]
+        },
+        {
+          "name": "Umfassend",
+          "slug": "bildung-de-umfassend",
+          "description": "Dazu Quellentexte und die deutsche Literatur. Enthält alles aus Standard.",
+          "includesTier": "bildung-de-standard",
+          "resources": [
+            {
+              "id": "wikisource_de_all_nopic",
+              "version": "2026-09",
+              "title": "Wikisource",
+              "description": "Freie Quellentexte und Dokumente, ohne Bilder.",
+              "url": "https://download.kiwix.org/zim/wikisource/wikisource_de_all_nopic_2026-09.zim",
+              "size_mb": 1205
+            },
+            {
+              "id": "gutenberg_de_all",
+              "version": "2026-01",
+              "title": "Projekt Gutenberg – Bibliothek",
+              "description": "Tausende deutsche Bücher und Klassiker der Literatur.",
+              "url": "https://download.kiwix.org/zim/gutenberg/gutenberg_de_all_2026-01.zim",
+              "size_mb": 11045
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Alltag und Technik (Deutsch)",
+      "slug": "alltag-de",
+      "icon": "IconTool",
+      "description": "Deutschsprachige Anleitungen: Kochen, Computer und Reparieren.",
+      "language": "de",
+      "tiers": [
+        {
+          "name": "Basis",
+          "slug": "alltag-de-basis",
+          "description": "Koch-Rezepte und Programmieren lernen. Sehr klein.",
+          "recommended": true,
+          "resources": [
+            {
+              "id": "kochwiki.org_de_all_nopic",
+              "version": "2026-07",
+              "title": "Koch-Wiki",
+              "description": "Rezepte und Kochtechniken, ohne Bilder.",
+              "url": "https://download.kiwix.org/zim/other/kochwiki.org_de_all_nopic_2026-07.zim",
+              "size_mb": 21
+            },
+            {
+              "id": "freecodecamp_de_all",
+              "version": "2026-08",
+              "title": "freeCodeCamp",
+              "description": "Programmieren lernen mit deutschen Tutorials.",
+              "url": "https://download.kiwix.org/zim/freecodecamp/freecodecamp_de_all_2026-08.zim",
+              "size_mb": 7
+            }
+          ]
+        },
+        {
+          "name": "Standard",
+          "slug": "alltag-de-standard",
+          "description": "Dazu Koch-Wiki mit Bildern und Informatik-Artikel. Enthält alles aus Basis.",
+          "includesTier": "alltag-de-basis",
+          "resources": [
+            {
+              "id": "kochwiki.org_de_all_maxi",
+              "version": "2026-07",
+              "title": "Koch-Wiki mit Bildern",
+              "description": "Rezepte und Kochtechniken mit Fotos.",
+              "url": "https://download.kiwix.org/zim/other/kochwiki.org_de_all_maxi_2026-07.zim",
+              "size_mb": 70
+            },
+            {
+              "id": "wikipedia_de_computer_nopic",
+              "version": "2026-07",
+              "title": "Wikipedia Informatik",
+              "description": "Informatik-Artikel der deutschen Wikipedia, ohne Bilder.",
+              "url": "https://download.kiwix.org/zim/wikipedia/wikipedia_de_computer_nopic_2026-07.zim",
+              "size_mb": 112
+            }
+          ]
+        },
+        {
+          "name": "Umfassend",
+          "slug": "alltag-de-umfassend",
+          "description": "Dazu die deutschen iFixit-Reparaturanleitungen. Enthält alles aus Standard.",
+          "includesTier": "alltag-de-standard",
+          "resources": [
+            {
+              "id": "ifixit_de_all",
+              "version": "2026-03",
+              "title": "iFixit Reparaturanleitungen",
+              "description": "Schritt-für-Schritt-Anleitungen zum Reparieren von Geräten.",
+              "url": "https://download.kiwix.org/zim/ifixit/ifixit_de_all_2026-03.zim",
+              "size_mb": 3593
             }
           ]
         }

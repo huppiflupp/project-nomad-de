@@ -71,6 +71,16 @@ const GROUP_META: Record<string, { id: string; name: string; description: string
   },
 }
 
+// Zusätzliche Schnellauswahl für die deutsche Fassung: der deutschsprachige Raum (steht vor den Kontinenten).
+const EXTRA_GROUPS: { id: string; name: string; description: string; countries: string[] }[] = [
+  {
+    id: 'dach',
+    name: 'DACH',
+    description: 'Deutschland, Österreich, Schweiz und Liechtenstein.',
+    countries: ['AT', 'CH', 'DE', 'LI'],
+  },
+]
+
 export class CountriesService {
   private static instance: CountriesService | null = null
   private loadPromise: Promise<void> | null = null
@@ -146,9 +156,14 @@ export class CountriesService {
       return [{ id: meta.id, name: meta.name, description: meta.description, countries: codes }]
     })
 
+    const extra: CountryGroup[] = EXTRA_GROUPS.flatMap((g) => {
+      const codes = g.countries.filter((c) => byCode.has(c as CountryCode)) as CountryCode[]
+      return codes.length ? [{ id: g.id, name: g.name, description: g.description, countries: codes }] : []
+    })
+
     this.countries = countries
     this.byCode = byCode
-    this.groups = groups
+    this.groups = [...extra, ...groups]
 
     logger.info(
       `[CountriesService] Loaded ${countries.length} countries across ${groups.length} groups`
