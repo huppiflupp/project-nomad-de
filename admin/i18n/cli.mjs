@@ -97,6 +97,8 @@ export function collectCatalog(root) {
   const visit = (v, file) => {
     if (Array.isArray(v)) return v.forEach((x) => visit(x, file))
     if (!v || typeof v !== 'object') return
+    // Von uns auf Deutsch geschriebene Einträge (Kategorien mit language "de", Wikipedia-Optionen "de-…") brauchen keine Übersetzung.
+    if (v.language === 'de' || (typeof v.id === 'string' && v.id.startsWith('de-'))) return
     for (const [k, x] of Object.entries(v)) {
       if (typeof x === 'string' && CATALOG_JSON_KEYS.has(k)) {
         const n = normalize(x)

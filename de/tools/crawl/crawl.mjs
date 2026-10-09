@@ -115,7 +115,7 @@ for (const p of PAGES) {
     await next.click()
     await page.waitForLoadState('networkidle')
   }
-  const card = page.getByText(lang === 'de' ? 'Medizin' : 'Medicine', { exact: true }).first()
+  const card = page.getByText(lang === 'de' ? 'Medizin (Deutsch)' : 'Medicine', { exact: true }).first()
   if (await card.count()) {
     await card.click()
     await page.waitForTimeout(500)

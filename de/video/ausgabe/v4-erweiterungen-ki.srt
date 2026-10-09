@@ -135,33 +135,33 @@ In unserem Test antwortete das Modell auf dem Prozessor mit vierzehn Token pro S
 NOMAD kann die KI auch von einem zweiten, stärkeren Rechner im Heimnetz beziehen, zum Beispiel über llama punkt c p p.
 
 35
-00:02:37,754 --> 00:02:39,972
+00:02:37,754 --> 00:02:39,999
 Zur Ehrlichkeit gehören die Grenzen.
 
 36
-00:02:39,972 --> 00:02:44,851
+00:02:39,999 --> 00:02:44,938
 Nachschlagewerke, die als PDF vorliegen, kann die KI praktisch nicht durchsuchen.
 
 37
-00:02:44,851 --> 00:02:47,068
+00:02:44,938 --> 00:02:47,183
 Große Wikipedia-Pakete brauchen viele Stunden.
 
 38
-00:02:47,068 --> 00:02:49,286
-Die Inhalte sind überwiegend englisch.
+00:02:47,183 --> 00:02:52,122
+Überleben, Vorsorge und medizinische Nachschlagewerke gibt es bisher nur auf Englisch.
 
 39
-00:02:49,286 --> 00:02:54,608
+00:02:52,122 --> 00:02:57,510
 Und die KI ist ein Helfer zum Suchen und Erklären, kein Arzt.
 
 40
-00:02:55,208 --> 00:02:57,914
+00:02:58,110 --> 00:03:00,816
 Das war der Überblick über die Erweiterungen.
 
 41
-00:02:57,914 --> 00:03:03,711
+00:03:00,816 --> 00:03:06,614
 Alles Weitere steht im Handbuch, das Sie als PDF und als Webseite im Projekt finden.
 
 42
-00:03:03,711 --> 00:03:05,257
+00:03:06,614 --> 00:03:08,160
 Vielen Dank fürs Zuschauen.

@@ -135,117 +135,117 @@ Hier finden Sie Karten, den Schnellstart zum Einrichten, das Supply Depot für w
 Alles ist auf Deutsch.
 
 35
-00:01:44,948 --> 00:01:46,687
+00:01:44,948 --> 00:01:46,623
 Was steckt in NOMAD?
 
 36
-00:01:46,687 --> 00:01:51,033
-Wikipedia und viele Nachschlagewerke, zum Beispiel zu Medizin und Überleben.
+00:01:46,623 --> 00:01:53,324
+Die deutsche und die englische Wikipedia und viele Nachschlagewerke, zum Beispiel zu Medizin, Kochen und Reparieren.
 
 37
-00:01:51,033 --> 00:01:55,380
+00:01:53,324 --> 00:01:57,511
 Karten, bei denen Sie ganze Länder wählen können, auch Deutschland.
 
 38
-00:01:55,380 --> 00:01:55,815
+00:01:57,511 --> 00:01:57,930
 Lernmaterial.
 
 39
-00:01:55,815 --> 00:02:00,162
+00:01:57,930 --> 00:02:02,118
 Ein Chat mit einer KI, die auf Ihrem Rechner läuft.
 
 40
-00:02:00,162 --> 00:02:01,901
+00:02:02,118 --> 00:02:03,793
 Und Ihre eigenen Dokumente.
 
 41
-00:02:02,501 --> 00:02:05,101
+00:02:04,393 --> 00:02:06,994
 Der einfachste Weg ist eine USB-SSD.
 
 42
-00:02:05,101 --> 00:02:10,302
+00:02:06,994 --> 00:02:12,195
 Das ist eine kleine, schnelle Festplatte am Kabel mit mindestens 512 Gigabyte.
 
 43
-00:02:10,302 --> 00:02:12,903
+00:02:12,195 --> 00:02:14,796
 Darauf schreiben Sie ein fertiges System.
 
 44
-00:02:12,903 --> 00:02:16,804
+00:02:14,796 --> 00:02:18,696
 Dann starten Sie Ihren vorhandenen Windows-Rechner von dieser Platte.
 
 45
-00:02:16,804 --> 00:02:20,272
+00:02:18,696 --> 00:02:22,164
 Windows selbst bleibt unberührt, es wird nichts gelöscht.
 
 46
-00:02:20,872 --> 00:02:23,316
+00:02:22,764 --> 00:02:25,209
 Ab wann geht es ohne Internet?
 
 47
-00:02:23,316 --> 00:02:26,983
+00:02:25,209 --> 00:02:28,876
 Direkt nach dem Start können Sie die Anleitungen lesen.
 
 48
-00:02:26,983 --> 00:02:31,873
+00:02:28,876 --> 00:02:33,765
 Sobald die Inhalte geladen sind, können Sie Wikipedia und die Nachschlagewerke nutzen.
 
 49
-00:02:31,873 --> 00:02:36,354
+00:02:33,765 --> 00:02:38,247
 Karten und KI brauchen jeweils einmal Internet, damit sie geladen werden.
 
 50
-00:02:36,354 --> 00:02:36,762
+00:02:38,247 --> 00:02:38,654
 Merksatz:
 
 51
-00:02:36,762 --> 00:02:38,799
+00:02:38,654 --> 00:02:40,692
 Was Sie herunterladen, braucht Internet.
 
 52
-00:02:38,799 --> 00:02:41,244
+00:02:40,692 --> 00:02:43,136
 Was Sie lesen oder suchen, nicht.
 
 53
-00:02:41,844 --> 00:02:43,949
+00:02:43,736 --> 00:02:45,899
 Zur Ehrlichkeit gehören die Grenzen.
 
 54
-00:02:43,949 --> 00:02:46,053
-Die Inhalte sind überwiegend englisch.
+00:02:45,899 --> 00:02:51,521
+Für Überleben, Vorsorge und die medizinischen Nachschlagewerke gibt es bisher nur englische Bücher.
 
 55
-00:02:46,053 --> 00:02:49,842
-Die Länderliste und die Beschriftung der Karten sind englisch.
+00:02:51,521 --> 00:02:54,116
+Die Beschriftung der Karten ist englisch.
 
 56
-00:02:49,842 --> 00:02:53,210
+00:02:54,116 --> 00:02:57,577
 Es gibt keine Unterstützung für Mac und ARM-Rechner.
 
 57
-00:02:53,210 --> 00:02:58,261
+00:02:57,577 --> 00:03:02,767
 Das Anfangspasswort der USB-SSD ist für alle gleich, bitte ändern Sie es.
 
 58
-00:02:58,261 --> 00:03:03,313
+00:03:02,767 --> 00:03:07,957
 Und bestimmte Nachschlagewerke, die als PDF vorliegen, kann die KI nicht durchsuchen.
 
 59
-00:03:03,913 --> 00:03:04,695
+00:03:08,557 --> 00:03:09,339
 Zum Schluss:
 
 60
-00:03:04,695 --> 00:03:08,212
+00:03:09,339 --> 00:03:12,856
 Sie brauchen Strom, einen PC und einmal ein Netz.
 
 61
-00:03:08,212 --> 00:03:10,948
+00:03:12,856 --> 00:03:15,592
 Alles andere bleibt bei Ihnen im Haus.
 
 62
-00:03:10,948 --> 00:03:15,248
+00:03:15,592 --> 00:03:19,892
 Den Quellcode und das Handbuch finden Sie im Projekt auf GitHub.
 
 63
-00:03:15,248 --> 00:03:17,202
+00:03:19,892 --> 00:03:21,846
 Vielen Dank für Ihre Aufmerksamkeit.

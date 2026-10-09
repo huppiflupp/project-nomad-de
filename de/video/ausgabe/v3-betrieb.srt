@@ -19,161 +19,165 @@ Der Schnellstart hat vier Schritte:
 Apps, Karten, Inhalte und Überprüfen.
 
 6
-00:00:17,453 --> 00:00:19,712
+00:00:17,453 --> 00:00:19,699
 Jeder Themenbereich hat drei Stufen:
 
 7
-00:00:19,712 --> 00:00:21,520
-Essential, Standard und Comprehensive.
+00:00:19,699 --> 00:00:21,496
+Basis, Standard und Umfassend.
 
 8
-00:00:21,520 --> 00:00:31,912
-Alle Bereiche zusammen sind in der kleinsten Stufe etwa sechs Gigabyte, in der mittleren etwa sechsunddreißig und in der größten etwa neunundachtzig Gigabyte.
+00:00:21,496 --> 00:00:31,379
+Alle deutschen Bereiche zusammen sind in der Basisstufe nur ein halbes Gigabyte, in Standard etwa sieben und in Umfassend etwa dreiundzwanzig Gigabyte.
 
 9
-00:00:31,912 --> 00:00:33,720
-Beginnen Sie mit Essential.
+00:00:31,379 --> 00:00:33,625
+Die englischen Bereiche sind größer.
 
 10
-00:00:33,720 --> 00:00:35,979
-Größeres können Sie jederzeit nachladen.
+00:00:33,625 --> 00:00:35,422
+Beginnen Sie mit Basis.
 
 11
-00:00:36,579 --> 00:00:42,893
-Wikipedia gibt es in mehreren Größen, von dreihundert Megabyte bis über hundertzwanzig Gigabyte.
+00:00:35,422 --> 00:00:37,668
+Größeres können Sie jederzeit nachladen.
 
 12
-00:00:42,893 --> 00:00:44,350
-Alle sind englischsprachig.
+00:00:38,268 --> 00:00:44,615
+Die deutsche Wikipedia gibt es in mehreren Größen, von hundertvierzig Megabyte bis über fünfzig Gigabyte.
 
 13
-00:00:44,350 --> 00:00:49,693
-Für den Anfang genügt die Schnellreferenz mit den hunderttausend wichtigsten Artikeln.
+00:00:44,615 --> 00:00:50,539
+Für den Anfang genügt die Schnellreferenz, später die Beliebten Artikel mit gut einem Gigabyte.
 
 14
-00:00:50,293 --> 00:00:53,662
-Zum Schluss sehen Sie eine Zusammenfassung mit der Gesamtgröße.
+00:00:50,539 --> 00:00:53,078
+Die englische Wikipedia gibt es auch.
 
 15
-00:00:53,662 --> 00:00:58,154
-Prüfen Sie, ob der Platz reicht, und schließen Sie die Einrichtung ab.
+00:00:53,678 --> 00:00:57,047
+Zum Schluss sehen Sie eine Zusammenfassung mit der Gesamtgröße.
 
 16
-00:00:58,754 --> 00:01:01,921
-Auf der Seite Downloads sehen Sie, was geladen wird.
+00:00:57,047 --> 00:01:01,539
+Prüfen Sie, ob der Platz reicht, und schließen Sie die Einrichtung ab.
 
 17
-00:01:01,921 --> 00:01:07,199
-Nach einem Neustart geht das Laden an der Stelle weiter, an der es aufgehört hat.
+00:01:02,139 --> 00:01:05,305
+Auf der Seite Downloads sehen Sie, was geladen wird.
 
 18
-00:01:07,199 --> 00:01:13,180
-Sind keine aktiven Downloads mehr da, machen Sie sofort den Offline-Test, solange das Internet noch erreichbar ist.
+00:01:05,305 --> 00:01:10,583
+Nach einem Neustart geht das Laden an der Stelle weiter, an der es aufgehört hat.
 
 19
-00:01:13,780 --> 00:01:18,422
-Für den Offline-Test ziehen Sie das Netzwerkkabel oder schalten das WLAN aus.
+00:01:10,583 --> 00:01:16,565
+Sind keine aktiven Downloads mehr da, machen Sie sofort den Offline-Test, solange das Internet noch erreichbar ist.
 
 20
-00:01:18,422 --> 00:01:21,517
-Zum Beweis geben Sie im Terminal ping ein.
+00:01:17,165 --> 00:01:21,807
+Für den Offline-Test ziehen Sie das Netzwerkkabel oder schalten das WLAN aus.
 
 21
-00:01:21,517 --> 00:01:23,838
-Es muss hundert Prozent Paketverlust erscheinen.
+00:01:21,807 --> 00:01:24,902
+Zum Beweis geben Sie im Terminal ping ein.
 
 22
-00:01:23,838 --> 00:01:26,933
-Starten Sie danach den Rechner ohne Netz neu.
+00:01:24,902 --> 00:01:27,223
+Es muss hundert Prozent Paketverlust erscheinen.
 
 23
-00:01:26,933 --> 00:01:31,575
-Das ist der eigentliche Test, denn im Notfall startet er genau so.
+00:01:27,223 --> 00:01:30,317
+Starten Sie danach den Rechner ohne Netz neu.
 
 24
-00:01:32,175 --> 00:01:35,937
-Nach dem Neustart öffnen Sie die Kommandozentrale und die Wissensbibliothek.
+00:01:30,317 --> 00:01:34,959
+Das ist der eigentliche Test, denn im Notfall startet er genau so.
 
 25
-00:01:35,937 --> 00:01:37,818
-Alle geladenen Bücher sind da.
+00:01:35,559 --> 00:01:39,322
+Nach dem Neustart öffnen Sie die Kommandozentrale und die Wissensbibliothek.
 
 26
-00:01:37,818 --> 00:01:43,838
-Suchen Sie einen Begriff, öffnen Sie einen Artikel und haken Sie die Checkliste im Handbuch ab.
+00:01:39,322 --> 00:01:41,203
+Alle geladenen Bücher sind da.
 
 27
-00:01:44,438 --> 00:01:48,486
-Auch Wikipedia öffnet Artikel samt Seitenlinks, ganz ohne Verbindung.
+00:01:41,203 --> 00:01:47,223
+Suchen Sie einen Begriff, öffnen Sie einen Artikel und haken Sie die Checkliste im Handbuch ab.
 
 28
-00:01:48,486 --> 00:01:54,783
-Die Texte sind überwiegend englisch, das ist richtig so, die geladenen Bücher sind englischsprachig.
+00:01:47,823 --> 00:01:51,871
+Auch Wikipedia öffnet Artikel samt Seitenlinks, ganz ohne Verbindung.
 
 29
-00:01:55,383 --> 00:01:58,476
-Im Handbuch gibt es eine Notfall-Karte auf einer Seite.
+00:01:51,871 --> 00:01:58,168
+Die Texte sind überwiegend englisch, das ist richtig so, die geladenen Bücher sind englischsprachig.
 
 30
-00:01:58,476 --> 00:02:06,382
-Darauf stehen die Adresse von NOMAD, was Sie tun, wenn die Seite nicht lädt, wie Sie sauber ausschalten und wo Ihre Notizen stehen.
+00:01:58,768 --> 00:02:01,861
+Im Handbuch gibt es eine Notfall-Karte auf einer Seite.
 
 31
-00:02:06,382 --> 00:02:10,506
-Drucken Sie sie aus und legen Sie sie sichtbar neben den Rechner.
+00:02:01,861 --> 00:02:09,766
+Darauf stehen die Adresse von NOMAD, was Sie tun, wenn die Seite nicht lädt, wie Sie sauber ausschalten und wo Ihre Notizen stehen.
 
 32
-00:02:11,106 --> 00:02:13,681
-Aktualisieren können Sie nur mit Internet.
+00:02:09,766 --> 00:02:13,891
+Drucken Sie sie aus und legen Sie sie sichtbar neben den Rechner.
 
 33
-00:02:13,681 --> 00:02:19,261
-Unter Einstellungen, System-Update, klicken Sie auf Erneut prüfen und dann auf Update starten.
+00:02:14,491 --> 00:02:17,066
+Aktualisieren können Sie nur mit Internet.
 
 34
-00:02:19,261 --> 00:02:23,124
-Das dauert etwa drei Minuten, zwischendurch erscheinen erwartete Verbindungsfehler.
+00:02:17,066 --> 00:02:22,646
+Unter Einstellungen, System-Update, klicken Sie auf Erneut prüfen und dann auf Update starten.
 
 35
-00:02:23,124 --> 00:02:26,558
-Danach steht dort, dass das System aktuell ist.
+00:02:22,646 --> 00:02:26,509
+Das dauert etwa drei Minuten, zwischendurch erscheinen erwartete Verbindungsfehler.
 
 36
-00:02:26,558 --> 00:02:29,562
-Machen Sie dann den Offline-Test noch einmal.
+00:02:26,509 --> 00:02:29,942
+Danach steht dort, dass das System aktuell ist.
 
 37
-00:02:30,162 --> 00:02:33,625
-Ein Notebook braucht im Betrieb etwa zwanzig Watt.
+00:02:29,942 --> 00:02:32,947
+Machen Sie dann den Offline-Test noch einmal.
 
 38
-00:02:33,625 --> 00:02:41,849
-Eine Powerbank mit neunundneunzig Wattstunden reicht für gut vier Stunden, eine Powerstation mit fünfhundert Wattstunden für gut einen Tag.
+00:02:33,547 --> 00:02:37,009
+Ein Notebook braucht im Betrieb etwa zwanzig Watt.
 
 39
-00:02:41,849 --> 00:02:43,147
-Sparen Sie Strom:
+00:02:37,009 --> 00:02:45,233
+Eine Powerbank mit neunundneunzig Wattstunden reicht für gut vier Stunden, eine Powerstation mit fünfhundert Wattstunden für gut einen Tag.
 
 40
-00:02:43,147 --> 00:02:46,610
-Bildschirm dunkel, WLAN aus, nur bei Bedarf einschalten.
+00:02:45,233 --> 00:02:46,532
+Sparen Sie Strom:
 
 41
-00:02:46,610 --> 00:02:49,640
-Im Handbuch steht die Rechnung zum Selbstausfüllen.
+00:02:46,532 --> 00:02:49,994
+Bildschirm dunkel, WLAN aus, nur bei Bedarf einschalten.
 
 42
-00:02:50,240 --> 00:02:54,772
-Drucken Sie das Handbuch aus und legen Sie es zur USB-SSD.
+00:02:49,994 --> 00:02:53,024
+Im Handbuch steht die Rechnung zum Selbstausfüllen.
 
 43
-00:02:54,772 --> 00:02:56,832
-Füllen Sie die Tabellen aus:
+00:02:53,624 --> 00:02:58,157
+Drucken Sie das Handbuch aus und legen Sie es zur USB-SSD.
 
 44
-00:02:56,832 --> 00:02:58,892
-Softwarestand, geladene Inhalte und Zugangsdaten.
+00:02:58,157 --> 00:03:00,217
+Füllen Sie die Tabellen aus:
 
 45
-00:02:58,892 --> 00:03:04,661
+00:03:00,217 --> 00:03:02,277
+Softwarestand, geladene Inhalte und Zugangsdaten.
+
+46
+00:03:02,277 --> 00:03:08,045
 Wenn es darauf ankommt, hat man meistens alles vergessen, deshalb steht dort jeder Schritt.

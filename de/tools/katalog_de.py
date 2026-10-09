@@ -100,6 +100,7 @@ def baue():
     pk = os.path.join(COLL, 'kiwix-categories.json')
     k = json.load(open(pk))
     k['categories'] = [c for c in k['categories'] if not c['slug'].endswith('-de')]
+    deutsch = []
     for c in KATEGORIEN:
         tiers = []
         for slug, name, besch, empf, inkl, rs in c['tiers']:
@@ -110,7 +111,8 @@ def baue():
                 t['includesTier'] = inkl
             t['resources'] = [res(*r) for r in rs]
             tiers.append(t)
-        k['categories'].append(dict(name=c['name'], slug=c['slug'], icon=c['icon'], description=c['description'], language=c['language'], tiers=tiers))
+        deutsch.append(dict(name=c['name'], slug=c['slug'], icon=c['icon'], description=c['description'], language=c['language'], tiers=tiers))
+    k['categories'] = deutsch + k['categories']   # deutsche Kategorien zuerst
     k['spec_version'] = SPEC_VERSION
     open(pk, 'w').write(json.dumps(k, indent=2, ensure_ascii=False) + '\n')
     print('geschrieben:', len(neu), 'Wikipedia-Optionen,', len(KATEGORIEN), 'Kategorien')

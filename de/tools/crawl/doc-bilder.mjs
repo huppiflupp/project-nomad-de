@@ -33,7 +33,7 @@ await seite('/easy-setup', 735, 'easy-setup-tiers', async (page) => {
     await next.click()
     await page.waitForLoadState('networkidle')
   }
-  await page.getByText('Medizin', { exact: true }).first().click()
+  await page.getByText('Medizin (Deutsch)', { exact: true }).first().click()
   await page.waitForTimeout(800)
 })
 

@@ -40,28 +40,29 @@ Das Sprachmodell einmal herunterladen. \\
 \hinweis{Eselsbrücke: Alles, was Sie \textbf{herunterladen}, braucht Internet. Alles, was Sie \textbf{lesen oder suchen}, nicht.}
 
 \section{Wie viel Platz brauchen die Inhalte?}
-NOMAD selbst belegt etwa 5~GB. Der Rest hängt davon ab, was Sie laden. Die Zahlen stammen aus den Katalogen von NOMAD (Stand Oktober 2026); die Stufen \emph{Standard} und \emph{Comprehensive} enthalten jeweils die darunter liegende Stufe mit.
+NOMAD selbst belegt etwa 5~GB. Der Rest hängt davon ab, was Sie laden. Die Zahlen stammen aus den Katalogen von NOMAD (Stand Oktober 2026); die Stufen \emph{Standard} und \emph{Umfassend} enthalten jeweils die darunter liegende Stufe mit. NOMAD zeigt Größen mit Faktor 1024 an, deshalb stehen dort Zahlen, die rund 2\,\% kleiner sind als hier.
+
+\textbf{Deutsche Inhalte (empfohlen):}
 
 \renewcommand{\arraystretch}{1.25}
 \begin{center}
 \small
 \begin{tabular}{@{}lrrr@{}}
 \toprule
-\textbf{Themenbereich} & \textbf{Essential} & \textbf{Standard} & \textbf{Comprehensive} \\
+\textbf{Themenbereich} & \textbf{Basis} & \textbf{Standard} & \textbf{Umfassend} \\
 \midrule
-Medizin & \SI{0,3}{GB} & \SI{3,8}{GB} & \SI{7,0}{GB} \\
-Überleben und Vorsorge & \SI{2,3}{GB} & \SI{10,1}{GB} & \SI{14,9}{GB} \\
-Bildung und Nachschlagen & \SI{3,1}{GB} & \SI{17,6}{GB} & \SI{47,5}{GB} \\
-Heimwerken und Reparatur & \SI{0,4}{GB} & \SI{2,3}{GB} & \SI{5,7}{GB} \\
-Landwirtschaft und Essen & \SI{0,04}{GB} & \SI{1,3}{GB} & \SI{9,4}{GB} \\
-Computer und Technik & \SI{0,02}{GB} & \SI{0,6}{GB} & \SI{4,6}{GB} \\
+Medizin (Deutsch) & \SI{0,16}{GB} & \SI{0,20}{GB} & \SI{0,69}{GB} \\
+Nachschlagen und Lernen (Deutsch) & \SI{0,26}{GB} & \SI{6,3}{GB} & \SI{18,6}{GB} \\
+Alltag und Technik (Deutsch) & \SI{0,03}{GB} & \SI{0,21}{GB} & \SI{3,8}{GB} \\
 \midrule
-\textbf{Summe aller Bereiche} & \textbf{\SI{6,3}{GB}} & \textbf{\SI{35,7}{GB}} & \textbf{\SI{89,1}{GB}} \\
+\textbf{Summe der deutschen Bereiche} & \textbf{\SI{0,45}{GB}} & \textbf{\SI{6,7}{GB}} & \textbf{\SI{23,1}{GB}} \\
 \bottomrule
 \end{tabular}
 \end{center}
 
-NOMAD zeigt Größen mit Faktor 1024 an, deshalb stehen dort Zahlen, die rund 2\,\% kleiner sind als hier. Dazu kommt Wikipedia (Englisch) nach Wunsch von \SI{0,3}{GB} (die 100.000 wichtigsten Artikel, kurz) bis \SI{121}{GB} (alles mit Bildern); mehr dazu in Kapitel~5.
+Dazu kommt die \textbf{deutsche Wikipedia} nach Wunsch: von \SI{137}{MB} (die wichtigsten Artikel, kurz) über \SI{1,2}{GB} (Beliebte Artikel) und \SI{18}{GB} (alles ohne Bilder) bis \SI{51}{GB} (alles mit Bildern); mehr dazu in Kapitel~5.
+
+\textbf{Englische Inhalte} gibt es zusätzlich, vor allem für Überleben, Vorsorge und Medizin-Nachschlagewerke (Kategorien mit dem Zusatz „Englisch“). Alle englischen Bereiche zusammen sind \SI{6,3}{GB} (Essential), \SI{35,7}{GB} (Standard) und \SI{89,1}{GB} (Comprehensive).
 
 \section{Wie lange dauert das Laden?}
 Die Dauer hängt von Ihrem Internetanschluss ab. Die Tabelle zeigt die reine Übertragungszeit bei voller Geschwindigkeit:
@@ -71,9 +72,10 @@ Die Dauer hängt von Ihrem Internetanschluss ab. Die Tabelle zeigt die reine Üb
 \toprule
 \textbf{Menge} & \textbf{16 Mbit/s (DSL klein)} & \textbf{50 Mbit/s} & \textbf{250 Mbit/s} \\
 \midrule
-\SI{6}{GB} (Essential) & 52 min & 17 min & 3 min \\
-\SI{36}{GB} (Standard) & 5,0 Std. & 1,6 Std. & 19 min \\
-\SI{89}{GB} (Comprehensive) & 12,4 Std. & 4,0 Std. & 48 min \\
+\SI{0,45}{GB} (Deutsch, Basis) & 4 min & 1 min & 15 s \\
+\SI{6,7}{GB} (Deutsch, Standard) & 56 min & 18 min & 4 min \\
+\SI{23}{GB} (Deutsch, Umfassend) & 3,2 Std. & 1,0 Std. & 12 min \\
+\SI{89}{GB} (Englisch, alles) & 12,4 Std. & 4,0 Std. & 48 min \\
 \bottomrule
 \end{tabular}
 \end{center}
