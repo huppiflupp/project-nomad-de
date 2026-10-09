@@ -5,6 +5,7 @@ import StyledModal, { StyledModalProps } from './StyledModal'
 import LoadingSpinner from './LoadingSpinner'
 import api from '~/lib/api'
 import { formatBytes } from '~/lib/util'
+import { continentName, countryName } from '~/lib/geo_names'
 import classNames from '~/lib/classNames'
 import {
   EXTRACT_DEFAULT_MAX_ZOOM,
@@ -56,23 +57,36 @@ const CountryPickerModal: React.FC<CountryPickerModalProps> = ({
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
   const preflightRequestIdRef = useRef(0)
 
-  const { data: countries = [], isLoading: countriesLoading } = useQuery({
+  const { data: countriesRaw = [], isLoading: countriesLoading } = useQuery({
     queryKey: ['maps-countries'],
     queryFn: () => api.listCountries(),
     staleTime: Infinity,
   })
 
-  const { data: groups = [] } = useQuery({
+  const { data: groupsRaw = [] } = useQuery({
     queryKey: ['maps-country-groups'],
     queryFn: () => api.listCountryGroups(),
     staleTime: Infinity,
   })
 
+  // Namen in der Oberfläche übersetzen (Deutsch); die englischen Namen bleiben für die Suche erhalten.
+  const countries = useMemo(
+    () =>
+      countriesRaw
+        .map((c) => ({ ...c, nameEn: c.name, name: countryName(c.code, c.name), continent: continentName(c.continent) }))
+        .sort((a, b) => a.name.localeCompare(b.name, 'de')),
+    [countriesRaw]
+  )
+  const groups = useMemo(() => groupsRaw.map((g) => ({ ...g, name: continentName(g.name) })), [groupsRaw])
+
   const grouped = useMemo(() => {
     const q = search.trim().toLowerCase()
     const filtered = q
       ? countries.filter(
-          (c) => c.name.toLowerCase().includes(q) || c.code.toLowerCase().includes(q)
+          (c) =>
+            c.name.toLowerCase().includes(q) ||
+            c.nameEn.toLowerCase().includes(q) ||
+            c.code.toLowerCase().includes(q)
         )
       : countries
 
@@ -323,7 +337,7 @@ const CountryPickerModal: React.FC<CountryPickerModalProps> = ({
         {selectedCountries.length > 0 && (
           <div>
             <p className="text-xs uppercase tracking-wide text-text-muted mb-2">
-              {selectedCountries.length} selected
+              {t('{0} selected', selectedCountries.length)}
             </p>
             <div className="flex flex-wrap gap-2 max-h-24 overflow-y-auto">
               {selectedCountries.map((country) => (

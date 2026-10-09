@@ -351,10 +351,10 @@ You are a helpful assistant that generates conversation starter suggestions for 
 Provide exactly 3 conversation starter topics as direct questions that someone would ask.
 These should be clear, complete questions that can start meaningful conversations.
 
-Examples of good suggestions:
-- "How do I purify water in an emergency?"
-- "What are the best foods for long-term storage?"
-- "Help me create a 72-hour emergency kit"
+Write the suggestions in German. Examples of good suggestions:
+- "Wie reinige ich Wasser im Notfall?"
+- "Welche Lebensmittel eignen sich am besten für die Langzeitlagerung?"
+- "Helfen Sie mir, ein Notfallpaket für 72 Stunden zusammenzustellen"
 
 Do NOT use:
 - Follow-up questions seeking clarification
@@ -363,11 +363,11 @@ Do NOT use:
 - Statements that are not suggestions themselves, such as praise for asking the question
 - Direct questions or commands to the user
 
-The suggestions should be in title case.
+Start each suggestion with a capital letter and use the formal address ("Sie") where a suggestion addresses the assistant.
 
 Respond with JSON: {"suggestions": ["...", "...", "..."]}
 `,
-  title_generation: `You are a title generator. Given the start of a conversation, generate a concise, descriptive title under 50 characters.
+  title_generation: `You are a title generator. Given the start of a conversation, generate a concise, descriptive title under 50 characters. Write the title in the language of the conversation (German if unclear).
 
 Respond with JSON: {"title": "..."}`,
   relevance_check: `You check whether search results are about what a user asked.

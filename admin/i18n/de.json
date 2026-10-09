@@ -2055,5 +2055,13 @@
  "Add more": "Mehr hinzufügen",
  "Add more files": "Weitere Dateien hinzufügen",
  "Remove file": "Datei entfernen",
- "Done": "Fertig"
+ "Done": "Fertig",
+ "<!-- This file holds custom instructions for your AI assistant. Everything here is sent to the assistant as a system prompt on every chat — use it to set persona, tone, priorities, and standing rules. It is also stored on disk at storage/NOMAD.md, so you can edit it directly. Replace this template with your own instructions, then click Save. -->": "<!--\nDiese Datei enthält eigene Anweisungen für Ihren KI-Assistenten. Alles, was hier steht, wird bei jedem Chat als Systemanweisung an den Assistenten geschickt – nutzen Sie sie für Rolle, Tonfall, Prioritäten und feste Regeln.\n\nSie ist auch auf der Festplatte unter storage/NOMAD.md gespeichert und kann dort direkt bearbeitet werden.\nErsetzen Sie diese Vorlage durch Ihre eigenen Anweisungen und klicken Sie dann auf Speichern.\n-->",
+ "About me": "Über mich",
+ "(e.g. I'm setting up an off-grid homestead in a cold climate.)": "(z. B. Ich bereite meinen Haushalt auf Stromausfälle und Notlagen vor.)",
+ "How the assistant should respond": "So soll der Assistent antworten",
+ "Be concise and practical.": "Fassen Sie sich kurz und praktisch.",
+ "Prioritize safety and proven methods.": "Sicherheit und bewährte Methoden haben Vorrang.",
+ "Answer in the language I write in; if unclear, in German. Address me formally.": "Antworten Sie in der Sprache, in der ich schreibe, im Zweifel auf Deutsch, und sprechen Sie mich mit „Sie“ an.",
+ "{0} selected": "{0} ausgewählt"
 }

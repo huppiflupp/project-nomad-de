@@ -14,25 +14,26 @@ interface NomadMdModalProps {
 
 // Seeded into the editor when no NOMAD.md exists yet. Nothing is written to disk
 // until the user saves, so this is purely a starting point they can replace.
-const NOMAD_MD_TEMPLATE = `# NOMAD.md
+const nomadMdTemplate = () => `# NOMAD.md
 
-<!--
+${t(`<!--
 This file holds custom instructions for your AI assistant. Everything here is
 sent to the assistant as a system prompt on every chat — use it to set persona,
 tone, priorities, and standing rules.
 
 It is also stored on disk at storage/NOMAD.md, so you can edit it directly.
 Replace this template with your own instructions, then click Save.
--->
+-->`)}
 
-## About me
+## ${t('About me')}
 
-- (e.g. I'm setting up an off-grid homestead in a cold climate.)
+- ${t("(e.g. I'm setting up an off-grid homestead in a cold climate.)")}
 
-## How the assistant should respond
+## ${t('How the assistant should respond')}
 
-- Be concise and practical.
-- Prioritize safety and proven methods.
+- ${t('Be concise and practical.')}
+- ${t('Prioritize safety and proven methods.')}
+- ${t('Answer in the language I write in; if unclear, in German. Address me formally.')}
 `
 
 export default function NomadMdModal({ aiAssistantName, onClose }: NomadMdModalProps) {
@@ -48,7 +49,7 @@ export default function NomadMdModal({ aiAssistantName, onClose }: NomadMdModalP
   // Seed the editor once the file loads: existing content, or the template when empty.
   useEffect(() => {
     if (data && content === null) {
-      setContent(data.content.trim().length > 0 ? data.content : NOMAD_MD_TEMPLATE)
+      setContent(data.content.trim().length > 0 ? data.content : nomadMdTemplate())
     }
   }, [data, content])
 
@@ -56,15 +57,15 @@ export default function NomadMdModal({ aiAssistantName, onClose }: NomadMdModalP
     mutationFn: (value: string) => api.saveNomadMd(value),
     onSuccess: (result) => {
       if (!result?.success) {
-        addNotification({ type: 'error', message: 'Failed to save NOMAD.md.' })
+        addNotification({ type: 'error', message: t('Failed to save NOMAD.md.') })
         return
       }
-      addNotification({ type: 'success', message: 'NOMAD.md saved. It applies to new messages.' })
+      addNotification({ type: 'success', message: t('NOMAD.md saved. It applies to new messages.') })
       queryClient.invalidateQueries({ queryKey: ['nomad-md'] })
       onClose()
     },
     onError: (error: any) => {
-      addNotification({ type: 'error', message: error?.message || 'Failed to save NOMAD.md.' })
+      addNotification({ type: 'error', message: error?.message || t('Failed to save NOMAD.md.') })
     },
   })
 

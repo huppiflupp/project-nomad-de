@@ -25,6 +25,7 @@ import ActiveModelDownloads from '~/components/ActiveModelDownloads'
 import { useSystemInfo } from '~/hooks/useSystemInfo'
 import GpuPassthroughAlert from '~/components/GpuPassthroughAlert'
 import { t } from '~/i18n/runtime'
+import { localizeRelativeTime } from '~/lib/relative_time'
 
 export default function ModelsPage(props: {
   models: {
@@ -577,6 +578,7 @@ export default function ModelsPage(props: {
               {
                 accessor: 'model_last_updated',
                 title: 'Last Updated',
+                render: (record) => localizeRelativeTime(record.model_last_updated),
               },
             ]}
             data={availableModelData?.models || []}
