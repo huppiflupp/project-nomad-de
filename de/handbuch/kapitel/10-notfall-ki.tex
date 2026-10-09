@@ -35,9 +35,26 @@ Wir haben sechs Modelle mit deutschen Fragen zu Erster Hilfe und Trinkwasser get
 \textbf{16~GB Arbeitsspeicher oder mehr:} \texttt{gemma4:e4b}.\par
 \textbf{Etwa 8~GB, älterer Rechner:} \texttt{gemma3:4b}; rechnen Sie mit mehreren Minuten pro Antwort.\par
 \textbf{Nicht verwenden:} die Modelle der Reihe \texttt{qwen3} und alle Modelle unter 2~GB. Sie antworten bei Erster Hilfe falsch.\par
-Mit NVIDIA-Grafikkarte läuft alles deutlich schneller; das haben wir nicht gemessen.}
+Mit NVIDIA-Grafikkarte läuft alles deutlich schneller, siehe unten.}
 
 \small Auf einem alten Rechner (4 Kerne, 8~GB, Baujahr 2013) brauchte \texttt{gemma3:4b} allein für das Lesen des Kontexts 3,5 Minuten, eine Antwort insgesamt zwei bis fünf Minuten. Zum Ausprobieren geht das, im Notfall ist es zu langsam.\normalsize
+
+\subsection*{Mit Grafikkarte}
+Wir haben \texttt{gemma4:e4b} auch auf einer älteren NVIDIA-Grafikkarte (RTX 2080 Ti, 11~GB) gemessen, mit dem Programm \texttt{llama.cpp}:
+
+\begin{center}\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}lrr@{}}
+\toprule
+ & \textbf{Nur Prozessor} & \textbf{Mit Grafikkarte} \\
+\midrule
+Antwort & 14 pro s & 106 pro s \\
+Kontext lesen & 50 pro s & 2700 pro s \\
+Texte für die Suche vorbereiten & 1000 pro s & 26000 bis 50000 pro s \\
+\bottomrule
+\end{tabular}
+\end{center}
+Eine Antwort dauert damit eine bis zwei Sekunden statt einer halben Minute. Ob NOMAD Ihre Grafikkarte nutzt, steht am Ende der Installation („GPU erkannt“). Das Handbuch geht davon aus, dass es auch ohne Grafikkarte nutzbar bleiben soll; sie ist eine Beschleunigung, keine Voraussetzung.
 
 \section{Einrichten}
 \begin{enumerate}[leftmargin=1.5em,itemsep=3pt]
@@ -64,7 +81,7 @@ Mit NVIDIA-Grafikkarte läuft alles deutlich schneller; das haben wir nicht geme
 \section{Kann die KI auch Wikipedia und die Nachschlagewerke nutzen?}
 Ja, aber \textbf{nur, wenn Sie sie dafür vorbereiten} („indizieren“). Im Chat erscheint oben ein Hinweis „Ihre vorhandenen Dateien für KI-Assistent indizieren?“ mit dem Knopf \menue{Vorhandene Inhalte indizieren}.
 
-\achtung{Ein Klick startet das Indizieren aller geladenen Inhalte sofort, ohne Warnung. Das belegt den Rechner \textbf{stundenlang}: ungefähr eine Minute je MB Inhalt auf einem alten, 20 Sekunden je MB auf einem modernen Rechner (gemessen beziehungsweise hochgerechnet). Beispiel „Medizin, Essential“ (etwa 525~MB): alter Rechner rund 9 Stunden, moderner Rechner rund 3 Stunden. Währenddessen reagiert der Chat nicht oder bricht mit einem Fehler ab. Starten Sie das Indizieren nur über Nacht, nur mit Netzteil und mit wenig Inhalten.}
+\achtung{Ein Klick startet das Indizieren aller geladenen Inhalte sofort, ohne Warnung. Das belegt den Rechner \textbf{lange}. Gemessene Werte: Das Handbuch „CDC-Gesundheitsinformationen“ (178~MB) brauchte auf einem alten Rechner ohne Grafikkarte etwa 3 Stunden, mit Grafikkarte 7,5 Minuten. Das Arzneimittel-Nachschlagewerk des britischen Gesundheitsdienstes (17~MB) brauchte mit Grafikkarte 6 Minuten. Große Wikipedia-Pakete (mehrere hundert MB) dauern selbst mit Grafikkarte viele Stunden (2 Prozent in 17 Minuten). Währenddessen reagiert der Chat nicht oder bricht mit einem Fehler ab. Indizieren Sie \textbf{gezielt} einzelne Nachschlagewerke, nur mit Netzteil und möglichst über Nacht.}
 
 \bild[0.85]{ki13-wissensdatenbank-liste}{Die Wissensdatenbank zeigt, welche Dateien gerade indiziert werden (hier die NOMAD-Anleitungen).}
 

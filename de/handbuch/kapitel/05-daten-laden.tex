@@ -38,7 +38,30 @@ Komplette Wikipedia (Vollständig) & \SI{121,1}{GB} & alles mit Bildern; nur fü
 \end{center}
 
 \section{Karten}
-Unter \menue{Karten} laden Sie Kartenausschnitte. \textbf{Achtung:} Der mitgelieferte Katalog enthält derzeit nur Gebiete der USA. Für Karten von Deutschland und Europa lesen Sie den Anhang „Was NOMAD nicht kann“.
+Karten laden Sie unter \menue{Einstellungen} $\rightarrow$ \menue{Karten-Manager}. Dort gibt es zwei Wege:
+\begin{description}[leftmargin=1.2em,style=nextline]
+\item[Nach Land oder Region (empfohlen)] Knopf \menue{Länder auswählen}: Land ankreuzen, mit dem Regler die \emph{Zoomstufe} einstellen, den Knopf \menue{Download starten} drücken. NOMAD schneidet nur die gewählten Länder aus einer Weltkarte heraus und zeigt vorher die Größe an.
+\item[Weltkarte] Knopf \menue{Weltkarte herunterladen}: der ganze Planet, etwa \SI{129}{GB}. Nur für große Platten.
+\end{description}
+Die Zoomstufe bestimmt den Detailgrad und damit die Größe. Beispiel Deutschland (Anzeige in NOMAD):
+
+\begin{center}\small
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{@{}rll@{}}
+\toprule
+\textbf{Zoomstufe} & \textbf{Detailgrad} & \textbf{Größe} \\
+\midrule
+10 & bis Stadtebene & \SI{0,12}{GB} (121~MB) \\
+12 & Straßen größerer Orte & \SI{0,68}{GB} \\
+15 & einzelne Straßen & \SI{5,6}{GB} \\
+\bottomrule
+\end{tabular}
+\end{center}
+\bild[0.85]{map01-karten-manager}{Der Karten-Manager: „Länder auswählen“ ist der empfohlene Weg.}
+\bild[0.85]{map02-laender-waehlen}{Land ankreuzen, Zoomstufe wählen; unten steht die zu erwartende Größe.}
+\bild[0.85]{map03-karte-deutschland}{Die Karte von Deutschland (Zoomstufe 10), offline angezeigt.}
+
+\hinweis{Die Länderliste und die Beschriftung der Karte sind englisch (zum Beispiel „Germany“). Unter „Kuratierte Kartenregionen“ stehen nur US-Gebiete; für Deutschland nehmen Sie „Länder auswählen“.}
 
 \section{Fortschritt beobachten}
 \bild[0.85]{43-downloads}{Auf der Seite „Downloads“ sehen Sie, was gerade geladen wird und wie weit es ist. Nach einem Neustart geht das Laden an der Stelle weiter, an der es aufgehört hat.}
