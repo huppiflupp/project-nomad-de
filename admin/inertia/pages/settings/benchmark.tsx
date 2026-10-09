@@ -836,23 +836,23 @@ export default function BenchmarkPage(props: {
                               <div className="flex justify-between">
                                 <span className="text-desert-stone-dark">Run environment</span>
                                 <span className="font-mono">
-                                  {latestResult.run_environment || 'Unknown'}
+                                  {latestResult.run_environment || t('Unknown')}
                                 </span>
                               </div>
                               <div className="flex justify-between">
                                 <span className="text-desert-stone-dark">Storage backend</span>
                                 <span className="font-mono">
-                                  {latestResult.storage_path_type || 'Unknown'}
+                                  {latestResult.storage_path_type || t('Unknown')}
                                 </span>
                               </div>
                               <div className="flex justify-between">
                                 <span className="text-desert-stone-dark">GPU compute</span>
                                 <span className="font-mono">
                                   {latestResult.gpu_compute_detected == null
-                                    ? 'Unknown'
+                                    ? t('Unknown')
                                     : latestResult.gpu_compute_detected
-                                      ? 'Detected'
-                                      : 'Not detected'}
+                                      ? t('Detected')
+                                      : t('Not detected')}
                                 </span>
                               </div>
                               {latestResult.sysbench_digest && (

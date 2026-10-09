@@ -7,7 +7,8 @@ const ALLOW_CODE_DIFF = ['getting-started.md', 'faq.md', 'updates.md']
 const SKIP_HEADINGS = ['release-notes.md']
 const count = (s, re) => (s.match(re) || []).length
 const codeBlocks = (s) => s.match(/```[\s\S]*?```/g) || []
-const links = (s) => [...s.matchAll(/\]\(([^)]+)\)/g)].map((m) => m[1]).sort()
+// Deutsche Bildfassungen heißen name-de.webp; für den Vergleich gelten sie als dasselbe Bild.
+const links = (s) => [...s.matchAll(/\]\(([^)]+)\)/g)].map((m) => m[1].replace(/-de\.webp$/, ".webp")).sort()
 const tags = (s) => (s.match(/\{%[^%]*%\}/g) || []).map((x) => x.replace(/"[^"]*"/g, '""')).sort()
 let bad = 0
 for (const f of readdirSync(en).filter((f) => f.endsWith('.md'))) {

@@ -6,6 +6,7 @@ import { useUppyEvent } from '@uppy/react'
 import Dashboard from '@uppy/react/dashboard'
 import classNames from 'classnames'
 import './index.css' // Custom styles for the uploader
+import { t } from '~/i18n/runtime'
 
 interface FileUploaderProps {
   minFiles?: number // minimum number of files required
@@ -87,6 +88,18 @@ const FileUploader = forwardRef<FileUploaderRef, FileUploaderProps>((props, ref)
       width={'100%'}
       height={'250px'}
       hideUploadButton
+      locale={{
+        strings: {
+          dropPasteFiles: t('Drop files here or %{browseFiles}'),
+          browseFiles: t('browse files'),
+          dropHint: t('Drop your files here'),
+          addMore: t('Add more'),
+          addMoreFiles: t('Add more files'),
+          removeFile: t('Remove file'),
+          cancel: t('Cancel'),
+          done: t('Done'),
+        },
+      }}
       disabled={disabled}
       className={classNames(className)}
     />

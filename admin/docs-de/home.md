@@ -8,7 +8,7 @@ Ihr persönlicher Offline-Wissensserver ist einsatzbereit.
 
 Stellen Sie es sich so vor: Wikipedia, Khan Academy, ein KI-Assistent und Offline-Karten an einem Ort, auf Hardware, die Sie selbst kontrollieren.
 
-![Dashboard der Kommandozentrale](/docs/dashboard.webp)
+![Dashboard der Kommandozentrale](/docs/dashboard-de.webp)
 
 ## Was können Sie tun?
 

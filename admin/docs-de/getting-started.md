@@ -59,14 +59,14 @@ Wenn Sie NOMAD zum ersten Mal verwenden, hilft Ihnen der Schnellstart-Assistent 
 
 **[Schnellstart starten →](/easy-setup)**
 
-![Schnellstart-Assistent – Schritt 1: Funktionen auswählen](/docs/easy-setup-step1.webp)
+![Schnellstart-Assistent – Schritt 1: Funktionen auswählen](/docs/easy-setup-step1-de.webp)
 
 Der Assistent führt Sie in vier einfachen Schritten durch die Einrichtung:
 1. **Funktionen** – Wählen Sie, was aktiviert werden soll: Wissensbibliothek, KI-Assistent, Bildungsplattform, Karten, Daten-Tools und Notizen
 2. **Karten** – Wählen Sie geografische Regionen für Offline-Karten
 3. **Inhalte** – Wählen Sie kuratierte Inhaltssammlungen in den Stufen Basis, Standard oder Umfassend
 
-![Inhaltsstufen – Basis, Standard und Umfassend](/docs/easy-setup-tiers.webp)
+![Inhaltsstufen – Basis, Standard und Umfassend](/docs/easy-setup-tiers-de.webp)
 4. **Überprüfen** – Bestätigen Sie Ihre Auswahl und starten Sie die Downloads
 
 Je nach Auswahl können die Downloads eine Weile dauern. Den Fortschritt können Sie im Bereich „Einstellungen“ verfolgen, bereits installierte Funktionen weiter nutzen oder den Server bei großen Downloads über Nacht laufen lassen.
@@ -113,7 +113,7 @@ Die Bildungsplattform bietet vollständige Lernkurse, die offline funktionieren.
 
 ### KI-Assistent – integrierter Chat
 
-![Oberfläche des KI-Chats](/docs/ai-chat.webp)
+![Oberfläche des KI-Chats](/docs/ai-chat-de.webp)
 
 NOMAD enthält eine integrierte KI-Chat-Oberfläche auf Basis von Ollama. Sie läuft vollständig auf Ihrem Server – kein Internet nötig, keine Daten werden irgendwohin gesendet.
 
@@ -139,7 +139,7 @@ NOMAD enthält eine integrierte KI-Chat-Oberfläche auf Basis von Ollama. Sie l�
 
 ### Wissensdatenbank – KI mit Dokumentenwissen
 
-![Oberfläche zum Hochladen in die Wissensdatenbank](/docs/knowledge-base.webp)
+![Oberfläche zum Hochladen in die Wissensdatenbank](/docs/knowledge-base-de.webp)
 
 Mit der Wissensdatenbank laden Sie Dokumente hoch, damit die KI sie beim Beantworten Ihrer Fragen heranziehen kann. Sie nutzt die semantische Suche (RAG über Qdrant), um relevante Informationen aus Ihren hochgeladenen Dateien zu finden.
 
@@ -164,7 +164,7 @@ Mit der Wissensdatenbank laden Sie Dokumente hoch, damit die KI sie beim Beantwo
 
 ### Karten – Offline-Navigation
 
-![Offline-Kartenansicht](/docs/maps.webp)
+![Offline-Kartenansicht](/docs/maps-de.webp)
 
 Sehen Sie Karten ohne Internet an. Laden Sie die benötigten Regionen herunter, bevor Sie offline gehen.
 
@@ -197,7 +197,7 @@ Wenn sich Ihr Bedarf ändert, können Sie jederzeit weitere Inhalte hinzufügen:
 
 ### Wikipedia-Auswahl
 
-![Inhalts-Explorer – Wikipedia-Pakete und kuratierte Sammlungen durchsuchen und herunterladen](/docs/content-explorer.webp)
+![Inhalts-Explorer – Wikipedia-Pakete und kuratierte Sammlungen durchsuchen und herunterladen](/docs/content-explorer-de.webp)
 
 NOMAD enthält ein eigenes Werkzeug zur Verwaltung von Wikipedia-Inhalten, mit dem Sie Wikipedia-Pakete durchsuchen und herunterladen.
 
@@ -210,7 +210,7 @@ NOMAD enthält ein eigenes Werkzeug zur Verwaltung von Wikipedia-Inhalten, mit d
 
 ### System-Benchmark
 
-![System-Benchmark mit NOMAD Score und Builder-Tag](/docs/benchmark.webp)
+![System-Benchmark mit NOMAD Score und Builder-Tag](/docs/benchmark-de.webp)
 
 Testen Sie die Leistung Ihrer Hardware und sehen Sie, wie sich Ihr NOMAD-System im Vergleich zur Community schlägt.
 

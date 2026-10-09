@@ -1704,7 +1704,7 @@
  "Turned on 1 file in \"{0}\".": "1 Datei in „{0}“ eingeschaltet.",
  "Turned on {0} files in \"{1}\".": "{0} Dateien in „{1}“ eingeschaltet.",
  "Turning off AI will discard your AI model picks, indexing policy, and remote Ollama configuration. Continue?": "Wenn Sie die KI ausschalten, werden Ihre Modellauswahl, die Indizierungsrichtlinie und die Einstellungen für entferntes Ollama verworfen. Fortfahren?",
- "Type": "Geben Sie",
+ "Type": "Typ",
  "Type RESET exactly (uppercase, no spaces) to enable the confirm button.": "Geben Sie genau RESET ein (Großbuchstaben, keine Leerzeichen), um die Schaltfläche „Bestätigen“ zu aktivieren.",
  "Type a medicine name above to search": "Geben Sie oben einen Arzneimittelnamen ein, um zu suchen",
  "Type your message to {0}... (Shift+Enter for new line)": "Schreiben Sie eine Nachricht an {0} … (Umschalt+Eingabe für neue Zeile)",
@@ -2048,5 +2048,12 @@
  "— public domain (CC0 1.0). NOMAD is not affiliated with or endorsed by the FDA.": "— gemeinfrei (CC0 1.0). NOMAD steht in keiner Verbindung zur FDA und wird nicht von ihr unterstützt.",
  "— public domain (CC0 1.0). NOMAD is not affiliated with or endorsed by the FDA. Label data and situation matches are label-text only; do not rely on them for medical decisions.": "— gemeinfrei (CC0 1.0). NOMAD steht in keiner Verbindung zur FDA und wird nicht von ihr unterstützt. Beipackzetteldaten und Situationstreffer sind reiner Beipackzetteltext; verlassen Sie sich nicht auf sie für medizinische Entscheidungen.",
  "— public domain (CC0 1.0). NOMAD is not affiliated with or endorsed by the FDA. Label data is provided as-is; do not rely on it for medical decisions.": "— gemeinfrei (CC0 1.0). NOMAD steht in keiner Verbindung zur FDA und wird nicht von ihr unterstützt. Beipackzetteldaten werden ohne Gewähr bereitgestellt; verlassen Sie sich nicht auf sie für medizinische Entscheidungen.",
- "” in the current label data. Try searching by drug name in": "“ in den aktuellen Beipackdaten gefunden. Versuchen Sie, nach dem Arzneimittelnamen zu suchen in"
+ "” in the current label data. Try searching by drug name in": "“ in den aktuellen Beipackdaten gefunden. Versuchen Sie, nach dem Arzneimittelnamen zu suchen in",
+ "Drop files here or %{browseFiles}": "Dateien hierher ziehen oder %{browseFiles}",
+ "browse files": "Dateien auswählen",
+ "Drop your files here": "Dateien hier ablegen",
+ "Add more": "Mehr hinzufügen",
+ "Add more files": "Weitere Dateien hinzufügen",
+ "Remove file": "Datei entfernen",
+ "Done": "Fertig"
 }
