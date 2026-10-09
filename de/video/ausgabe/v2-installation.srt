@@ -1,0 +1,191 @@
+1
+00:00:00,000 --> 00:00:02,779
+In diesem Video richten wir NOMAD ein.
+
+2
+00:00:02,779 --> 00:00:04,367
+Es gibt zwei Wege.
+
+3
+00:00:04,367 --> 00:00:06,749
+Der einfache Weg ist eine USB-SSD:
+
+4
+00:00:06,749 --> 00:00:08,734
+Ihr Windows-Rechner bleibt dabei unberührt.
+
+5
+00:00:08,734 --> 00:00:12,307
+Der zweite Weg ist ein eigener Rechner mit Ubuntu.
+
+6
+00:00:12,307 --> 00:00:16,674
+Wir zeigen zuerst den einfachen Weg und danach kurz den zweiten.
+
+7
+00:00:17,274 --> 00:00:22,483
+Sie brauchen eine USB-SSD mit mindestens 512 Gigabyte und USB drei.
+
+8
+00:00:22,483 --> 00:00:26,745
+Ein normaler USB-Stick ist zu klein und zu langsam.
+
+9
+00:00:26,745 --> 00:00:33,848
+Dazu einen Windows-Rechner mit Internet, etwa sechs Gigabyte freien Platz und das kostenlose Programm balenaEtcher.
+
+10
+00:00:34,448 --> 00:00:40,103
+Laden Sie auf der Release-Seite des Projekts die Datei nomad Punkt img Punkt x z herunter.
+
+11
+00:00:40,103 --> 00:00:42,224
+Sie ist etwa fünf Gigabyte groß.
+
+12
+00:00:42,224 --> 00:00:45,405
+Entpacken Sie sie nicht, Etcher kann sie so lesen.
+
+13
+00:00:45,405 --> 00:00:52,828
+Notieren Sie die Prüfsumme und vergleichen Sie sie mit dem Windows-Befehl certutil, damit Sie sicher sind, dass die Datei vollständig ist.
+
+14
+00:00:53,428 --> 00:00:54,631
+Starten Sie balenaEtcher.
+
+15
+00:00:54,631 --> 00:01:00,647
+Wählen Sie die Datei, wählen Sie als Ziel Ihre USB-SSD und kontrollieren Sie die Größe.
+
+16
+00:01:00,647 --> 00:01:01,048
+Achtung:
+
+17
+00:01:01,048 --> 00:01:07,466
+Beim Schreiben wird die SSD vollständig gelöscht, wählen Sie nie die Platte, auf der Windows läuft.
+
+18
+00:01:07,466 --> 00:01:12,279
+Dann auf Flash klicken und warten, bis der Vorgang erfolgreich abgeschlossen ist.
+
+19
+00:01:12,879 --> 00:01:18,116
+Fahren Sie den Rechner herunter, schließen Sie die SSD an und schalten Sie ein.
+
+20
+00:01:18,116 --> 00:01:25,973
+Drücken Sie sofort mehrfach die Taste für das Startmenü, bei vielen Geräten F zwölf, bei Asus Escape, bei HP F neun.
+
+21
+00:01:25,973 --> 00:01:30,463
+Wählen Sie dort Ihre USB-SSD aus und bestätigen Sie mit der Eingabetaste.
+
+22
+00:01:31,063 --> 00:01:33,550
+Nach etwa einer Minute erscheint der Desktop.
+
+23
+00:01:33,550 --> 00:01:35,326
+Eine Anmeldung ist nicht nötig.
+
+24
+00:01:35,326 --> 00:01:40,656
+Beim allerersten Start richtet sich das System ein und vergrößert sich auf die ganze Platte.
+
+25
+00:01:40,656 --> 00:01:45,629
+Das dauert ein bis zwei Minuten länger, schalten Sie in dieser Zeit nicht aus.
+
+26
+00:01:45,629 --> 00:01:47,406
+Auch ohne Internet funktioniert das.
+
+27
+00:01:48,006 --> 00:01:52,201
+Sobald NOMAD bereit ist, öffnet sich der Browser mit der Kommandozentrale.
+
+28
+00:01:52,201 --> 00:01:55,251
+Wenn Sie diese Seite sehen, ist alles eingerichtet.
+
+29
+00:01:55,851 --> 00:01:57,049
+Ein wichtiger Schritt:
+
+30
+00:01:57,049 --> 00:02:01,040
+Benutzer und Passwort sind bei jeder USB-SSD gleich, nämlich nomad.
+
+31
+00:02:01,040 --> 00:02:04,234
+Ändern Sie das Passwort, sobald das System steht.
+
+32
+00:02:04,234 --> 00:02:12,616
+Öffnen Sie mit Strg, Alt und T ein Terminal, geben Sie passwd ein, dann das alte und zweimal das neue Passwort.
+
+33
+00:02:12,616 --> 00:02:15,410
+Beim Tippen erscheint nichts, das ist normal.
+
+34
+00:02:16,010 --> 00:02:19,515
+Der zweite Weg ist ein eigener Rechner mit Ubuntu.
+
+35
+00:02:19,515 --> 00:02:24,579
+Sie schreiben den Ubuntu-Stick mit Etcher, starten davon und wählen als Sprache Deutsch.
+
+36
+00:02:25,179 --> 00:02:26,775
+Wichtig ist die Festplatten-Auswahl:
+
+37
+00:02:26,775 --> 00:02:28,769
+Festplatte löschen und Ubuntu installieren.
+
+38
+00:02:28,769 --> 00:02:31,162
+Das löscht alles auf dieser Platte.
+
+39
+00:02:31,162 --> 00:02:37,545
+Nutzen Sie diesen Weg nur für einen Rechner, der danach nur noch für NOMAD gedacht ist.
+
+40
+00:02:38,145 --> 00:02:43,776
+Nach der Anmeldung öffnen Sie ein Terminal und geben drei Befehle ein, die im Handbuch stehen.
+
+41
+00:02:43,776 --> 00:02:48,000
+Der Installer meldet sich auf Deutsch und fragt, ob er fortfahren soll.
+
+42
+00:02:48,000 --> 00:02:52,223
+Antworten Sie mit j und danach auf die Lizenzfrage ebenfalls mit j.
+
+43
+00:02:52,823 --> 00:03:00,104
+Am Ende steht, dass die Installation erfolgreich abgeschlossen wurde, und die Adresse der Oberfläche:
+
+44
+00:03:00,104 --> 00:03:03,744
+http doppelpunkt Schrägstrich Schrägstrich localhost doppelpunkt 8080.
+
+45
+00:03:03,744 --> 00:03:08,945
+Öffnen Sie diese Adresse im Browser, und die Kommandozentrale erscheint.
+
+46
+00:03:09,545 --> 00:03:12,144
+Jetzt ist NOMAD eingerichtet, aber noch leer.
+
+47
+00:03:12,144 --> 00:03:17,714
+Im nächsten Video laden wir die Inhalte herunter und testen, ob alles ohne Internet funktioniert.
+
+48
+00:03:17,714 --> 00:03:19,571
+Dafür klicken Sie auf Schnellstart.

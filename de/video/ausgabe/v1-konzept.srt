@@ -1,0 +1,251 @@
+1
+00:00:00,000 --> 00:00:00,334
+Willkommen.
+
+2
+00:00:00,334 --> 00:00:02,677
+In dieser Vorstellung geht es um NOMAD:
+
+3
+00:00:02,677 --> 00:00:08,702
+einen kleinen Wissensserver für zu Hause, der auch dann noch funktioniert, wenn das Internet nicht mehr da ist.
+
+4
+00:00:08,702 --> 00:00:13,387
+Wir zeigen, was das ist, wie man es einrichtet und wo seine Grenzen liegen.
+
+5
+00:00:13,987 --> 00:00:16,978
+Stellen Sie sich einen Tag ohne Strom vor.
+
+6
+00:00:16,978 --> 00:00:18,474
+Plötzlich ist es dunkel.
+
+7
+00:00:18,474 --> 00:00:20,718
+Kein Licht, kein WLAN, kein Fernseher.
+
+8
+00:00:20,718 --> 00:00:23,709
+Nach einer Stunde wird es still im Haus.
+
+9
+00:00:23,709 --> 00:00:26,326
+Und dann fällt auf, was eigentlich fehlt:
+
+10
+00:00:26,326 --> 00:00:27,074
+das Wissen.
+
+11
+00:00:27,674 --> 00:00:30,154
+Ohne Strom fällt auch das Internet aus.
+
+12
+00:00:30,154 --> 00:00:34,761
+Kein Streaming, kein Radio über das Netz, und das Handy ist schnell leer.
+
+13
+00:00:34,761 --> 00:00:37,596
+Nachrichten, Wetter und Karten sind nicht mehr erreichbar.
+
+14
+00:00:38,196 --> 00:00:40,151
+Am meisten fehlt das Nachschlagen.
+
+15
+00:00:40,151 --> 00:00:41,716
+Wikipedia ist nicht erreichbar.
+
+16
+00:00:41,716 --> 00:00:48,756
+Es gibt keine Anleitung für Heizung und Herd, keine Hinweise zur Ersten Hilfe, keine Karte für die Umleitung.
+
+17
+00:00:49,356 --> 00:00:51,179
+Und die Kinder und Enkel?
+
+18
+00:00:51,179 --> 00:00:54,824
+Filme und Spiele fallen weg, auch das Lernen und Üben.
+
+19
+00:00:54,824 --> 00:00:56,282
+Bücher und Brettspiele helfen.
+
+20
+00:00:56,282 --> 00:00:59,563
+Aber nicht jeder hat die richtigen Bücher im Regal.
+
+21
+00:01:00,163 --> 00:01:02,353
+Die Idee von NOMAD ist einfach:
+
+22
+00:01:02,353 --> 00:01:04,179
+Das Wissen kommt ins Haus.
+
+23
+00:01:04,179 --> 00:01:06,735
+NOMAD läuft auf einem Rechner bei Ihnen.
+
+24
+00:01:06,735 --> 00:01:10,751
+Sie richten es einmal ein und laden einmal die Inhalte herunter.
+
+25
+00:01:10,751 --> 00:01:12,941
+Danach brauchen Sie kein Internet mehr.
+
+26
+00:01:13,541 --> 00:01:15,050
+Drei Wörter, einfach erklärt.
+
+27
+00:01:15,050 --> 00:01:21,083
+Ein Server ist ein Computer, der anderen etwas gibt, und er steht bei Ihnen im Regal.
+
+28
+00:01:21,083 --> 00:01:21,838
+Offline heißt:
+
+29
+00:01:21,838 --> 00:01:24,477
+ohne Internet, alles ist schon im Haus.
+
+30
+00:01:24,477 --> 00:01:30,511
+Und der Browser ist das Fenster, in dem Sie schauen; NOMAD öffnen Sie wie eine Internetseite.
+
+31
+00:01:31,111 --> 00:01:32,766
+So sieht NOMAD aus.
+
+32
+00:01:32,766 --> 00:01:35,248
+Das ist die Kommandozentrale, die Startseite.
+
+33
+00:01:35,248 --> 00:01:42,693
+Hier finden Sie Karten, den Schnellstart zum Einrichten, das Supply Depot für weitere Programme, Anleitungen und die Einstellungen.
+
+34
+00:01:42,693 --> 00:01:44,348
+Alles ist auf Deutsch.
+
+35
+00:01:44,948 --> 00:01:46,687
+Was steckt in NOMAD?
+
+36
+00:01:46,687 --> 00:01:51,033
+Wikipedia und viele Nachschlagewerke, zum Beispiel zu Medizin und Überleben.
+
+37
+00:01:51,033 --> 00:01:55,380
+Karten, bei denen Sie ganze Länder wählen können, auch Deutschland.
+
+38
+00:01:55,380 --> 00:01:55,815
+Lernmaterial.
+
+39
+00:01:55,815 --> 00:02:00,162
+Ein Chat mit einer KI, die auf Ihrem Rechner läuft.
+
+40
+00:02:00,162 --> 00:02:01,901
+Und Ihre eigenen Dokumente.
+
+41
+00:02:02,501 --> 00:02:05,101
+Der einfachste Weg ist eine USB-SSD.
+
+42
+00:02:05,101 --> 00:02:10,302
+Das ist eine kleine, schnelle Festplatte am Kabel mit mindestens 512 Gigabyte.
+
+43
+00:02:10,302 --> 00:02:12,903
+Darauf schreiben Sie ein fertiges System.
+
+44
+00:02:12,903 --> 00:02:16,804
+Dann starten Sie Ihren vorhandenen Windows-Rechner von dieser Platte.
+
+45
+00:02:16,804 --> 00:02:20,272
+Windows selbst bleibt unberührt, es wird nichts gelöscht.
+
+46
+00:02:20,872 --> 00:02:23,316
+Ab wann geht es ohne Internet?
+
+47
+00:02:23,316 --> 00:02:26,983
+Direkt nach dem Start können Sie die Anleitungen lesen.
+
+48
+00:02:26,983 --> 00:02:31,873
+Sobald die Inhalte geladen sind, können Sie Wikipedia und die Nachschlagewerke nutzen.
+
+49
+00:02:31,873 --> 00:02:36,354
+Karten und KI brauchen jeweils einmal Internet, damit sie geladen werden.
+
+50
+00:02:36,354 --> 00:02:36,762
+Merksatz:
+
+51
+00:02:36,762 --> 00:02:38,799
+Was Sie herunterladen, braucht Internet.
+
+52
+00:02:38,799 --> 00:02:41,244
+Was Sie lesen oder suchen, nicht.
+
+53
+00:02:41,844 --> 00:02:43,949
+Zur Ehrlichkeit gehören die Grenzen.
+
+54
+00:02:43,949 --> 00:02:46,053
+Die Inhalte sind überwiegend englisch.
+
+55
+00:02:46,053 --> 00:02:49,842
+Die Länderliste und die Beschriftung der Karten sind englisch.
+
+56
+00:02:49,842 --> 00:02:53,210
+Es gibt keine Unterstützung für Mac und ARM-Rechner.
+
+57
+00:02:53,210 --> 00:02:58,261
+Das Anfangspasswort der USB-SSD ist für alle gleich, bitte ändern Sie es.
+
+58
+00:02:58,261 --> 00:03:03,313
+Und bestimmte Nachschlagewerke, die als PDF vorliegen, kann die KI nicht durchsuchen.
+
+59
+00:03:03,913 --> 00:03:04,695
+Zum Schluss:
+
+60
+00:03:04,695 --> 00:03:08,212
+Sie brauchen Strom, einen PC und einmal ein Netz.
+
+61
+00:03:08,212 --> 00:03:10,948
+Alles andere bleibt bei Ihnen im Haus.
+
+62
+00:03:10,948 --> 00:03:15,248
+Den Quellcode und das Handbuch finden Sie im Projekt auf GitHub.
+
+63
+00:03:15,248 --> 00:03:17,202
+Vielen Dank für Ihre Aufmerksamkeit.

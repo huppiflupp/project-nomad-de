@@ -1,0 +1,167 @@
+1
+00:00:00,000 --> 00:00:02,912
+In diesem Video geht es um Erweiterungen:
+
+2
+00:00:02,912 --> 00:00:10,403
+Karten für ganze Länder, eigene Dokumente und die Notfall-KI, ein Sprachassistent, der auf Ihrem Rechner läuft, ohne Internet.
+
+3
+00:00:11,003 --> 00:00:13,101
+Karten laden Sie im Karten-Manager.
+
+4
+00:00:13,101 --> 00:00:15,618
+Der empfohlene Weg ist Länder auswählen.
+
+5
+00:00:15,618 --> 00:00:22,332
+NOMAD schneidet nur die gewählten Länder aus einer Weltkarte heraus und zeigt vorher die Größe an.
+
+6
+00:00:22,332 --> 00:00:26,109
+Die Weltkarte als Ganzes hat dagegen über hundertzwanzig Gigabyte.
+
+7
+00:00:26,709 --> 00:00:33,765
+Kreuzen Sie das Land an, stellen Sie mit dem Regler die Zoomstufe ein und starten Sie den Download.
+
+8
+00:00:33,765 --> 00:00:40,037
+Deutschland bis zur Stadtebene braucht etwa einhundertzwanzig Megabyte, mit einzelnen Straßen sind es über fünf Gigabyte.
+
+9
+00:00:40,037 --> 00:00:43,957
+Die Länderliste ist englisch, die Karten selbst funktionieren ohne Internet.
+
+10
+00:00:44,557 --> 00:00:46,809
+So sieht das Ergebnis aus:
+
+11
+00:00:46,809 --> 00:00:49,512
+die Karte von Deutschland, vollständig offline.
+
+12
+00:00:49,512 --> 00:00:52,214
+Die Ortsnamen sind allerdings englisch beschriftet.
+
+13
+00:00:52,814 --> 00:00:58,314
+Der KI-Assistent wird im Supply Depot installiert, oder Sie haken ihn im Schnellstart an.
+
+14
+00:00:58,314 --> 00:01:02,242
+Dafür brauchen Sie Internet, denn das Sprachmodell wird einmal heruntergeladen.
+
+15
+00:01:02,842 --> 00:01:05,542
+Unter Einstellungen, KI-Assistent, laden Sie ein Modell.
+
+16
+00:01:05,542 --> 00:01:08,628
+Wir haben sechs Modelle mit deutschen Fragen getestet.
+
+17
+00:01:08,628 --> 00:01:14,414
+Am besten war gemma vier e vier mit etwa sieben Gigabyte, ab sechzehn Gigabyte Arbeitsspeicher.
+
+18
+00:01:14,414 --> 00:01:18,271
+Mit nur acht Gigabyte nehmen Sie gemma drei vier b.
+
+19
+00:01:18,271 --> 00:01:23,286
+Meiden Sie die Modelle der Reihe qwen drei und alle unter zwei Gigabyte.
+
+20
+00:01:23,286 --> 00:01:25,600
+Sie antworten bei Erster Hilfe falsch.
+
+21
+00:01:26,200 --> 00:01:30,828
+Im Chat wählen Sie oben das Modell und können die Wissensdatenbank ein- oder ausschalten.
+
+22
+00:01:30,828 --> 00:01:36,778
+Ist sie an, sucht die KI vor jeder Antwort in Ihren Dokumenten und nennt am Ende die Quellen.
+
+23
+00:01:37,378 --> 00:01:38,457
+Eine wichtige Warnung:
+
+24
+00:01:38,457 --> 00:01:47,456
+Dieses kleine Modell hat auf die Frage nach dem Plattenplatz eine erfundene Geschichte über ein Funkgerät geantwortet, und trotzdem die Quelle F A Q angegeben.
+
+25
+00:01:47,456 --> 00:01:51,055
+Eine genannte Quelle ist kein Beweis, dass die Antwort stimmt.
+
+26
+00:01:51,055 --> 00:01:55,374
+Prüfen Sie bei Medizin, Sicherheit und Recht jede Antwort an der Quelle.
+
+27
+00:01:55,974 --> 00:02:02,243
+Wollen Sie, dass die KI auch Wikipedia und die Nachschlagewerke nutzt, müssen Sie diese indizieren.
+
+28
+00:02:02,243 --> 00:02:06,422
+Ein Klick startet das für alle geladenen Inhalte, ohne Warnung.
+
+29
+00:02:06,422 --> 00:02:08,511
+Das kann sehr lange dauern:
+
+30
+00:02:08,511 --> 00:02:15,615
+Ein Nachschlagewerk von hundertachtundsiebzig Megabyte brauchte auf einem alten Rechner etwa drei Stunden, mit Grafikkarte siebeneinhalb Minuten.
+
+31
+00:02:15,615 --> 00:02:18,122
+Indizieren Sie gezielt und über Nacht.
+
+32
+00:02:18,722 --> 00:02:21,732
+Mit einer Grafikkarte ist die KI deutlich schneller.
+
+33
+00:02:21,732 --> 00:02:29,255
+In unserem Test antwortete das Modell auf dem Prozessor mit vierzehn Token pro Sekunde, auf einer älteren NVIDIA-Karte mit hundertsechs.
+
+34
+00:02:29,255 --> 00:02:37,154
+NOMAD kann die KI auch von einem zweiten, stärkeren Rechner im Heimnetz beziehen, zum Beispiel über llama punkt c p p.
+
+35
+00:02:37,754 --> 00:02:39,972
+Zur Ehrlichkeit gehören die Grenzen.
+
+36
+00:02:39,972 --> 00:02:44,851
+Nachschlagewerke, die als PDF vorliegen, kann die KI praktisch nicht durchsuchen.
+
+37
+00:02:44,851 --> 00:02:47,068
+Große Wikipedia-Pakete brauchen viele Stunden.
+
+38
+00:02:47,068 --> 00:02:49,286
+Die Inhalte sind überwiegend englisch.
+
+39
+00:02:49,286 --> 00:02:54,608
+Und die KI ist ein Helfer zum Suchen und Erklären, kein Arzt.
+
+40
+00:02:55,208 --> 00:02:57,914
+Das war der Überblick über die Erweiterungen.
+
+41
+00:02:57,914 --> 00:03:03,711
+Alles Weitere steht im Handbuch, das Sie als PDF und als Webseite im Projekt finden.
+
+42
+00:03:03,711 --> 00:03:05,257
+Vielen Dank fürs Zuschauen.

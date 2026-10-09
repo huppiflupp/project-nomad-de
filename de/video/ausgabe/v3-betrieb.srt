@@ -1,0 +1,179 @@
+1
+00:00:00,000 --> 00:00:03,792
+Jetzt machen wir aus dem leeren NOMAD einen Wissensserver.
+
+2
+00:00:03,792 --> 00:00:07,584
+Dafür brauchen Sie Internet, und Sie sollten Zeit einplanen.
+
+3
+00:00:07,584 --> 00:00:12,640
+Der Rechner muss am Netzteil hängen und darf währenddessen nicht ausgeschaltet werden.
+
+4
+00:00:12,640 --> 00:00:14,746
+Der Schnellstart hat vier Schritte:
+
+5
+00:00:14,746 --> 00:00:16,853
+Apps, Karten, Inhalte und Überprüfen.
+
+6
+00:00:17,453 --> 00:00:19,712
+Jeder Themenbereich hat drei Stufen:
+
+7
+00:00:19,712 --> 00:00:21,520
+Essential, Standard und Comprehensive.
+
+8
+00:00:21,520 --> 00:00:31,912
+Alle Bereiche zusammen sind in der kleinsten Stufe etwa sechs Gigabyte, in der mittleren etwa sechsunddreißig und in der größten etwa neunundachtzig Gigabyte.
+
+9
+00:00:31,912 --> 00:00:33,720
+Beginnen Sie mit Essential.
+
+10
+00:00:33,720 --> 00:00:35,979
+Größeres können Sie jederzeit nachladen.
+
+11
+00:00:36,579 --> 00:00:42,893
+Wikipedia gibt es in mehreren Größen, von dreihundert Megabyte bis über hundertzwanzig Gigabyte.
+
+12
+00:00:42,893 --> 00:00:44,350
+Alle sind englischsprachig.
+
+13
+00:00:44,350 --> 00:00:49,693
+Für den Anfang genügt die Schnellreferenz mit den hunderttausend wichtigsten Artikeln.
+
+14
+00:00:50,293 --> 00:00:53,662
+Zum Schluss sehen Sie eine Zusammenfassung mit der Gesamtgröße.
+
+15
+00:00:53,662 --> 00:00:58,154
+Prüfen Sie, ob der Platz reicht, und schließen Sie die Einrichtung ab.
+
+16
+00:00:58,754 --> 00:01:01,921
+Auf der Seite Downloads sehen Sie, was geladen wird.
+
+17
+00:01:01,921 --> 00:01:07,199
+Nach einem Neustart geht das Laden an der Stelle weiter, an der es aufgehört hat.
+
+18
+00:01:07,199 --> 00:01:13,180
+Sind keine aktiven Downloads mehr da, machen Sie sofort den Offline-Test, solange das Internet noch erreichbar ist.
+
+19
+00:01:13,780 --> 00:01:18,422
+Für den Offline-Test ziehen Sie das Netzwerkkabel oder schalten das WLAN aus.
+
+20
+00:01:18,422 --> 00:01:21,517
+Zum Beweis geben Sie im Terminal ping ein.
+
+21
+00:01:21,517 --> 00:01:23,838
+Es muss hundert Prozent Paketverlust erscheinen.
+
+22
+00:01:23,838 --> 00:01:26,933
+Starten Sie danach den Rechner ohne Netz neu.
+
+23
+00:01:26,933 --> 00:01:31,575
+Das ist der eigentliche Test, denn im Notfall startet er genau so.
+
+24
+00:01:32,175 --> 00:01:35,937
+Nach dem Neustart öffnen Sie die Kommandozentrale und die Wissensbibliothek.
+
+25
+00:01:35,937 --> 00:01:37,818
+Alle geladenen Bücher sind da.
+
+26
+00:01:37,818 --> 00:01:43,838
+Suchen Sie einen Begriff, öffnen Sie einen Artikel und haken Sie die Checkliste im Handbuch ab.
+
+27
+00:01:44,438 --> 00:01:48,486
+Auch Wikipedia öffnet Artikel samt Seitenlinks, ganz ohne Verbindung.
+
+28
+00:01:48,486 --> 00:01:54,783
+Die Texte sind überwiegend englisch, das ist richtig so, die geladenen Bücher sind englischsprachig.
+
+29
+00:01:55,383 --> 00:01:58,476
+Im Handbuch gibt es eine Notfall-Karte auf einer Seite.
+
+30
+00:01:58,476 --> 00:02:06,382
+Darauf stehen die Adresse von NOMAD, was Sie tun, wenn die Seite nicht lädt, wie Sie sauber ausschalten und wo Ihre Notizen stehen.
+
+31
+00:02:06,382 --> 00:02:10,506
+Drucken Sie sie aus und legen Sie sie sichtbar neben den Rechner.
+
+32
+00:02:11,106 --> 00:02:13,681
+Aktualisieren können Sie nur mit Internet.
+
+33
+00:02:13,681 --> 00:02:19,261
+Unter Einstellungen, System-Update, klicken Sie auf Erneut prüfen und dann auf Update starten.
+
+34
+00:02:19,261 --> 00:02:23,124
+Das dauert etwa drei Minuten, zwischendurch erscheinen erwartete Verbindungsfehler.
+
+35
+00:02:23,124 --> 00:02:26,558
+Danach steht dort, dass das System aktuell ist.
+
+36
+00:02:26,558 --> 00:02:29,562
+Machen Sie dann den Offline-Test noch einmal.
+
+37
+00:02:30,162 --> 00:02:33,625
+Ein Notebook braucht im Betrieb etwa zwanzig Watt.
+
+38
+00:02:33,625 --> 00:02:41,849
+Eine Powerbank mit neunundneunzig Wattstunden reicht für gut vier Stunden, eine Powerstation mit fünfhundert Wattstunden für gut einen Tag.
+
+39
+00:02:41,849 --> 00:02:43,147
+Sparen Sie Strom:
+
+40
+00:02:43,147 --> 00:02:46,610
+Bildschirm dunkel, WLAN aus, nur bei Bedarf einschalten.
+
+41
+00:02:46,610 --> 00:02:49,640
+Im Handbuch steht die Rechnung zum Selbstausfüllen.
+
+42
+00:02:50,240 --> 00:02:54,772
+Drucken Sie das Handbuch aus und legen Sie es zur USB-SSD.
+
+43
+00:02:54,772 --> 00:02:56,832
+Füllen Sie die Tabellen aus:
+
+44
+00:02:56,832 --> 00:02:58,892
+Softwarestand, geladene Inhalte und Zugangsdaten.
+
+45
+00:02:58,892 --> 00:03:04,661
+Wenn es darauf ankommt, hat man meistens alles vergessen, deshalb steht dort jeder Schritt.
