@@ -96,6 +96,8 @@ Router-Namen: Abschnitt `[nomic-embed-text:v1.5]` im Preset wird zu `nomic-embed
   Gemessen ≈ 30–40 Chunks/s je Lauf, auf einem moderneren Rechner vermutlich mehr (nicht gemessen).
 - Große Wikipedia-ZIMs sind für die KI nicht praktikabel (Hunderttausende Artikel, mehrere Stunden bis Tage). Gezielt indizieren (CDC, NHS, Anleitungen).
 - Antwortqualität mit Quelle: „Wofür wird Paracetamol verwendet, Höchstdosis?“ → Quelle „NHS‘ Medicines A to Z“, Dosis (max. 8 × 500 mg/24 h) stimmt, 9 s gesamt.
+- **Ursache des Engpasses (Upstream bekannt):** `extractZIMContent` läuft je 50er-Stapel neu von Eintrag 0 an (O(n²)); Issues #1185, #1212, PR #1386 im Original,
+  Details in `de/plans/2026-10-09-handbuch-medien-embedding.md`.
 - gemma4 liefert über llama.cpp einen Denk-Anteil (`reasoning_content`); bei knappem `max_tokens` bleibt die sichtbare Antwort leer. NOMAD setzt `reasoning_effort`.
 
 ## Nicht gemessen / offen

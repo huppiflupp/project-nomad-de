@@ -36,6 +36,12 @@ Messung 2026-10-09 (Details in `de/tests/notfall-ki-messung.md`):
   (`ZIMExtractionService`: libzim-Zugriff, Parsen mit cheerio, Stapelgröße `ZIM_BATCH_SIZE = 50`, ein Job je Stapel, 2 parallele Jobs, Upserts in Qdrant).
 - Offene Fragen: Wie viel Zeit entfällt auf Extraktion, Chunking, Embedding-Aufruf, Qdrant-Upsert? Löst Upstream das schon (Issues, neuere Versionen)?
   Text ist Text: Eine Vorab-Umwandlung ZIM → Text/JSONL könnte den Aufwand je Chunk senken.
+- **Fund im Upstream (2026-10-09, nur festgehalten):** Das Original kennt die Ursache. `ZIMExtractionService.extractZIMContent()` öffnet das Archiv je Stapel neu und
+  läuft bis zum Offset von Eintrag 0 an (`archive.iterByPath()`, dabei wird für jeden übersprungenen Eintrag `entry.item` dereferenziert). Jeder Stapel kostet also
+  proportional zum Offset, die Aufnahme einer ZIM ist **O(n²)**. Issues: Crosstalk-Solutions/project-nomad **#1185** (offen, Wikipedia maxi: 13,7 Tage für 5,83 %) und **#1212**
+  (geschlossen; gemessen: `ZIM_BATCH_SIZE` 50 → 500 gab ×2,7, → 5000 etwa ×9, 5,5 → 50 Einträge/s). Korrektur-PR **#1386** „seek ZIM batches instead of rescanning from the start“ (offen).
+  Das passt zu unserer Messung (große ZIM: Fortschritt bremst, GPU im Leerlauf). Bei einem Abgleich (`de/SYNC.md`) prüfen, ob #1386 in eine neue Version gelangt;
+  sonst eigene Umsetzung (Seek statt Rescan, größere Stapel) erwägen.
 - Weitere Erkenntnisse: PDF-ZIMs liefern fast keinen Text (1–2 Chunks); Indexieren startet ohne Warnung für alles.
 
 ## Offene Entscheidungen (Nutzer)
