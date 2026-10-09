@@ -1,0 +1,3 @@
+bilder/*.png
+bilder/_cache/
+*.log
